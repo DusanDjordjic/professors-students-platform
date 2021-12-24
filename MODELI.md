@@ -1,12 +1,13 @@
 # Model profesora
 
-Svaki profesor mora da ima
-
 - \_id : string/ObjectId
 - name : string
 - lastName : string
+- username : string
+- email : string
+- phoneNumber : string
 - rating : number
-- prices :\[monthPrice, yearprice, lifetimePrice\]
+- prices :\[monthPrice, yearPrice, lifetimePrice\]
 - subjects : \[ math, javascript, programming\] (lista predmeta koje profesor predaje)
 - password : string
 
@@ -15,6 +16,9 @@ Svaki profesor mora da ima
 - \_id : string/ObjectId
 - name : string
 - lastName : string
+- username : string
+- email : string
+- phoneNumber : string
 - intrests : \[math, javascript\] (lista interesovanja)
 - password : string
 
@@ -29,7 +33,5 @@ Svaki profesor mora da ima
 - \_id : string
 - professorId : string
 - createdDate : date
-- expiraionDate : date
-- subject : string
-
-ZA POCETAK DOSTA
+- text : {title, content, footer}
+- description: string
