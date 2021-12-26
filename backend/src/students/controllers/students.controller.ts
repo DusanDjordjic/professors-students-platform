@@ -1,6 +1,6 @@
 import { Body, Controller, Get, HttpException, Post } from '@nestjs/common';
 import { AddStudentDtoValidationPipe } from 'src/core/pipes/add-student-dto-validation.pipe';
-import { AddStudentDto } from '../dto/add-student.dto';
+import { AddStudentDto } from '../../shared/dto/add-student.dto';
 import { StudentsService } from '../services/students.service';
 
 @Controller('api/students')

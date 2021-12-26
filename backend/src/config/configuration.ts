@@ -7,4 +7,10 @@ export default () => ({
     dbhost: process.env.DB_HOST,
     dbport: process.env.DB_PORT,
   },
+  jwt: {
+    secret: process.env.JWT_SECRET,
+  },
+  hash: {
+    salt: 10,
+  },
 });
