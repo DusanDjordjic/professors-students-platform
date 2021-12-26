@@ -1,6 +1,13 @@
-import { IsEmail, IsNotEmpty, IsString, MaxLength } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  MaxLength,
+  Min,
+} from 'class-validator';
 
-export class AddStudentDto {
+export class AddProfessorDto {
   @IsString()
   @MaxLength(255)
   @IsNotEmpty()
@@ -19,10 +26,14 @@ export class AddStudentDto {
   @MaxLength(255)
   @IsNotEmpty()
   phoneNumber: string;
+  @IsNumber()
+  @Min(0)
+  @IsNotEmpty()
+  price: number;
   @IsString()
   @MaxLength(255)
   @IsNotEmpty()
-  interests: string;
+  subjects: string;
   @IsString()
   @MaxLength(255)
   @IsNotEmpty()

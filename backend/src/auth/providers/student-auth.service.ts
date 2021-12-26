@@ -8,7 +8,7 @@ import { ConfigService } from '@nestjs/config';
 import { LoginStudentDto } from 'src/shared/dto/login-student.dto';
 import { JwtService } from '@nestjs/jwt';
 @Injectable()
-export class AuthService {
+export class StudentAuthService {
   constructor(
     private readonly configService: ConfigService,
     private readonly jwtService: JwtService,
@@ -27,31 +27,40 @@ export class AuthService {
       // Narpravimo student entity
       const newStudent = this.studentRepo.create({ ...student, _id: 0 });
 
-      // Provera da li vec postoje studenti sa istim username ili email
+      // Provera da li vec postoje studenti sa istim username ili email ili phoneNumber
       const similarStudents = await this.getAllStudentsByEmailOrUsernameOrPhone(
         student.email,
         student.username,
         student.phoneNumber,
       );
-
+      let existsErrors: { [key: string]: string }[] = [];
       if (similarStudents[0]) {
         if (student.email == similarStudents[0].email) {
           // Ako postoje studenti sa istim email
-          // Vracamo gresku 409 Confict
-          throw new HttpException('Email already exists', 409);
+          existsErrors.push({
+            field: 'email',
+            message: 'Email already exists',
+          });
         }
         if (student.username == similarStudents[0].username) {
           // Ako postoje studenti sa istim username
-          // Vracamo gresku 409 Confict
-          throw new HttpException('Username already exists', 409);
+          existsErrors.push({
+            field: 'username',
+            message: 'Username already exists',
+          });
         }
         if (student.phoneNumber == similarStudents[0].phoneNumber) {
           // Ako postoje studenti sa istim phoneNumber
-          // Vracamo gresku 409 Confict
-          throw new HttpException('Phone number already exists', 409);
+          existsErrors.push({
+            field: 'phoneNumber',
+            message: 'Phone number already exists',
+          });
         }
       }
-
+      // Vracamo gresku 409 Confict ako postoje isti studenti
+      if (existsErrors.length > 0) {
+        throw new HttpException(existsErrors, 409);
+      }
       // Sacuvamo studenta i vratimo ga
       const savedStudent = await this.studentRepo.save(newStudent);
       // Ako nekim slucajem nije sacuvan student vracamo gresku
@@ -59,7 +68,7 @@ export class AuthService {
       if (!savedStudent) {
         throw new HttpException('Student not saved', 500);
       } else {
-        return savedStudent;
+        return { error: null, type: 'student' };
       }
     } catch (error) {
       throw new HttpException(error, 500);
@@ -96,6 +105,7 @@ export class AuthService {
       return {
         accessToken: this.jwtService.sign(payload),
         expiresAt: new Date().getTime() + 3600 * 1000 * 24,
+        type: 'student',
       };
     } catch (error) {
       throw new HttpException(error, 500);
@@ -117,7 +127,7 @@ export class AuthService {
     if (phoneNumber) {
       filterArray.push({ phoneNumber });
     }
-    // Pretraga studenata po email ili username
+    // Pretraga studenata po email ili username ili phoneNumber
     return this.studentRepo.find({
       where: filterArray,
     });

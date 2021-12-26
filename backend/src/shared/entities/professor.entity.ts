@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class StudentEntity {
+export class ProfessorEntity {
   @PrimaryGeneratedColumn()
   _id: number;
   @Column({ type: 'varchar', length: 255, nullable: false })
@@ -14,8 +14,10 @@ export class StudentEntity {
   email: string;
   @Column({ type: 'varchar', length: 255, nullable: false })
   phoneNumber: string;
+  @Column({ type: 'int', nullable: false })
+  price: number;
   @Column({ type: 'varchar', length: 255, nullable: false })
-  interests: string;
+  subjects: string;
   @Column({ type: 'varchar', length: 255, nullable: false })
   password: string;
 }
