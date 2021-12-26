@@ -1,15 +1,17 @@
 import { Module } from '@nestjs/common';
 import { AuthController } from './controllers/auth.controller';
-import { AuthService } from './providers/auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { StudentEntity } from 'src/shared/entities/student.entity';
 import { JwtStrategy } from './providers/jwt.strategy';
+import { StudentAuthService } from './providers/student-auth.service';
+import { ProfessorAuthService } from './providers/professor-auth.service';
+import { ProfessorEntity } from 'src/shared/entities/professor.entity';
 
 @Module({
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy],
+  providers: [StudentAuthService, ProfessorAuthService, JwtStrategy],
   imports: [
     JwtModule.registerAsync({
       imports: [ConfigModule],
@@ -22,7 +24,7 @@ import { JwtStrategy } from './providers/jwt.strategy';
 
       inject: [ConfigService],
     }),
-    TypeOrmModule.forFeature([StudentEntity]),
+    TypeOrmModule.forFeature([StudentEntity, ProfessorEntity]),
   ],
 })
 export class AuthModule {}

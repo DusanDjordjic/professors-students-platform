@@ -1,6 +1,6 @@
 export class StudentModel {
   _id: number;
-  name: string;
+  firstName: string;
   lastName: string;
   username: string;
   email: string;
@@ -9,7 +9,7 @@ export class StudentModel {
   password: string;
   constructor(obj?: any) {
     this._id = (obj && obj._id) || 0;
-    this.name = (obj && obj.name) || '';
+    this.firstName = (obj && obj.firstName) || '';
     this.lastName = (obj && obj.lastName) || '';
     this.username = (obj && obj.username) || '';
     this.email = (obj && obj.email) || '';

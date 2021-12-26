@@ -8,12 +8,11 @@ import { AuthModule } from './auth/auth.module';
 
 import configuration from './config/configuration';
 import { JwtAuthGuard } from './core/guards/jwt-auth.guard';
+import { ProfessorEntity } from './shared/entities/professor.entity';
 import { StudentEntity } from './shared/entities/student.entity';
-import { StudentsModule } from './students/students.module';
 
 @Module({
   imports: [
-    StudentsModule,
     AuthModule,
     ConfigModule.forRoot({
       isGlobal: true,
@@ -29,7 +28,7 @@ import { StudentsModule } from './students/students.module';
         username: config.get('database.dbusername'),
         password: config.get('database.dbpassword'),
         database: config.get('database.dbname'),
-        entities: [StudentEntity],
+        entities: [StudentEntity, ProfessorEntity],
         synchronize: true,
       }),
       inject: [ConfigService],
