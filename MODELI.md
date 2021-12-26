@@ -7,7 +7,7 @@
 - email : string
 - phoneNumber : string
 - rating : number
-- prices :\[monthPrice, yearPrice, lifetimePrice\]
+- price : number
 - subjects : \[ math, javascript, programming\] (lista predmeta koje profesor predaje)
 - password : string
 
@@ -22,16 +22,23 @@
 - intrests : \[math, javascript\] (lista interesovanja)
 - password : string
 
-# Model pretplata
+# Model komentara
 
 - \_id : string
 - professorId : string
 - studnetId : string
+- title : string
+- createdDate : date
+- text : string
+- rating : number
 
-# Model lekcija
+# Model predmeta
+
+- \_id : string
+- subjectName : string
+
+# TODO Model pretplata
 
 - \_id : string
 - professorId : string
-- createdDate : date
-- text : {title, content, footer}
-- description: string
+- studnetId : string

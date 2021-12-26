@@ -12,9 +12,6 @@ Koraci navedeni sa f-broj moraju da se poklapaju kod frontend i backend strane
 - Profesori i studneti se cuvaju u posebnim tabelama.
 - Moraju imati sva polja popunjena.
 - Mora zadovoljavati potrebe modela.
-- Profesor za cenu moze da stavi : besplatno i da doda dugme za doniranje ili da stavi cenu.
-- Ukoliko hoce da stavi cenu bira koje ce to cene biti: Mesecna, Godisnja, Zivotna.
-- Ukoliko su sve cene 0 profesor besplatno daje svoje znanje (mogucnost cuvanja free:boolean / **Razmatranje**)
 
 ### Login
 
