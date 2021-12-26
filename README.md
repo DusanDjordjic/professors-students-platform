@@ -9,13 +9,13 @@ Možete se ulogovati kao student ili kao profesor. Ako želite da učite druge l
 ### Ulogujte se kao student
 
 1.  Pretražite šta vam to profesori nude za učenje
-2.  Izaberite jednog profesora i pretplatite se za njegove lekcije (Profesor postavlja cenu takođe može biti besplatno ili u vidu dobrovoljne donacije)
-3.  Dobijaćete obavestenja kada profesor postavi novi tekst, lekciju ili zadatak.
-4.  Radite zadatke, učestvujte u diskusijama i naučite to što želite
+2.  Izaberite jednog profesora zakazite cas kod njega (Profesor postavlja cenu takođe može biti besplatno ili u vidu dobrovoljne donacije)
+3.  Kada je cas zakazan drugi studenti ne modu za zakazu taj termin.
+4.  Nakon odrzanog casa mozete da ocenite profesora i da ostavite komentar.
 
 ### Ulogujte se kao profesor
 
-1.  Postavite cenu vaseg rada, napišite šta predajete i šta će studenti naučiti
-2.  Napravite raspored predavanja, lekicja, domaćih zadataka itd.
-3.  Objavljujte domaće, dogovarajte sastanke sa studentima ( preko na primer discord ili zoom aplikacije)(jednog dana i preko sjata)
+1.  Postavite cenu jednog casa, napišite šta predajete i šta će studenti naučiti
+2.  Napravite raspored kojim danima ste slobodni da bi studenti mogli da zakazu cas
+3.  Kada student zakaze cas dobicete notifikaciju na sajtu (i u vidu mejla)
 4.  Budite plaćeni za vaš trud.

@@ -12,8 +12,6 @@ Koraci navedeni sa f-broj moraju da se poklapaju kod frontend i backend strane
 - Validacija unetih podataka.
 - Moraju imati sva polja popunjena.
 - Mora zadovoljavati potrebe modela.
-- Profesor za cenu moze da stavi : besplatno i da doda dugme za doniranje ili da stavi cenu.
-- Ukoliko hoce da stavi cenu bira koje ce to cene biti: Mesecna, Godisnja, Zivotna.
 - Profesor bira predmete koje predaje (moze da ih izabere vise)
 - Slanje profesora serveru
 - Prima odgovor u vidu da li je profesor napravljen ili ne
@@ -28,7 +26,7 @@ Koraci navedeni sa f-broj moraju da se poklapaju kod frontend i backend strane
 - Mora zadovoljavati potrebe modela.
 - Student bira svoja interesovanja (moze ih izabrati vise)
 - Slanje studenta serveru
-- Prima odgovor u vidu da li je korisnik napravljen ili ne
+- Prima odgovor u vidu da li je student napravljen ili ne
 - Ukoliko jeste salje ga na login
 - Ukoliko nije ispisuje gresku
 
@@ -38,7 +36,7 @@ Koraci navedeni sa f-broj moraju da se poklapaju kod frontend i backend strane
 - Salju se podaci email/username i sifra
 - Dobija se odgovor nazad
 - U slucaju greske prikazati gresku
-- Ako sve prodje glatko uzeti iz odgovra "type" vrednost i sacuvati je
+- Ako sve prodje glatko uzeti iz odgovora "type : [student, profesor]" vrednost i sacuvati je
 - Uzeti takodje "token" i sacuvati ga
 - Na osnovu te vrednosti cemo znati da li je korisnik profesor ili student i tako prikazati aplikaciju
 - Interceptor koji ce za svaki HTTP request zakaciti token u Authentication header
