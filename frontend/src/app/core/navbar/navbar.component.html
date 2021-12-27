@@ -18,8 +18,10 @@
           <div>Informacije</div>
         </div>
         <div class="buttons">
-          <button>Login</button>
-          <button class="background">Signup</button>
+          <a [routerLink]="['auth', 'login', 'student']">Login</a>
+          <a [routerLink]="['auth', 'signup', 'student']" class="background"
+            >Signup</a
+          >
         </div>
       </div>
     </div>

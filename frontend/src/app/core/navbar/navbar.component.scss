@@ -97,7 +97,6 @@ nav {
       padding: 1rem 0;
       div {
         padding: 0.5rem 1rem;
-
         cursor: pointer;
         transition: all 0.3s;
         border-radius: 4px;
@@ -112,7 +111,7 @@ nav {
     }
     .buttons {
       display: flex;
-      button {
+      a {
         width: 50%;
         font-weight: 500;
         @include button;
@@ -168,7 +167,7 @@ nav {
       .links {
         padding: 0;
         display: flex;
-        column-gap: 1rem;
+        column-gap: 0.5rem;
         margin-right: 2rem;
         div {
           margin: 0;
@@ -176,7 +175,7 @@ nav {
       }
       .buttons {
         display: flex;
-        button {
+        a {
           width: auto;
         }
       }
