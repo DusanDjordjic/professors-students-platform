@@ -1,0 +1,27 @@
+<nav>
+  <div class="container">
+    <div class="nav-header">
+      <button (click)="toggleNavContent()"><i class="fas fa-bars"></i></button>
+      <span class="logo">WebŠkola</span>
+    </div>
+    <div class="nav-content" [ngClass]="{ active: navContentVisible }">
+      <span class="search-field">
+        <input type="text" placeholder="Pretraži..." />
+        <button>
+          <i class="fas fa-search"></i>
+        </button>
+      </span>
+      <div>
+        <div class="links">
+          <div>Početna</div>
+          <div>Pretraga</div>
+          <div>Informacije</div>
+        </div>
+        <div class="buttons">
+          <button>Login</button>
+          <button class="background">Signup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

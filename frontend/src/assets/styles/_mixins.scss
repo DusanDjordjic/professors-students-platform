@@ -1,0 +1,44 @@
+@mixin button() {
+  cursor: pointer;
+  border-radius: 4px;
+  border: none;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
+@mixin container {
+  @include lg() {
+    width: 900px;
+  }
+
+  @include xl() {
+    width: 1100px;
+  }
+  @include xxl() {
+    width: 1300px;
+  }
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+}
+@mixin md() {
+  @media only screen and (min-width: 926px) {
+    @content;
+  }
+}
+
+@mixin lg() {
+  @media only screen and (min-width: 992px) {
+    @content;
+  }
+}
+
+@mixin xl() {
+  @media only screen and (min-width: 1200px) {
+    @content;
+  }
+}
+@mixin xxl() {
+  @media only screen and (min-width: 1400px) {
+    @content;
+  }
+}
