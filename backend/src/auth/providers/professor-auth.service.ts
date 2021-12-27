@@ -1,7 +1,5 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AddStudentDto } from 'src/shared/dto/add-student.dto';
-
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { ConfigService } from '@nestjs/config';
@@ -71,6 +69,7 @@ export class ProfessorAuthService {
       if (existsErrors.length > 0) {
         throw new HttpException(existsErrors, 409);
       }
+
       // Sacuvamo profesora i vratimo ga
       const savedProfessor = await this.professorRepo.save(newProfessor);
       // Ako nekim slucajem nije sacuvan profesor vracamo gresku
