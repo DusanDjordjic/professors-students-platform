@@ -10,13 +10,15 @@ import configuration from './config/configuration';
 import { JwtAuthGuard } from './core/guards/jwt-auth.guard';
 import { ProfessorEntity } from './shared/entities/professor.entity';
 import { StudentEntity } from './shared/entities/student.entity';
+import { SubjectEntity } from './shared/entities/subject.entity';
+import { SubjectsModule } from './subjects/subjects.module';
 
 @Module({
   imports: [
     AuthModule,
+    SubjectsModule,
     ConfigModule.forRoot({
       isGlobal: true,
-
       load: [configuration],
     }),
     TypeOrmModule.forRootAsync({
@@ -28,7 +30,7 @@ import { StudentEntity } from './shared/entities/student.entity';
         username: config.get('database.dbusername'),
         password: config.get('database.dbpassword'),
         database: config.get('database.dbname'),
-        entities: [StudentEntity, ProfessorEntity],
+        entities: [StudentEntity, ProfessorEntity, SubjectEntity],
         synchronize: true,
       }),
       inject: [ConfigService],
