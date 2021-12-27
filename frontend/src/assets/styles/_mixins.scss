@@ -20,6 +20,17 @@
   margin: 0 auto;
   padding: 1rem;
 }
+
+@mixin xs() {
+  @media only screen and (min-width: 568px) {
+    @content;
+  }
+}
+@mixin sm() {
+  @media only screen and (min-width: 768px) {
+    @content;
+  }
+}
 @mixin md() {
   @media only screen and (min-width: 926px) {
     @content;
