@@ -1,0 +1,91 @@
+@import "src/assets/styles/vars";
+@import "src/assets/styles/mixins";
+footer {
+  padding: 3rem 0 0 0;
+
+  color: $color-secondary-400;
+  border-top: 1px solid $color-secondary-100;
+  .container {
+    @include container;
+    .footer-items-wrapper {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 3rem;
+      div {
+        & > * {
+          display: block;
+          text-align: justify;
+        }
+        h5 {
+          margin: 0 0 1rem 0;
+          font-size: 1rem;
+          font-weight: 500;
+          color: $color-secondary-600;
+        }
+        a,
+        p {
+          font-size: 0.9rem;
+        }
+        a {
+          margin-bottom: 0.5rem;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    .footer-links-wrapper {
+      border-top: 1px solid $color-secondary-100;
+      padding: 1rem 0;
+      font-size: 0.9rem;
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 0.5rem;
+        a {
+          font-size: 1rem;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 30px;
+          height: 30px;
+          border-radius: 100px;
+          background-color: rgba($color: $color-secondary-100, $alpha: 0.5);
+          transition: all 0.3s;
+          &:hover {
+            background-color: darken(
+              $color: rgba($color: $color-secondary-100, $alpha: 0.5),
+              $amount: 10
+            );
+          }
+        }
+      }
+    }
+    .footer-copyright {
+      border-top: 1px solid $color-secondary-100;
+      padding: 1rem 0;
+      text-align: center;
+    }
+  }
+}
+@include xs() {
+  footer {
+    .container {
+      @include container;
+      .footer-items-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+}
+@include lg() {
+  footer {
+    .container {
+      @include container;
+      .footer-items-wrapper {
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+      }
+    }
+  }
+}
