@@ -2,33 +2,37 @@
   <div class="container">
     <div class="form-page-grid">
       <aside>
-        <h1>Registracija profesora</h1>
-        <div>
-          <a [routerLink]="['/auth', 'signup', 'student']"
-            >Registrujte se kao student</a
-          >
-          <a [routerLink]="['/auth', 'login', 'student']"
-            >Ulogujte se kao student</a
-          >
-          <a [routerLink]="['/auth', 'login', 'professor']"
-            >Ulogujte se kao profesor</a
-          >
-        </div>
-        <div>
-          <!-- TODO dodati kada se naprave stranice -->
-          <span>Pročitajte <a routerLink="#">uslove korišćenja</a></span>
-          <span>Dešava se greška? <a routerLink="#">Kontaktirajte nas</a></span>
-        </div>
-        <div *ngIf="internalErrors.length > 0" class="error-container">
-          <span *ngFor="let err of internalErrors">
-            {{ err }}
-          </span>
-        </div>
-        <div>
-          <img
-            src="assets\images\illustrations\professor-signup.svg"
-            alt="Student"
-          />
+        <div class="sticky">
+          <h1>Registracija profesora</h1>
+          <div>
+            <a [routerLink]="['/auth', 'signup', 'student']"
+              >Registrujte se kao student</a
+            >
+            <a [routerLink]="['/auth', 'login', 'student']"
+              >Ulogujte se kao student</a
+            >
+            <a [routerLink]="['/auth', 'login', 'professor']"
+              >Ulogujte se kao profesor</a
+            >
+          </div>
+          <div>
+            <!-- TODO dodati kada se naprave stranice -->
+            <span>Pročitajte <a routerLink="#">uslove korišćenja</a></span>
+            <span
+              >Dešava se greška? <a routerLink="#">Kontaktirajte nas</a></span
+            >
+          </div>
+          <div *ngIf="internalErrors.length > 0" class="error-container">
+            <span *ngFor="let err of internalErrors">
+              {{ err }}
+            </span>
+          </div>
+          <div>
+            <img
+              src="assets\images\illustrations\professor-signup.svg"
+              alt="Profesor"
+            />
+          </div>
         </div>
       </aside>
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
@@ -191,108 +195,46 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="street">Ulica<span class="required">*</span></label>
+              <label for="street">Ulica</label>
               <input
                 formControlName="street"
                 type="text"
                 id="street"
                 placeholder="Jalijska 2"
                 [ngClass]="{
-                  invalid:
-                    getFormControl('street').invalid &&
-                    (getFormControl('street').touched ||
-                      getFormControl('street').dirty),
-                  valid: getFormControl('street').valid
+                  valid:
+                    getFormControl('street').touched ||
+                    getFormControl('street').dirty
                 }"
               />
-              <div
-                class="error-container"
-                *ngIf="
-                  getFormControl('street').invalid &&
-                  (getFormControl('street').touched ||
-                    getFormControl('street').dirty)
-                "
-              >
-                <small *ngIf="getFormControl('street').errors?.['required']">
-                  Ulica je obavezna
-                </small>
-              </div>
             </div>
             <div class="form-group">
-              <label for="streetNumber"
-                >Ulični broj<span class="required">*</span></label
-              >
+              <label for="streetNumber">Ulični broj</label>
               <input
                 formControlName="streetNumber"
                 type="text"
                 id="streetNumber"
                 placeholder="24c"
                 [ngClass]="{
-                  invalid:
-                    getFormControl('streetNumber').invalid &&
-                    (getFormControl('streetNumber').touched ||
-                      getFormControl('streetNumber').dirty),
-                  valid: getFormControl('streetNumber').valid
+                  valid:
+                    getFormControl('streetNumber').touched ||
+                    getFormControl('streetNumber').dirty
                 }"
               />
-              <div
-                class="error-container"
-                *ngIf="
-                  getFormControl('streetNumber').invalid &&
-                  (getFormControl('streetNumber').touched ||
-                    getFormControl('streetNumber').dirty)
-                "
-              >
-                <small
-                  *ngIf="getFormControl('streetNumber').errors?.['required']"
-                >
-                  Ulični broj je obavezan
-                </small>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="zipCode"
-                >Poštanjski broj<span class="required">*</span></label
-              >
-              <input
-                formControlName="zipCode"
-                type="text"
-                id="zipCode"
-                placeholder="22000"
-                [ngClass]="{
-                  invalid:
-                    getFormControl('zipCode').invalid &&
-                    (getFormControl('zipCode').touched ||
-                      getFormControl('zipCode').dirty),
-                  valid: getFormControl('zipCode').valid
-                }"
-              />
-              <div
-                class="error-container"
-                *ngIf="
-                  getFormControl('zipCode').invalid &&
-                  (getFormControl('zipCode').touched ||
-                    getFormControl('zipCode').dirty)
-                "
-              >
-                <small *ngIf="getFormControl('zipCode').errors?.['required']">
-                  Poštanski broj je obavezan
-                </small>
-              </div>
             </div>
           </div>
           <div class="group">
-            <h3>Interesovanja</h3>
+            <h3>Predmeti</h3>
             <div class="form-group">
-              <label for="interestSelect"
-                >Interesovanja<span class="required">*</span></label
+              <label for="subjectsSelect"
+                >Predmeti<span class="required">*</span></label
               >
               <select
-                id="interestSelect"
-                #interestSelect
+                id="subjectsSelect"
+                #subjectsSelect
                 [ngClass]="{
-                  invalid: interestsTouched && interests.length == 0,
-                  valid: interestsTouched && interests.length != 0
+                  invalid: subjectsTouched && selectedSubjects.length == 0,
+                  valid: subjectsTouched && selectedSubjects.length != 0
                 }"
               >
                 <option [value]="sub._id" *ngFor="let sub of subjects">
@@ -303,28 +245,102 @@
             <div>
               <button
                 type="button"
-                (click)="addSubjectToArray(+interestSelect.value)"
+                (click)="addSubjectToArray(+subjectsSelect.value)"
                 class="span-full"
               >
-                Dodaj
+                Dodaj predmet
               </button>
-              <div class="error-container" *ngIf="interestsTouched">
-                <small *ngIf="interests.length == 0">
-                  Morate izabrati barem jedno interesovanje
+              <div class="error-container" *ngIf="subjectsTouched">
+                <small *ngIf="selectedSubjects.length == 0">
+                  Morate izabrati barem jednan predmet
                 </small>
               </div>
             </div>
 
-            <div class="interests">
+            <div class="items-list">
               <span
-                *ngFor="let sub of interests"
+                *ngFor="let sub of selectedSubjects"
                 (click)="removeSubjectFromArray(sub._id)"
                 ><i class="fas fa-times"></i>{{ sub.name }}</span
               >
             </div>
           </div>
           <div class="group">
+            <h3>Način učenja</h3>
+            <div class="form-group">
+              <label for="learingWaySelect"
+                >Način učenja<span class="required">*</span></label
+              >
+              <select
+                id="learingWaySelect"
+                #lerningWaySelect
+                [ngClass]="{
+                  invalid: learingWayTouched && learningWays.length == 0,
+                  valid: learingWayTouched && learningWays.length != 0
+                }"
+              >
+                <option [value]="lw._id" *ngFor="let lw of AllLearningWays">
+                  {{ lw.name }}
+                </option>
+              </select>
+            </div>
+            <div>
+              <button
+                type="button"
+                (click)="addLearingWayToArray(+lerningWaySelect.value)"
+                class="span-full"
+              >
+                Dodaj način učenja
+              </button>
+              <div class="error-container" *ngIf="learingWayTouched">
+                <small *ngIf="learningWays.length == 0">
+                  Morate izabrati barem jedan način učenja
+                </small>
+              </div>
+            </div>
+
+            <div class="items-list">
+              <span
+                *ngFor="let lw of learningWays"
+                (click)="removeLearningWayFromArray(lw._id)"
+                ><i class="fas fa-times"></i>{{ lw.name }}</span
+              >
+            </div>
+          </div>
+          <div class="group">
             <h3>Podaci za sajt</h3>
+            <div class="form-group">
+              <label for="price"
+                >Cena jednog časa (RSD)<span class="required">*</span></label
+              >
+              <input
+                formControlName="price"
+                type="number"
+                id="price"
+                [ngClass]="{
+                  invalid:
+                    getFormControl('price').invalid &&
+                    (getFormControl('price').touched ||
+                      getFormControl('price').dirty),
+                  valid: getFormControl('price').valid
+                }"
+              />
+              <div
+                class="error-container"
+                *ngIf="
+                  getFormControl('price').invalid &&
+                  (getFormControl('price').touched ||
+                    getFormControl('price').dirty)
+                "
+              >
+                <small *ngIf="getFormControl('price').errors?.['required']">
+                  Cena je obavezna
+                </small>
+                <small *ngIf="getFormControl('price').errors?.['min']">
+                  Cena ne može biti manja od 0
+                </small>
+              </div>
+            </div>
             <div class="form-group">
               <label for="username"
                 >Korisničko ime<span class="required">*</span></label
