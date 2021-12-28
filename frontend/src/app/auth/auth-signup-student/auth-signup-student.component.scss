@@ -9,6 +9,13 @@ main {
   }
   aside {
     padding: 1rem;
+    .sticky {
+      position: sticky;
+      // 77px je velicina navbara
+      // 1rem padding od containera
+      // 1rem padding od aside-a
+      top: calc(77px + 2rem);
+    }
     h1 {
       margin-top: 0;
 

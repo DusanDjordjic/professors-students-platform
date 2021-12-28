@@ -2,33 +2,37 @@
   <div class="container">
     <div class="form-page-grid">
       <aside>
-        <h1>Registracija studenta</h1>
-        <div>
-          <a [routerLink]="['/auth', 'signup', 'professor']"
-            >Registrujte se kao profesor</a
-          >
-          <a [routerLink]="['/auth', 'login', 'student']"
-            >Ulogujte se kao student</a
-          >
-          <a [routerLink]="['/auth', 'login', 'professor']"
-            >Ulogujte se kao profesor</a
-          >
-        </div>
-        <div>
-          <!-- TODO dodati kada se naprave stranice -->
-          <span>Pročitajte <a routerLink="#">uslove korišćenja</a></span>
-          <span>Dešava se greška? <a routerLink="#">Kontaktirajte nas</a></span>
-        </div>
-        <div *ngIf="internalErrors.length > 0" class="error-container">
-          <span *ngFor="let err of internalErrors">
-            {{ err }}
-          </span>
-        </div>
-        <div>
-          <img
-            src="assets\images\illustrations\student-signup.svg"
-            alt="Student"
-          />
+        <div class="sticky">
+          <h1>Registracija studenta</h1>
+          <div>
+            <a [routerLink]="['/auth', 'signup', 'professor']"
+              >Registrujte se kao profesor</a
+            >
+            <a [routerLink]="['/auth', 'login', 'student']"
+              >Ulogujte se kao student</a
+            >
+            <a [routerLink]="['/auth', 'login', 'professor']"
+              >Ulogujte se kao profesor</a
+            >
+          </div>
+          <div>
+            <!-- TODO dodati kada se naprave stranice -->
+            <span>Pročitajte <a routerLink="#">uslove korišćenja</a></span>
+            <span
+              >Dešava se greška? <a routerLink="#">Kontaktirajte nas</a></span
+            >
+          </div>
+          <div *ngIf="internalErrors.length > 0" class="error-container">
+            <span *ngFor="let err of internalErrors">
+              {{ err }}
+            </span>
+          </div>
+          <div>
+            <img
+              src="assets\images\illustrations\student-signup.svg"
+              alt="Student"
+            />
+          </div>
         </div>
       </aside>
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
