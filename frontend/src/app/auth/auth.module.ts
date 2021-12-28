@@ -6,6 +6,9 @@ import { AuthLoginProfessorComponent } from './auth-login-professor/auth-login-p
 import { AuthLoginStudentComponent } from './auth-login-student/auth-login-student.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { SubjectsService } from 'src/shared/providers/subjects.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoadingSpinnerComponent } from 'src/shared/components/loading-spinner/loading-spinner.component';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [
@@ -13,8 +16,9 @@ import { SubjectsService } from 'src/shared/providers/subjects.service';
     AuthSignupProfessorComponent,
     AuthLoginProfessorComponent,
     AuthLoginStudentComponent,
+    LoadingSpinnerComponent,
   ],
-  imports: [CommonModule, AuthRoutingModule],
-  providers: [SubjectsService],
+  imports: [CommonModule, AuthRoutingModule, ReactiveFormsModule],
+  providers: [SubjectsService, AuthService],
 })
 export class AuthModule {}

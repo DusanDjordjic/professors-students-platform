@@ -1,9 +1,21 @@
-@mixin button() {
+@mixin button($bg-color: $color-main-500, $color: $color-light) {
   cursor: pointer;
   border-radius: 4px;
+  background-color: $bg-color;
+  color: $color;
   border: none;
   font-size: 1rem;
   padding: 0.5rem 1rem;
+  transition: all 0.3s;
+  &:hover {
+    box-shadow: 0 0 10px rgba($color: #000, $alpha: 0.3);
+    background-color: darken($color: $bg-color, $amount: 10);
+  }
+  &:disabled {
+    cursor: default;
+    box-shadow: none;
+    background-color: desaturate($bg-color, 80%);
+  }
 }
 @mixin container {
   @include lg() {
@@ -20,7 +32,29 @@
   margin: 0 auto;
   padding: 1rem;
 }
+@mixin autoCompleteBg($bg-color: $color-secondary-100) {
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    box-shadow: 0 0 0 30px $bg-color inset !important;
+    -webkit-box-shadow: 0 0 0 30px $bg-color inset !important;
+  }
+}
+@mixin placeholder-color(
+  $ph-color: rgba($color: $color-secondary-400, $alpha: 0.5)
+) {
+  &::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: $ph-color;
+    opacity: 1; /* Firefox */
+  }
 
+  & :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: $ph-color;
+  }
+}
 @mixin xs() {
   @media only screen and (min-width: 568px) {
     @content;
