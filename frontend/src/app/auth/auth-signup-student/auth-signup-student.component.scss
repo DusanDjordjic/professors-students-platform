@@ -13,7 +13,7 @@ main {
       margin-top: 0;
 
       font-weight: 600;
-      font-size: 2rem;
+      font-size: 1.75rem;
       color: $color-secondary-600;
     }
     div {
@@ -103,8 +103,9 @@ main {
       flex-direction: column;
       grid-template-columns: 1fr;
       gap: 2rem;
-      .interests {
+      .items-list {
         span {
+          cursor: pointer;
           display: block;
           white-space: nowrap;
           color: $color-secondary-400;

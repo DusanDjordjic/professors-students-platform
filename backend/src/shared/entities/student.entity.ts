@@ -17,5 +17,13 @@ export class StudentEntity {
   @Column({ type: 'varchar', length: 255, nullable: false })
   interests: string;
   @Column({ type: 'varchar', length: 255, nullable: false })
+  city: string;
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  street: string;
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  streetNumber: string;
+  @Column({ type: 'varchar', length: 255, nullable: false })
+  learningWays: string;
+  @Column({ type: 'varchar', length: 255, nullable: false })
   password: string;
 }

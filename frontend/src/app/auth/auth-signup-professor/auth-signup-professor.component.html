@@ -1,1 +1,451 @@
-<p>auth-signup-professor works!</p>
+<main>
+  <div class="container">
+    <div class="form-page-grid">
+      <aside>
+        <h1>Registracija profesora</h1>
+        <div>
+          <a [routerLink]="['/auth', 'signup', 'student']"
+            >Registrujte se kao student</a
+          >
+          <a [routerLink]="['/auth', 'login', 'student']"
+            >Ulogujte se kao student</a
+          >
+          <a [routerLink]="['/auth', 'login', 'professor']"
+            >Ulogujte se kao profesor</a
+          >
+        </div>
+        <div>
+          <!-- TODO dodati kada se naprave stranice -->
+          <span>Pročitajte <a routerLink="#">uslove korišćenja</a></span>
+          <span>Dešava se greška? <a routerLink="#">Kontaktirajte nas</a></span>
+        </div>
+        <div *ngIf="internalErrors.length > 0" class="error-container">
+          <span *ngFor="let err of internalErrors">
+            {{ err }}
+          </span>
+        </div>
+        <div>
+          <img
+            src="assets\images\illustrations\professor-signup.svg"
+            alt="Student"
+          />
+        </div>
+      </aside>
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <div class="form-wrapper">
+          <div class="group">
+            <h3>Personalni podaci</h3>
+            <div class="form-group">
+              <label for="firstName">Ime<span class="required">*</span></label>
+              <input
+                formControlName="firstName"
+                type="text"
+                id="firstName"
+                placeholder="Dušan"
+                [ngClass]="{
+                  invalid:
+                    getFormControl('firstName').invalid &&
+                    (getFormControl('firstName').touched ||
+                      getFormControl('firstName').dirty),
+                  valid: getFormControl('firstName').valid
+                }"
+              />
+              <div
+                class="error-container"
+                *ngIf="
+                  getFormControl('firstName').invalid &&
+                  (getFormControl('firstName').touched ||
+                    getFormControl('firstName').dirty)
+                "
+              >
+                <small *ngIf="getFormControl('firstName').errors?.['required']">
+                  Ime je obavezno
+                </small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="lastName"
+                >Prezime<span class="required">*</span></label
+              >
+              <input
+                formControlName="lastName"
+                type="text"
+                id="lastName"
+                placeholder="Đorđić"
+                [ngClass]="{
+                  invalid:
+                    getFormControl('lastName').invalid &&
+                    (getFormControl('lastName').touched ||
+                      getFormControl('lastName').dirty),
+                  valid: getFormControl('lastName').valid
+                }"
+              />
+              <div
+                class="error-container"
+                *ngIf="
+                  getFormControl('lastName').invalid &&
+                  (getFormControl('lastName').touched ||
+                    getFormControl('lastName').dirty)
+                "
+              >
+                <small *ngIf="getFormControl('lastName').errors?.['required']">
+                  Prezime je obavezno
+                </small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email<span class="required">*</span></label>
+              <input
+                formControlName="email"
+                type="text"
+                id="email"
+                #emailField
+                placeholder="dusandjordjic@gmail.com"
+                [ngClass]="{
+                  invalid:
+                    getFormControl('email').invalid &&
+                    (getFormControl('email').touched ||
+                      getFormControl('email').dirty),
+                  valid: getFormControl('email').valid
+                }"
+              />
+              <div
+                class="error-container"
+                *ngIf="
+                  getFormControl('email').invalid &&
+                  (getFormControl('email').touched ||
+                    getFormControl('email').dirty)
+                "
+              >
+                <small *ngIf="getFormControl('email').errors?.['required']">
+                  Email je obavezan
+                </small>
+                <small *ngIf="getFormControl('email').errors?.['email']">
+                  Email nije u odgovarajućem formatu
+                </small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="phoneNumber"
+                >Broj telefona<span class="required">*</span></label
+              >
+              <input
+                formControlName="phoneNumber"
+                type="text"
+                id="phoneNumber"
+                #phoneNumberField
+                placeholder="0641122334"
+                [ngClass]="{
+                  invalid:
+                    getFormControl('phoneNumber').invalid &&
+                    (getFormControl('phoneNumber').touched ||
+                      getFormControl('phoneNumber').dirty),
+                  valid: getFormControl('phoneNumber').valid
+                }"
+              />
+              <div
+                class="error-container"
+                *ngIf="
+                  getFormControl('phoneNumber').invalid &&
+                  (getFormControl('phoneNumber').touched ||
+                    getFormControl('phoneNumber').dirty)
+                "
+              >
+                <small
+                  *ngIf="getFormControl('phoneNumber').errors?.['required']"
+                >
+                  Broj telefona je obavezan
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="group">
+            <h3>Adresa</h3>
+            <div class="form-group">
+              <label for="city">Grad<span class="required">*</span></label>
+              <input
+                formControlName="city"
+                type="text"
+                id="city"
+                placeholder="Sremska Mitrovica"
+                [ngClass]="{
+                  invalid:
+                    getFormControl('city').invalid &&
+                    (getFormControl('city').touched ||
+                      getFormControl('city').dirty),
+                  valid: getFormControl('city').valid
+                }"
+              />
+              <div
+                class="error-container"
+                *ngIf="
+                  getFormControl('city').invalid &&
+                  (getFormControl('city').touched ||
+                    getFormControl('city').dirty)
+                "
+              >
+                <small *ngIf="getFormControl('city').errors?.['required']">
+                  Grad je obavezan
+                </small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="street">Ulica<span class="required">*</span></label>
+              <input
+                formControlName="street"
+                type="text"
+                id="street"
+                placeholder="Jalijska 2"
+                [ngClass]="{
+                  invalid:
+                    getFormControl('street').invalid &&
+                    (getFormControl('street').touched ||
+                      getFormControl('street').dirty),
+                  valid: getFormControl('street').valid
+                }"
+              />
+              <div
+                class="error-container"
+                *ngIf="
+                  getFormControl('street').invalid &&
+                  (getFormControl('street').touched ||
+                    getFormControl('street').dirty)
+                "
+              >
+                <small *ngIf="getFormControl('street').errors?.['required']">
+                  Ulica je obavezna
+                </small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="streetNumber"
+                >Ulični broj<span class="required">*</span></label
+              >
+              <input
+                formControlName="streetNumber"
+                type="text"
+                id="streetNumber"
+                placeholder="24c"
+                [ngClass]="{
+                  invalid:
+                    getFormControl('streetNumber').invalid &&
+                    (getFormControl('streetNumber').touched ||
+                      getFormControl('streetNumber').dirty),
+                  valid: getFormControl('streetNumber').valid
+                }"
+              />
+              <div
+                class="error-container"
+                *ngIf="
+                  getFormControl('streetNumber').invalid &&
+                  (getFormControl('streetNumber').touched ||
+                    getFormControl('streetNumber').dirty)
+                "
+              >
+                <small
+                  *ngIf="getFormControl('streetNumber').errors?.['required']"
+                >
+                  Ulični broj je obavezan
+                </small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="zipCode"
+                >Poštanjski broj<span class="required">*</span></label
+              >
+              <input
+                formControlName="zipCode"
+                type="text"
+                id="zipCode"
+                placeholder="22000"
+                [ngClass]="{
+                  invalid:
+                    getFormControl('zipCode').invalid &&
+                    (getFormControl('zipCode').touched ||
+                      getFormControl('zipCode').dirty),
+                  valid: getFormControl('zipCode').valid
+                }"
+              />
+              <div
+                class="error-container"
+                *ngIf="
+                  getFormControl('zipCode').invalid &&
+                  (getFormControl('zipCode').touched ||
+                    getFormControl('zipCode').dirty)
+                "
+              >
+                <small *ngIf="getFormControl('zipCode').errors?.['required']">
+                  Poštanski broj je obavezan
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="group">
+            <h3>Interesovanja</h3>
+            <div class="form-group">
+              <label for="interestSelect"
+                >Interesovanja<span class="required">*</span></label
+              >
+              <select
+                id="interestSelect"
+                #interestSelect
+                [ngClass]="{
+                  invalid: interestsTouched && interests.length == 0,
+                  valid: interestsTouched && interests.length != 0
+                }"
+              >
+                <option [value]="sub._id" *ngFor="let sub of subjects">
+                  {{ sub.name }}
+                </option>
+              </select>
+            </div>
+            <div>
+              <button
+                type="button"
+                (click)="addSubjectToArray(+interestSelect.value)"
+                class="span-full"
+              >
+                Dodaj
+              </button>
+              <div class="error-container" *ngIf="interestsTouched">
+                <small *ngIf="interests.length == 0">
+                  Morate izabrati barem jedno interesovanje
+                </small>
+              </div>
+            </div>
+
+            <div class="interests">
+              <span
+                *ngFor="let sub of interests"
+                (click)="removeSubjectFromArray(sub._id)"
+                ><i class="fas fa-times"></i>{{ sub.name }}</span
+              >
+            </div>
+          </div>
+          <div class="group">
+            <h3>Podaci za sajt</h3>
+            <div class="form-group">
+              <label for="username"
+                >Korisničko ime<span class="required">*</span></label
+              >
+              <input
+                formControlName="username"
+                type="text"
+                id="username"
+                #usernameField
+                [ngClass]="{
+                  invalid:
+                    getFormControl('username').invalid &&
+                    (getFormControl('username').touched ||
+                      getFormControl('username').dirty),
+                  valid: getFormControl('username').valid
+                }"
+              />
+              <div
+                class="error-container"
+                *ngIf="
+                  getFormControl('username').invalid &&
+                  (getFormControl('username').touched ||
+                    getFormControl('username').dirty)
+                "
+              >
+                <small *ngIf="getFormControl('username').errors?.['required']">
+                  Korisničko ime je obavezno
+                </small>
+                <small *ngIf="getFormControl('username').errors?.['pattern']">
+                  Dužina korisničkog imena mora biti najmanje 8 karaktera, mora
+                  sadržati samo slova i brojeve. Jedno slovo mora biti veliko.
+                </small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password"
+                >Lozinka<span class="required">*</span></label
+              >
+              <input
+                formControlName="password"
+                type="password"
+                id="password"
+                [ngClass]="{
+                  invalid:
+                    getFormControl('password').invalid &&
+                    (getFormControl('password').touched ||
+                      getFormControl('password').dirty),
+                  valid: getFormControl('password').valid
+                }"
+              />
+              <div
+                class="error-container"
+                *ngIf="
+                  getFormControl('password').invalid &&
+                  (getFormControl('password').touched ||
+                    getFormControl('password').dirty)
+                "
+              >
+                <small *ngIf="getFormControl('password').errors?.['required']">
+                  Lozinka je obavezna
+                </small>
+                <small *ngIf="getFormControl('password').errors?.['pattern']">
+                  Dužina lozinke mora biti najmanje 8 karaktera, sadržati barem
+                  jedno veliko slovo, jedan broj i jedan specijalni karakter
+                </small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="passwordRepeat"
+                >Potvrdi lozinku<span class="required">*</span></label
+              >
+              <input
+                formControlName="passwordRepeat"
+                type="password"
+                id="passwordRepeat"
+                [ngClass]="{
+                  invalid:
+                    (getFormControl('passwordRepeat').touched ||
+                      getFormControl('passwordRepeat').dirty) &&
+                    signupForm.hasError('notSame'),
+                  valid:
+                    !signupForm.hasError('notSame') &&
+                    (getFormControl('passwordRepeat').touched ||
+                      getFormControl('passwordRepeat').dirty) &&
+                    getFormControl('passwordRepeat').valid
+                }"
+              />
+              <div
+                class="error-container"
+                *ngIf="
+                  getFormControl('passwordRepeat').touched ||
+                  getFormControl('passwordRepeat').dirty
+                "
+              >
+                <small *ngIf="signupForm.hasError('notSame')"
+                  >Lozinke moraju da se podudaraju</small
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          class="span-full mt mb loading-spinner-container"
+          [disabled]="signupForm.invalid"
+        >
+          Registrujte se
+          <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+        </button>
+        <div
+          class="error-container center"
+          *ngIf="afterSubmitErrors.length > 0"
+        >
+          <small *ngFor="let err of afterSubmitErrors">{{ err }}</small>
+        </div>
+        <div *ngIf="afterSubmitErrors.length > 0">
+          <span id="toLogin"
+            >Već imate nalog?
+            <a [routerLink]="['/auth', 'login', 'student']">Ulogujte se</a>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>

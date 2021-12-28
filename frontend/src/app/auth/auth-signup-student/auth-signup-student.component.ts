@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { LearningWayModel } from 'src/shared/models/learning-way.model';
 import { SubjectModel } from 'src/shared/models/subject.model';
+import { LearningWayService } from 'src/shared/providers/learning-way.service';
 import { SubjectsService } from 'src/shared/providers/subjects.service';
 import { checkPasswordsValidator } from 'src/shared/validators/confirm-password.validator';
 import { AuthService } from '../auth.service';
@@ -14,14 +16,17 @@ import { SignupStudentModel } from '../models/signup-student.model';
 export class AuthSignupStudentComponent implements OnInit {
   // Selektovani niz interesovanja
   interests: SubjectModel[] = [];
+  learningWays: LearningWayModel[] = [];
   // Niz svih predmeta
   subjects: SubjectModel[] = [];
+  AllLearningWays: LearningWayModel[] = [];
   // Za greške koje se mogu javiti prilikom submit-ovanja
   afterSubmitErrors: string[] = [];
   afterSubmitErrorStatusCode: number = -1;
   internalErrors: string[] = [];
   // Boolean da bi smo znali kada da prikažemo greške kod selektovanja interesovanja
   interestsTouched = false;
+  learingWayTouched = false;
   // Boolean za spiner
   isLoading = false;
   // 3 Polja na koja cemo se fokusirati u slucaju greske
@@ -36,10 +41,10 @@ export class AuthSignupStudentComponent implements OnInit {
       email: new FormControl(null, [Validators.required, Validators.email]),
       phoneNumber: new FormControl(null, [Validators.required]),
       city: new FormControl(null, [Validators.required]),
-      street: new FormControl(null, [Validators.required]),
-      streetNumber: new FormControl(null, [Validators.required]),
-      zipCode: new FormControl(null, [Validators.required]),
+      street: new FormControl(null),
+      streetNumber: new FormControl(null),
       interests: new FormArray([], [Validators.required]),
+      learningWays: new FormArray([], [Validators.required]),
       username: new FormControl(null, [
         Validators.required,
         Validators.pattern('(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}'),
@@ -56,6 +61,7 @@ export class AuthSignupStudentComponent implements OnInit {
   );
   constructor(
     private subjectService: SubjectsService,
+    private learningWayService: LearningWayService,
     private authService: AuthService
   ) {}
 
@@ -72,10 +78,26 @@ export class AuthSignupStudentComponent implements OnInit {
         );
       },
     });
+    // Uzimamo sve nacine ucenja
+    this.learningWayService.getAllLearningWays().subscribe({
+      next: (learningWays) => {
+        this.AllLearningWays = learningWays;
+      },
+      error: (err) => {
+        // TODO Modal da iskoci ako su se desile greske koje nisu do korisnika
+        this.internalErrors.push(
+          'Došlo je do greške. Server je u kvaru. Pokušajte opet kasnije'
+        );
+      },
+    });
   }
   // Getter za niz interesovanja
   get formInterests() {
     return this, this.signupForm.get('interests') as FormArray;
+  }
+  // Getter za niz nacina ucenja
+  get formLearningWays() {
+    return this, this.signupForm.get('learningWays') as FormArray;
   }
   // Metoda za dobijanja kontrole
   getFormControl(name: string) {
@@ -176,6 +198,33 @@ export class AuthSignupStudentComponent implements OnInit {
     this.formInterests.removeAt(
       this.formInterests.value.findIndex(
         (subjectId: number) => subjectId === _id
+      )
+    );
+  }
+  addLearingWayToArray(_id: number) {
+    // Postavljamo na true zato što je pipnuto dugme
+    this.learingWayTouched = true;
+    // Tražimo način učenja koji ima isti id
+    const learingWay = this.AllLearningWays.find(
+      (learingWay) => learingWay._id == _id
+    );
+    // Ako uposte ne postoji način učenja sa tim id-jem samo se vraćamo
+    if (!learingWay) return;
+    // Provera da li je način učenja već dodan u niz. Ako jeste samo se vratimo
+    if (this.learningWays.includes(learingWay)) return;
+
+    // Dodajemo način učenja u niz za prikaz i u FormArray
+    this.learningWays.push(learingWay);
+    this.formLearningWays.push(new FormControl(_id));
+  }
+
+  removeLearningWayFromArray(_id: number) {
+    // Niz za prikaz filtriramo samo
+    this.learningWays = this.learningWays.filter((sub) => sub._id !== _id);
+    // Za FormArray moramo da prvo pronađemo indeks pa da obrišemo sa tog indeksa
+    this.formLearningWays.removeAt(
+      this.formLearningWays.value.findIndex(
+        (learningWay: number) => learningWay === _id
       )
     );
   }

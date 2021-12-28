@@ -24,6 +24,12 @@
             {{ err }}
           </span>
         </div>
+        <div>
+          <img
+            src="assets\images\illustrations\student-signup.svg"
+            alt="Student"
+          />
+        </div>
       </aside>
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
         <div class="form-wrapper">
@@ -185,94 +191,32 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="street">Ulica<span class="required">*</span></label>
+              <label for="street">Ulica</label>
               <input
                 formControlName="street"
                 type="text"
                 id="street"
                 placeholder="Jalijska 2"
                 [ngClass]="{
-                  invalid:
-                    getFormControl('street').invalid &&
-                    (getFormControl('street').touched ||
-                      getFormControl('street').dirty),
-                  valid: getFormControl('street').valid
+                  valid:
+                    getFormControl('street').touched ||
+                    getFormControl('street').dirty
                 }"
               />
-              <div
-                class="error-container"
-                *ngIf="
-                  getFormControl('street').invalid &&
-                  (getFormControl('street').touched ||
-                    getFormControl('street').dirty)
-                "
-              >
-                <small *ngIf="getFormControl('street').errors?.['required']">
-                  Ulica je obavezna
-                </small>
-              </div>
             </div>
             <div class="form-group">
-              <label for="streetNumber"
-                >Ulični broj<span class="required">*</span></label
-              >
+              <label for="streetNumber">Ulični broj</label>
               <input
                 formControlName="streetNumber"
                 type="text"
                 id="streetNumber"
                 placeholder="24c"
                 [ngClass]="{
-                  invalid:
-                    getFormControl('streetNumber').invalid &&
-                    (getFormControl('streetNumber').touched ||
-                      getFormControl('streetNumber').dirty),
-                  valid: getFormControl('streetNumber').valid
+                  valid:
+                    getFormControl('streetNumber').touched ||
+                    getFormControl('streetNumber').dirty
                 }"
               />
-              <div
-                class="error-container"
-                *ngIf="
-                  getFormControl('streetNumber').invalid &&
-                  (getFormControl('streetNumber').touched ||
-                    getFormControl('streetNumber').dirty)
-                "
-              >
-                <small
-                  *ngIf="getFormControl('streetNumber').errors?.['required']"
-                >
-                  Ulični broj je obavezan
-                </small>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="zipCode"
-                >Poštanjski broj<span class="required">*</span></label
-              >
-              <input
-                formControlName="zipCode"
-                type="text"
-                id="zipCode"
-                placeholder="22000"
-                [ngClass]="{
-                  invalid:
-                    getFormControl('zipCode').invalid &&
-                    (getFormControl('zipCode').touched ||
-                      getFormControl('zipCode').dirty),
-                  valid: getFormControl('zipCode').valid
-                }"
-              />
-              <div
-                class="error-container"
-                *ngIf="
-                  getFormControl('zipCode').invalid &&
-                  (getFormControl('zipCode').touched ||
-                    getFormControl('zipCode').dirty)
-                "
-              >
-                <small *ngIf="getFormControl('zipCode').errors?.['required']">
-                  Poštanski broj je obavezan
-                </small>
-              </div>
             </div>
           </div>
           <div class="group">
@@ -309,11 +253,53 @@
               </div>
             </div>
 
-            <div class="interests">
+            <div class="items-list">
               <span
                 *ngFor="let sub of interests"
                 (click)="removeSubjectFromArray(sub._id)"
                 ><i class="fas fa-times"></i>{{ sub.name }}</span
+              >
+            </div>
+          </div>
+          <div class="group">
+            <h3>Način učenja</h3>
+            <div class="form-group">
+              <label for="learingWaySelect"
+                >Način učenja<span class="required">*</span></label
+              >
+              <select
+                id="learingWaySelect"
+                #lerningWaySelect
+                [ngClass]="{
+                  invalid: learingWayTouched && learningWays.length == 0,
+                  valid: learingWayTouched && learningWays.length != 0
+                }"
+              >
+                <option [value]="lw._id" *ngFor="let lw of AllLearningWays">
+                  {{ lw.name }}
+                </option>
+              </select>
+            </div>
+            <div>
+              <button
+                type="button"
+                (click)="addLearingWayToArray(+lerningWaySelect.value)"
+                class="span-full"
+              >
+                Dodaj
+              </button>
+              <div class="error-container" *ngIf="learingWayTouched">
+                <small *ngIf="learningWays.length == 0">
+                  Morate izabrati barem jedan način učenja
+                </small>
+              </div>
+            </div>
+
+            <div class="items-list">
+              <span
+                *ngFor="let lw of learningWays"
+                (click)="removeLearningWayFromArray(lw._id)"
+                ><i class="fas fa-times"></i>{{ lw.name }}</span
               >
             </div>
           </div>

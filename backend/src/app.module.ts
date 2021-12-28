@@ -8,6 +8,8 @@ import { AuthModule } from './auth/auth.module';
 
 import configuration from './config/configuration';
 import { JwtAuthGuard } from './core/guards/jwt-auth.guard';
+import { LearingWayModule } from './learingWay/learing-way.module';
+import { LearningWayEntity } from './shared/entities/learning-way.entity';
 import { ProfessorEntity } from './shared/entities/professor.entity';
 import { StudentEntity } from './shared/entities/student.entity';
 import { SubjectEntity } from './shared/entities/subject.entity';
@@ -17,6 +19,8 @@ import { SubjectsModule } from './subjects/subjects.module';
   imports: [
     AuthModule,
     SubjectsModule,
+    LearingWayModule,
+    // TypeOrmModule.forFeature([LearningWayEntity]),
     ConfigModule.forRoot({
       isGlobal: true,
       load: [configuration],
@@ -30,7 +34,12 @@ import { SubjectsModule } from './subjects/subjects.module';
         username: config.get('database.dbusername'),
         password: config.get('database.dbpassword'),
         database: config.get('database.dbname'),
-        entities: [StudentEntity, ProfessorEntity, SubjectEntity],
+        entities: [
+          StudentEntity,
+          ProfessorEntity,
+          SubjectEntity,
+          LearningWayEntity,
+        ],
         synchronize: true,
       }),
       inject: [ConfigService],

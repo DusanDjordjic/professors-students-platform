@@ -6,8 +6,8 @@ export class SignupStudentModel {
   city: string;
   street: string;
   streetNumber: string;
-  zipCode: string;
   interests: string;
+  learningWays: string;
   username: string;
   password: string;
   constructor(obj?: any) {
@@ -16,11 +16,12 @@ export class SignupStudentModel {
     this.email = (obj && obj.email) || '';
     this.phoneNumber = (obj && obj.phoneNumber) || '';
     this.city = (obj && obj.city) || '';
-    this.street = (obj && obj.street) || '';
-    this.streetNumber = (obj && obj.streetNumber) || '';
-    this.zipCode = (obj && obj.zipCode) || '';
+    this.street = (obj && obj.street) || null;
+    this.streetNumber = (obj && obj.streetNumber) || null;
     this.interests =
       (obj && obj.interests && JSON.stringify(obj.interests)) || '';
+    this.learningWays =
+      (obj && obj.learningWays && JSON.stringify(obj.learningWays)) || '';
     this.username = (obj && obj.username) || '';
     this.password = (obj && obj.password) || '';
   }
