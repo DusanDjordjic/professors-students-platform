@@ -1,6 +1,11 @@
 @import "src/assets/styles/vars";
 @import "src/assets/styles/mixins";
 nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
   background-color: $color-secondary-600;
   color: $color-secondary-100;
 }
@@ -97,7 +102,6 @@ nav {
       padding: 1rem 0;
       div {
         padding: 0.5rem 1rem;
-
         cursor: pointer;
         transition: all 0.3s;
         border-radius: 4px;
@@ -112,7 +116,7 @@ nav {
     }
     .buttons {
       display: flex;
-      button {
+      a {
         width: 50%;
         font-weight: 500;
         @include button;
@@ -168,7 +172,7 @@ nav {
       .links {
         padding: 0;
         display: flex;
-        column-gap: 1rem;
+        column-gap: 0.5rem;
         margin-right: 2rem;
         div {
           margin: 0;
@@ -176,7 +180,7 @@ nav {
       }
       .buttons {
         display: flex;
-        button {
+        a {
           width: auto;
         }
       }

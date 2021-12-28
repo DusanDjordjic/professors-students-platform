@@ -39,21 +39,21 @@ export class StudentAuthService {
           // Ako postoje studenti sa istim email
           existsErrors.push({
             field: 'email',
-            message: 'Email already exists',
+            message: 'Email već postoji',
           });
         }
         if (student.username == similarStudents[0].username) {
           // Ako postoje studenti sa istim username
           existsErrors.push({
             field: 'username',
-            message: 'Username already exists',
+            message: 'Korisničko ime već postoji',
           });
         }
         if (student.phoneNumber == similarStudents[0].phoneNumber) {
           // Ako postoje studenti sa istim phoneNumber
           existsErrors.push({
             field: 'phoneNumber',
-            message: 'Phone number already exists',
+            message: 'Broj telefona već postoji',
           });
         }
       }
@@ -66,7 +66,7 @@ export class StudentAuthService {
       // Ako nekim slucajem nije sacuvan student vracamo gresku
       // 500 Server error
       if (!savedStudent) {
-        throw new HttpException('Student not saved', 500);
+        throw new HttpException('Student nije sačuvan', 500);
       } else {
         return { error: null, type: 'student' };
       }
@@ -83,7 +83,7 @@ export class StudentAuthService {
       });
       // Ako student ne postoji vracamo 404 not found
       if (!student) {
-        throw new HttpException('No student found', 404);
+        throw new HttpException('Student nije pronađen', 404);
       }
       // Da li se sifre poklapaju
       const isPasswordMatch = await bcrypt.compare(
@@ -92,7 +92,7 @@ export class StudentAuthService {
       );
       // Ako se na poklapaju sifre vracamo 403 unauthorized
       if (!isPasswordMatch) {
-        throw new HttpException('Invalid password', 403);
+        throw new HttpException('Pogrešna šifra', 403);
       }
 
       const payload = {

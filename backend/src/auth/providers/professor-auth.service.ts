@@ -43,7 +43,7 @@ export class ProfessorAuthService {
 
           existsErrors.push({
             field: 'email',
-            message: 'Email already exists',
+            message: 'Email već postoji',
           });
           throw new HttpException('Email already exists', 409);
         }
@@ -52,7 +52,7 @@ export class ProfessorAuthService {
 
           existsErrors.push({
             field: 'username',
-            message: 'Username already exists',
+            message: 'Korisničko ime već postoji',
           });
         }
         if (professor.phoneNumber == similarProfessors[0].phoneNumber) {
@@ -60,7 +60,7 @@ export class ProfessorAuthService {
 
           existsErrors.push({
             field: 'phoneNumber',
-            message: 'Phone number already exists',
+            message: 'Broj telefona već postoji',
           });
         }
       }
@@ -75,7 +75,7 @@ export class ProfessorAuthService {
       // Ako nekim slucajem nije sacuvan profesor vracamo gresku
       // 500 Server error
       if (!savedProfessor) {
-        throw new HttpException('Professor not saved', 500);
+        throw new HttpException('Profesor nije sačuvan', 500);
       } else {
         return { error: null, type: 'professor' };
       }
@@ -92,7 +92,7 @@ export class ProfessorAuthService {
       });
       // Ako profesor ne postoji vracamo 404 not found
       if (!professor) {
-        throw new HttpException('No professor found', 404);
+        throw new HttpException('Porfesor nije pronađen', 404);
       }
       // Da li se sifre poklapaju
       const isPasswordMatch = await bcrypt.compare(
@@ -101,7 +101,7 @@ export class ProfessorAuthService {
       );
       // Ako se na poklapaju sifre vracamo 403 unauthorized
       if (!isPasswordMatch) {
-        throw new HttpException('Invalid password', 403);
+        throw new HttpException('Pogrešna šifra', 403);
       }
 
       const payload = {

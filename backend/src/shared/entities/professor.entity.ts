@@ -19,5 +19,13 @@ export class ProfessorEntity {
   @Column({ type: 'varchar', length: 255, nullable: false })
   subjects: string;
   @Column({ type: 'varchar', length: 255, nullable: false })
+  city: string;
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  street: string;
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  streetNumber: string;
+  @Column({ type: 'varchar', length: 255, nullable: false })
+  learningWays: string;
+  @Column({ type: 'varchar', length: 255, nullable: false })
   password: string;
 }

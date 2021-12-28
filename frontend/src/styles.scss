@@ -11,3 +11,12 @@ a {
   color: inherit;
   text-decoration: none;
 }
+input,
+select {
+  &:focus {
+    outline: none;
+  }
+}
+img {
+  user-select: none;
+}
