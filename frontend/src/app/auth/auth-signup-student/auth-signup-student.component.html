@@ -26,16 +26,16 @@
               <input type="text" id="lastName" placeholder="Đorđić" />
             </div>
             <div class="form-group">
-              <label for="firstName">Email</label>
+              <label for="email">Email</label>
               <input
                 type="text"
-                id="firstName"
+                id="email"
                 placeholder="dusandjordjic@gmail.com"
               />
             </div>
             <div class="form-group">
-              <label for="firstName">Broj telefona</label>
-              <input type="text" id="firstName" placeholder="+38161122334" />
+              <label for="phoneNumber">Broj telefona</label>
+              <input type="text" id="phoneNumber" placeholder="+38161122334" />
             </div>
           </div>
 
@@ -62,24 +62,26 @@
             <h3>Interesovanja</h3>
             <div class="form-group">
               <label for="interestSelect">Izaberi jedno ili više</label>
-              <select id="interestSelect">
-                <option [value]="1">Matematika</option>
-                <option [value]="2">Organska Hemija</option>
-                <option [value]="3">Neorganska Hemija</option>
-                <option [value]="4">Istorija umetnosti</option>
-                <option [value]="5">Nemački jezik</option>
-                <option [value]="6">Engleski jezik</option>
-                <option [value]="7">Biologija</option>
-                <option [value]="8">Geografija</option>
+              <select id="interestSelect" #interestSelect>
+                <option [value]="sub._id" *ngFor="let sub of subjects">
+                  {{ sub.name }}
+                </option>
               </select>
-              <button type="button" class="mt">Dodaj</button>
+              <button
+                type="button"
+                (click)="addInterest(+interestSelect.value)"
+                class="span-full mt"
+              >
+                Dodaj
+              </button>
             </div>
 
             <div class="interests">
-              <span><i class="fas fa-times"></i> Matematika</span>
-              <span><i class="fas fa-times"></i> Organska Hemija</span>
-              <span><i class="fas fa-times"></i> Istorija umetnosti</span>
-              <span><i class="fas fa-times"></i> Engleski jezik</span>
+              <span
+                *ngFor="let sub of interests"
+                (click)="removeInterest(sub._id)"
+                ><i class="fas fa-times"></i>{{ sub.name }}</span
+              >
             </div>
           </div>
           <div class="group">
@@ -98,7 +100,7 @@
             </div>
           </div>
         </div>
-        <button class="span-full mt">Registrujte se</button>
+        <button class="span-full mt mb">Registrujte se</button>
       </form>
     </div>
   </div>

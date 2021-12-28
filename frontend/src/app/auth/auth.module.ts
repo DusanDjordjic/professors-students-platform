@@ -5,6 +5,7 @@ import { AuthSignupProfessorComponent } from './auth-signup-professor/auth-signu
 import { AuthLoginProfessorComponent } from './auth-login-professor/auth-login-professor.component';
 import { AuthLoginStudentComponent } from './auth-login-student/auth-login-student.component';
 import { AuthRoutingModule } from './auth-routing.module';
+import { SubjectsService } from 'src/shared/providers/subjects.service';
 
 @NgModule({
   declarations: [
@@ -14,5 +15,6 @@ import { AuthRoutingModule } from './auth-routing.module';
     AuthLoginStudentComponent,
   ],
   imports: [CommonModule, AuthRoutingModule],
+  providers: [SubjectsService],
 })
 export class AuthModule {}

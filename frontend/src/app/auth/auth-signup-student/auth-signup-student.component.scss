@@ -11,14 +11,14 @@ main {
     padding: 1rem;
     h1 {
       margin-top: 0;
-      text-align: center;
+
       font-weight: 600;
       font-size: 2rem;
       color: $color-secondary-600;
     }
     div {
       border-top: 2px solid $color-secondary-100;
-      text-align: center;
+      //   text-align: center;
       & > * {
         margin: 0.5rem;
         display: block;
@@ -44,6 +44,9 @@ main {
   .mt {
     margin-top: 1rem;
   }
+  .mb {
+    margin-bottom: 1rem;
+  }
   .span-full {
     width: 100%;
   }
@@ -68,10 +71,11 @@ main {
       gap: 2rem;
       .interests {
         span {
+          display: block;
           white-space: nowrap;
-          margin-right: 1rem;
-
+          color: $color-secondary-400;
           i {
+            cursor: pointer;
             margin-right: 0.25rem;
             color: $color-danger-500;
           }
