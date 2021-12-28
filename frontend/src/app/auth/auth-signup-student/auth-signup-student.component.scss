@@ -30,6 +30,13 @@ main {
         }
       }
     }
+    .error-container {
+      color: $color-danger-500;
+      small {
+        display: block;
+        width: 100%;
+      }
+    }
   }
   button {
     @include button($color-main-500);

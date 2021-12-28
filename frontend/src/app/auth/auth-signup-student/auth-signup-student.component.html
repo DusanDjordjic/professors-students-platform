@@ -4,13 +4,25 @@
       <aside>
         <h1>Registracija studenta</h1>
         <div>
-          <a href="">Registrujte se kao profesor</a>
-          <a href="">Ulogujte se kao student</a>
-          <a href="">Ulogujte se kao profesor</a>
+          <a [routerLink]="['/auth', 'signup', 'professor']"
+            >Registrujte se kao profesor</a
+          >
+          <a [routerLink]="['/auth', 'login', 'student']"
+            >Ulogujte se kao student</a
+          >
+          <a [routerLink]="['/auth', 'login', 'professor']"
+            >Ulogujte se kao profesor</a
+          >
         </div>
         <div>
-          <span>Pročitajte <a href="">uslove korišćenja</a></span>
-          <span>Dešava se greška? <a href="">Kontaktirajte nas</a></span>
+          <!-- TODO dodati kada se naprave stranice -->
+          <span>Pročitajte <a routerLink="#">uslove korišćenja</a></span>
+          <span>Dešava se greška? <a routerLink="#">Kontaktirajte nas</a></span>
+        </div>
+        <div *ngIf="internalErrors.length > 0" class="error-container">
+          <span *ngFor="let err of internalErrors">
+            {{ err }}
+          </span>
         </div>
       </aside>
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
@@ -422,7 +434,10 @@
           <small *ngFor="let err of afterSubmitErrors">{{ err }}</small>
         </div>
         <div *ngIf="afterSubmitErrors.length > 0">
-          <span id="toLogin">Već imate nalog? <a href="">Ulogujte se</a> </span>
+          <span id="toLogin"
+            >Već imate nalog?
+            <a [routerLink]="['/auth', 'login', 'student']">Ulogujte se</a>
+          </span>
         </div>
       </form>
     </div>
