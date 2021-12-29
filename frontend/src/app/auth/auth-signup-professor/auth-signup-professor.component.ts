@@ -114,7 +114,7 @@ export class AuthSignupProfessorComponent implements OnInit {
     // Uključujemo spiner
     this.isLoading = true;
 
-    // Pravimo nog studenta od podataka iz forme
+    // Pravimo novog studenta od podataka iz forme
     const newProfessor = new SignupProfessorModel(this.signupForm.value);
 
     // Http zahtev za slanje studenta

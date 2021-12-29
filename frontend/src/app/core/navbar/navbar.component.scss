@@ -116,8 +116,9 @@ nav {
     }
     .buttons {
       display: flex;
-      a {
-        width: 50%;
+      a,
+      button {
+        width: 100%;
         font-weight: 500;
         @include button;
         transition: all 0.3s;
