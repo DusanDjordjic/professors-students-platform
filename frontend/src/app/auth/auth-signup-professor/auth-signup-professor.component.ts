@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LearningWayModel } from 'src/shared/models/learning-way.model';
 import { SubjectModel } from 'src/shared/models/subject.model';
 import { LearningWayService } from 'src/shared/providers/learning-way.service';
@@ -62,9 +63,10 @@ export class AuthSignupProfessorComponent implements OnInit {
     { validators: checkPasswordsValidator }
   );
   constructor(
-    private subjectService: SubjectsService,
-    private learningWayService: LearningWayService,
-    private authService: AuthService
+    private readonly subjectService: SubjectsService,
+    private readonly learningWayService: LearningWayService,
+    private readonly authService: AuthService,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
@@ -123,6 +125,7 @@ export class AuthSignupProfessorComponent implements OnInit {
         // Ako se prođe kako treba gasimo spiner i postavljamo greske na prazan niz
         this.isLoading = false;
         this.afterSubmitErrors = [];
+        this.router.navigate(['/auth', 'login', 'professor']);
       },
       error: (err) => {
         console.log(err);
