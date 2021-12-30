@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LearningWayModel } from 'src/shared/models/learning-way.model';
 import { SubjectModel } from 'src/shared/models/subject.model';
 import { LearningWayService } from 'src/shared/providers/learning-way.service';
@@ -60,9 +61,10 @@ export class AuthSignupStudentComponent implements OnInit {
     { validators: checkPasswordsValidator }
   );
   constructor(
-    private subjectService: SubjectsService,
-    private learningWayService: LearningWayService,
-    private authService: AuthService
+    private readonly subjectService: SubjectsService,
+    private readonly learningWayService: LearningWayService,
+    private readonly authService: AuthService,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
@@ -73,9 +75,10 @@ export class AuthSignupStudentComponent implements OnInit {
       },
       error: (err) => {
         // TODO Modal da iskoci ako su se desile greske koje nisu do korisnika
-        this.internalErrors.push(
-          'Došlo je do greške. Server je u kvaru. Pokušajte opet kasnije'
-        );
+        if (this.internalErrors.length == 0)
+          this.internalErrors.push(
+            'Došlo je do greške. Server je u kvaru. Pokušajte opet kasnije'
+          );
       },
     });
     // Uzimamo sve nacine ucenja
@@ -85,9 +88,10 @@ export class AuthSignupStudentComponent implements OnInit {
       },
       error: (err) => {
         // TODO Modal da iskoci ako su se desile greske koje nisu do korisnika
-        this.internalErrors.push(
-          'Došlo je do greške. Server je u kvaru. Pokušajte opet kasnije'
-        );
+        if (this.internalErrors.length == 0)
+          this.internalErrors.push(
+            'Došlo je do greške. Server je u kvaru. Pokušajte opet kasnije'
+          );
       },
     });
   }
@@ -121,6 +125,7 @@ export class AuthSignupStudentComponent implements OnInit {
         // Ako se prođe kako treba gasimo spiner i postavljamo greske na prazan niz
         this.isLoading = false;
         this.afterSubmitErrors = [];
+        this.router.navigate(['/auth', 'login', 'student']);
       },
       error: (err) => {
         console.log(err);

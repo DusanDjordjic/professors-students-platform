@@ -45,7 +45,6 @@ export class ProfessorAuthService {
             field: 'email',
             message: 'Email već postoji',
           });
-          throw new HttpException('Email already exists', 409);
         }
         if (professor.username == similarProfessors[0].username) {
           // Ako postoje profesori sa istim username dodamo gresku u listu gresaka

@@ -18,10 +18,16 @@
           <div>Informacije</div>
         </div>
         <div class="buttons">
-          <a [routerLink]="['auth', 'login', 'student']">Login</a>
-          <a [routerLink]="['auth', 'signup', 'student']" class="background"
+          <a [routerLink]="['auth', 'login', 'student']" *ngIf="!loginStatus"
+            >Login</a
+          >
+          <a
+            [routerLink]="['auth', 'signup', 'student']"
+            class="background"
+            *ngIf="!loginStatus"
             >Signup</a
           >
+          <button (click)="logout()" *ngIf="loginStatus">Logout</button>
         </div>
       </div>
     </div>
