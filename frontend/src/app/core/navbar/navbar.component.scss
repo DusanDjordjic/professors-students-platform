@@ -6,185 +6,96 @@ nav {
   left: 0;
   right: 0;
   z-index: 10;
-  background-color: $color-secondary-600;
-  color: $color-secondary-100;
-}
-.container {
-  @include container;
-  display: block;
-  align-items: center;
-  justify-content: center;
-  .nav-header {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    button {
-      @include button;
-      color: $color-secondary-100;
-      background-color: transparent;
-      transition: all 0.3s;
-      &:hover {
-        background-color: rgba($color: $color-secondary-100, $alpha: 0.2);
+  color: $color-dark;
+  transition: left 0.3s;
+  background-color: $color-light;
+  @include shadow-sm;
+  z-index: 1000;
+  &.sidebarActive {
+    left: 0;
+  }
+
+  .icon-btn {
+    @include icon-btn;
+  }
+  .search-wrapper {
+    position: relative;
+    &:focus-within,
+    &:hover {
+      i {
+        color: $color-dark;
       }
+    }
+    input {
+      @include input-gray;
+      padding-left: $spacing-base * 3;
+      min-width: 100%;
+    }
+    i {
+      transition: color 0.3s;
+      color: $color-secondary;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: $spacing-base;
       display: inline-block;
     }
   }
   .nav-content {
-    &.active {
-      display: block;
-    }
-    width: 100%;
+    display: flex;
+    column-gap: $spacing-base * 3;
+  }
+  .notification-btn {
     display: none;
-    justify-content: space-between;
+  }
+  .profile-details {
+    display: none;
     align-items: center;
-    padding-top: 2rem;
-    div {
-      display: block;
+    img {
+      @include field-gray;
+      @include icon-btn-shape;
+      object-fit: cover;
+      padding: 0;
+      margin-right: $spacing-base;
+      border: none;
     }
-    .search-field {
-      display: block;
-      position: relative;
-      width: 100%;
-      &:focus-within {
-        input {
-          border-color: $color-main-500;
-        }
-        button {
-          border-color: $color-main-500;
-        }
-      }
-      input {
-        display: block;
-        background-color: $color-secondary-400;
-        color: $color-secondary-100;
-        border-radius: 100px;
-        border: 2px solid transparent;
-        width: 100%;
-        font-size: 1rem;
-        padding: 0.5rem calc(45px + 1rem) 0.5rem 1rem;
-        margin: 0;
-        transition: all 0.3s;
-        &::placeholder {
-          /* Chrome, Firefox, Opera, Safari 10.1+ */
-          color: rgba($color: $color-secondary-100, $alpha: 0.5);
-          opacity: 1; /* Firefox */
-        }
-
-        & :-ms-input-placeholder {
-          /* Internet Explorer 10-11 */
-          color: rgba($color: $color-secondary-100, $alpha: 0.5);
-        }
-        &:focus {
-          outline: none;
-        }
-      }
-      button {
-        cursor: pointer;
-        font-size: 16px;
-        position: absolute;
-        top: 0px;
-        right: 0;
-        width: 45px;
-        height: 45px;
-        border-radius: 100px;
-        border: 2px solid $color-secondary-600;
-        background-color: transparent;
-        color: $color-secondary-100;
-        transition: all 0.3s;
-        &:hover {
-          background-color: rgba($color: $color-secondary-100, $alpha: 0.2);
-        }
-      }
+  }
+}
+.container {
+  @include container;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-base * 2;
+}
+@include md {
+  nav {
+    transition: left 0.3s;
+    &.sidebarActive {
+      left: $sidebar-width;
     }
-    .links {
-      display: block;
-      padding: 1rem 0;
-      div {
-        padding: 0.5rem 1rem;
-        cursor: pointer;
-        transition: all 0.3s;
-        border-radius: 4px;
-        margin-bottom: 0.5rem;
-        &:last-of-type {
-          border: none;
-        }
-        &:hover {
-          background-color: rgba($color: $color-secondary-100, $alpha: 0.2);
-        }
-      }
-    }
-    .buttons {
+  }
+}
+@media only screen and (min-width: 400px) {
+  nav {
+    .notification-btn {
       display: flex;
-      a,
-      button {
-        width: 100%;
-        font-weight: 500;
-        @include button;
-        transition: all 0.3s;
-        background-color: $color-secondary-100;
-        color: $color-secondary-600;
-        &:first-of-type {
-          margin-right: 1rem;
-        }
-        &.background {
-          background-color: $color-main-500;
-          color: $color-secondary-100;
-          &:hover {
-            background-color: darken($color: $color-main-500, $amount: 10);
-          }
-        }
-        &:hover {
-          background-color: darken($color: $color-secondary-100, $amount: 10);
-        }
+    }
+  }
+}
+@media only screen and (min-width: 471px) {
+  nav {
+    .search-wrapper {
+      input {
+        min-width: 300px;
       }
     }
   }
 }
-@include md() {
-  .container {
-    @include container;
-    display: flex;
-    .nav-header {
-      width: auto;
+@media only screen and (min-width: 655px) {
+  nav {
+    .profile-details {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      button {
-        display: none;
-      }
-    }
-
-    .nav-content {
-      &.active {
-        display: flex;
-      }
-      display: flex;
-      margin-left: 2rem;
-      padding: 0;
-      div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .search-field {
-        width: 240px;
-      }
-      .links {
-        padding: 0;
-        display: flex;
-        column-gap: 0.5rem;
-        margin-right: 2rem;
-        div {
-          margin: 0;
-        }
-      }
-      .buttons {
-        display: flex;
-        a {
-          width: auto;
-        }
-      }
     }
   }
 }

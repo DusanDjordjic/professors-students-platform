@@ -1,10 +1,18 @@
-<div>
-  <app-navbar></app-navbar>
-</div>
-<!-- 77px je velicina navbar-a -->
-<div style="padding-top: 77px">
-  <router-outlet></router-outlet>
-</div>
-<div>
-  <app-footer></app-footer>
+<div class="wrapper">
+  <!-- Sidebar -->
+  <app-sidebar [ngClass]="{ active: sidebarState }"></app-sidebar>
+
+  <!-- Content -->
+  <div class="content" [ngClass]="{ sidebarActive: sidebarState }">
+    <div>
+      <app-navbar></app-navbar>
+    </div>
+    <!-- 77px je velicina navbar-a -->
+    <div style="padding-top: 77px">
+      <router-outlet></router-outlet>
+    </div>
+    <div>
+      <app-footer></app-footer>
+    </div>
+  </div>
 </div>

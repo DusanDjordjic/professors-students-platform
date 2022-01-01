@@ -1,0 +1,97 @@
+@import "src/assets/styles/vars";
+@import "src/assets/styles/mixins";
+aside {
+  background-color: $color-light;
+  padding: 0 $spacing-base * 2;
+  min-height: 100%;
+
+  font-weight: 600;
+  @include shadow-sm;
+
+  .sidebar-wrapper {
+    padding-top: $spacing-base * 2;
+    display: flex;
+    flex-direction: column;
+    row-gap: $spacing-big;
+    .links-group {
+      .links-group-name {
+        margin-bottom: $spacing-base * 2;
+        margin-left: $spacing-base;
+        display: block;
+      }
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        row-gap: $spacing-base;
+        a {
+          white-space: nowrap;
+          display: block;
+          padding: $spacing-base * 0.5 $spacing-base;
+          color: $color-secondary;
+          border-radius: $base-border-radius;
+          transition: all 0.3s;
+          &:hover {
+            background-color: $color-main-1;
+            color: $color-dark;
+            @include shadow-normal;
+          }
+          &.active {
+            background-color: $color-main-1;
+            color: $color-dark;
+          }
+          i {
+            display: inline-block;
+            min-width: $spacing-base * 2;
+            margin-right: $spacing-base * 0.5;
+          }
+        }
+      }
+      &.color-1 {
+        ul {
+          a {
+            &:hover {
+              background-color: $color-main-1;
+            }
+            .active {
+              background-color: $color-main-1;
+            }
+          }
+        }
+      }
+      &.color-2 {
+        ul {
+          a {
+            &:hover {
+              background-color: $color-main-2;
+            }
+            .active {
+              background-color: $color-main-2;
+            }
+          }
+        }
+      }
+      &.color-3 {
+        ul {
+          a {
+            &:hover {
+              background-color: $color-main-3;
+            }
+            .active {
+              background-color: $color-main-3;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@include md {
+  aside {
+    .sidebar-wrapper {
+      padding-top: $navbar-height;
+    }
+  }
+}

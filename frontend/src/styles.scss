@@ -1,11 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+@import "src/assets/styles/vars";
 * {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+input::placeholder {
+  color: $color-secondary;
 }
 body {
   margin: 0;
-  font-size: 16px;
+  font-size: 14px;
+  background-color: $color-bg;
+  color: $color-dark;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-family-header;
 }
 a {
   color: inherit;

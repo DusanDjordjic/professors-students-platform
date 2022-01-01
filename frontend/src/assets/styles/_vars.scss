@@ -1,7 +1,41 @@
+// Colors
+$color-light: #fff;
+$color-bg: #f8feff;
+$color-dark: #1c1c1c;
+$color-main-1: #99ffff;
+$color-main-2: #8be9fe;
+$color-main-3: #ff9966;
+$color-secondary: #acb0b4;
 $color-main-500: #3988f6;
 $color-danger-500: #f6396c;
-$color-light: #fff;
 $color-secondary-100: #d8e6fc;
 $color-secondary-300: #7f92af;
 $color-secondary-400: #42618b;
 $color-secondary-600: #1e385b;
+
+// Font-sizes
+
+$font-size-normal: 14px;
+$font-size-bigger: 18px;
+$font-size-md: 24px;
+$font-size-lg: 32px;
+$font-size-xl: 48px;
+
+// Font-families
+
+$font-family-text: "Poppins", sans-serif;
+$font-family-header: "Lora", sans-serif;
+
+// Spacing
+
+$spacing-base: 12px;
+$spacing-big: 50px;
+
+// Border-radius:
+
+$base-border-radius: 4px;
+
+// Sidebar
+
+$sidebar-width: 195.22px;
+$navbar-height: 68px;

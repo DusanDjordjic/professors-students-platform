@@ -1,0 +1,68 @@
+<aside>
+  <!-- <div>Logo</div> -->
+  <div class="sidebar-wrapper">
+    <div class="links-group color-1">
+      <span class="links-group-name">Meni</span>
+      <ul>
+        <li>
+          <a
+            routerLink=""
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            ><i class="fas fa-home"></i>Početna</a
+          >
+        </li>
+        <li>
+          <a routerLink="search" routerLinkActive="active"
+            ><i class="fas fa-search"></i>Pretraga</a
+          >
+        </li>
+        <li>
+          <a routerLink="about" routerLinkActive="active"
+            ><i class="fas fa-info-circle"></i>O nama</a
+          >
+        </li>
+        <li>
+          <a routerLink="contact" routerLinkActive="active"
+            ><i class="fas fa-phone-alt"></i>Kontakt</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="links-group color-2">
+      <span class="links-group-name">DusanDux001</span>
+      <ul>
+        <li>
+          <a routerLink="profile" routerLinkActive="active"
+            ><i class="fas fa-user"></i>Moj Profil</a
+          >
+        </li>
+        <li>
+          <a routerLink="chat" routerLinkActive="active"
+            ><i class="fas fa-comment"></i>Poruke</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="links-group color-3">
+      <span class="links-group-name">Podrška</span>
+      <ul>
+        <li>
+          <a [routerLink]="['support', 'privacy']"
+            ><i class="fas fa-lock"></i>Privatnost</a
+          >
+        </li>
+        <li>
+          <a [routerLink]="['support', 'faq']"
+            ><i class="fas fa-question-circle"></i>FAQ</a
+          >
+        </li>
+        <li>
+          <a [routerLink]="['support', 'settings']"
+            ><i class="fas fa-cog"></i>Podešavanja</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</aside>

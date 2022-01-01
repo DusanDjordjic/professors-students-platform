@@ -1,35 +1,28 @@
-<nav>
+<nav [ngClass]="{ sidebarActive: sidebarState }">
   <div class="container">
-    <div class="nav-header">
-      <button (click)="toggleNavContent()"><i class="fas fa-bars"></i></button>
-      <span class="logo">WebŠkola</span>
-    </div>
-    <div class="nav-content" [ngClass]="{ active: navContentVisible }">
-      <span class="search-field">
+    <button
+      class="icon-btn"
+      (click)="toggleSidebar()"
+      [ngClass]="{ active: sidebarState }"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="nav-content">
+      <div class="search-wrapper">
         <input type="text" placeholder="Pretraži..." />
-        <button>
-          <i class="fas fa-search"></i>
-        </button>
-      </span>
-      <div>
-        <div class="links">
-          <div>Početna</div>
-          <div>Pretraga</div>
-          <div>Informacije</div>
-        </div>
-        <div class="buttons">
-          <a [routerLink]="['auth', 'login', 'student']" *ngIf="!loginStatus"
-            >Login</a
-          >
-          <a
-            [routerLink]="['auth', 'signup', 'student']"
-            class="background"
-            *ngIf="!loginStatus"
-            >Signup</a
-          >
-          <button (click)="logout()" *ngIf="loginStatus">Logout</button>
-        </div>
+        <i class="fas fa-search"></i>
       </div>
+      <div class="profile-details">
+        <img
+          src="assets\images\profile\default-profile.jpg"
+          alt="Profile pictire"
+        />
+        <span>Dušan Đorđić</span>
+      </div>
+      <a class="icon-btn notification-btn" routerLink="">
+        <i class="fas fa-bell"></i>
+      </a>
     </div>
   </div>
 </nav>

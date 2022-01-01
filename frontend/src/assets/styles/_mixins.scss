@@ -1,3 +1,42 @@
+// SHADOWS
+
+@mixin shadow-sm {
+  box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
+    rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+}
+@mixin shadow-normal {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+// BUTTONS AND FIELDS
+@mixin field-gray {
+  cursor: pointer;
+  padding: $spacing-base * 0.5;
+  border-radius: $base-border-radius;
+  background-color: $color-light;
+  color: $color-secondary;
+  min-height: 36px;
+  transition: color 0.3s, border-color 0.3s, box-shadow 0.3s;
+  border: 1px solid rgba($color-secondary, 0.5);
+  &.active,
+  &:hover {
+    color: $color-dark;
+    border-color: transparent;
+    box-shadow: 3px 3px 10px rgba($color-dark, 0.2);
+  }
+}
+
+@mixin input-gray {
+  @include field-gray();
+  display: flex;
+  align-items: center;
+
+  &:focus {
+    color: $color-dark;
+    border-color: transparent;
+    @include shadow-normal;
+  }
+}
 @mixin button($bg-color: $color-main-500, $color: $color-light) {
   cursor: pointer;
   border-radius: 4px;
@@ -17,44 +56,38 @@
     background-color: desaturate($bg-color, 80%);
   }
 }
+@mixin icon-btn-shape {
+  border-radius: $base-border-radius;
+  height: 36px;
+  width: 36px;
+}
+@mixin icon-btn {
+  @include field-gray();
+  @include icon-btn-shape();
+  display: inline-flex;
+  font-size: $font-size-bigger;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  width: 36px;
+}
+// CONTAINER AND LAYOUT
 @mixin container {
   @include lg() {
-    width: 900px;
+    width: 792px;
   }
 
   @include xl() {
-    width: 1100px;
+    width: 1000px;
   }
   @include xxl() {
-    width: 1300px;
+    width: 1200px;
   }
   width: 100%;
   margin: 0 auto;
   padding: 1rem;
 }
-@mixin autoCompleteBg($bg-color: $color-secondary-100) {
-  &:-webkit-autofill,
-  &:-webkit-autofill:hover,
-  &:-webkit-autofill:focus,
-  &:-webkit-autofill:active {
-    box-shadow: 0 0 0 30px $bg-color inset !important;
-    -webkit-box-shadow: 0 0 0 30px $bg-color inset !important;
-  }
-}
-@mixin placeholder-color(
-  $ph-color: rgba($color: $color-secondary-400, $alpha: 0.5)
-) {
-  &::placeholder {
-    /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: $ph-color;
-    opacity: 1; /* Firefox */
-  }
 
-  & :-ms-input-placeholder {
-    /* Internet Explorer 10-11 */
-    color: $ph-color;
-  }
-}
 @mixin xs() {
   @media only screen and (min-width: 568px) {
     @content;
@@ -85,5 +118,30 @@
 @mixin xxl() {
   @media only screen and (min-width: 1400px) {
     @content;
+  }
+}
+
+// SPECIAL
+@mixin autoCompleteBg($bg-color: $color-secondary-100) {
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    box-shadow: 0 0 0 30px $bg-color inset !important;
+    -webkit-box-shadow: 0 0 0 30px $bg-color inset !important;
+  }
+}
+@mixin placeholder-color(
+  $ph-color: rgba($color: $color-secondary-400, $alpha: 0.5)
+) {
+  &::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: $ph-color;
+    opacity: 1; /* Firefox */
+  }
+
+  & :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: $ph-color;
   }
 }
