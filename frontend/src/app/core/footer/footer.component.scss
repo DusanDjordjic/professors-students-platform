@@ -3,8 +3,8 @@
 footer {
   padding: 3rem 0 0 0;
 
-  color: $color-secondary-400;
-  border-top: 1px solid $color-secondary-100;
+  color: $color-secondary;
+
   .container {
     @include container;
     .footer-items-wrapper {
@@ -20,7 +20,7 @@ footer {
           margin: 0 0 1rem 0;
           font-size: 1rem;
           font-weight: 500;
-          color: $color-secondary-600;
+          color: $color-dark;
         }
         a,
         p {
@@ -35,7 +35,7 @@ footer {
       }
     }
     .footer-links-wrapper {
-      border-top: 1px solid $color-secondary-100;
+      border-top: 1px solid rgba($color: $color-secondary, $alpha: 0.5);
       padding: 1rem 0;
       font-size: 0.9rem;
       .button {
@@ -51,19 +51,18 @@ footer {
           width: 30px;
           height: 30px;
           border-radius: 100px;
-          background-color: rgba($color: $color-secondary-100, $alpha: 0.5);
-          transition: all 0.3s;
+          transition: color 0.3s;
           &:hover {
-            background-color: darken(
-              $color: rgba($color: $color-secondary-100, $alpha: 0.5),
-              $amount: 10
+            color: darken(
+              $color: rgba($color: $color-secondary, $alpha: 1),
+              $amount: 20
             );
           }
         }
       }
     }
     .footer-copyright {
-      border-top: 1px solid $color-secondary-100;
+      border-top: 1px solid rgba($color: $color-secondary, $alpha: 0.5);
       padding: 1rem 0;
       text-align: center;
     }

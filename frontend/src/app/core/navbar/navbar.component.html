@@ -13,7 +13,11 @@
         <input type="text" placeholder="Pretraži..." />
         <i class="fas fa-search"></i>
       </div>
-      <div class="profile-details">
+      <div class="auth-links" *ngIf="!loginStatus">
+        <a [routerLink]="['auth', 'login', 'student']">Login</a>
+        <a [routerLink]="['auth', 'signup', 'student']">Registruj se</a>
+      </div>
+      <div class="profile-details" *ngIf="loginStatus">
         <img
           src="assets\images\profile\default-profile.jpg"
           alt="Profile pictire"

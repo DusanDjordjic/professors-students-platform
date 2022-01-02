@@ -30,14 +30,14 @@
   @include field-gray();
   display: flex;
   align-items: center;
-
+  color: $color-dark;
   &:focus {
     color: $color-dark;
     border-color: transparent;
     @include shadow-normal;
   }
 }
-@mixin button($bg-color: $color-main-500, $color: $color-light) {
+@mixin button($bg-color: $color-main-2, $color: $color-dark) {
   cursor: pointer;
   border-radius: 4px;
   background-color: $bg-color;
@@ -47,13 +47,14 @@
   padding: 0.5rem 1rem;
   transition: all 0.3s;
   &:hover {
-    box-shadow: 0 0 10px rgba($color: #000, $alpha: 0.3);
+    @include shadow-normal();
     background-color: darken($color: $bg-color, $amount: 10);
   }
   &:disabled {
     cursor: default;
     box-shadow: none;
-    background-color: desaturate($bg-color, 80%);
+    background-color: $color-secondary;
+    // background-color: desaturate($bg-color, 100%);
   }
 }
 @mixin icon-btn-shape {
@@ -122,7 +123,7 @@
 }
 
 // SPECIAL
-@mixin autoCompleteBg($bg-color: $color-secondary-100) {
+@mixin autoCompleteBg($bg-color: rgba($color-main-2, 0.3)) {
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,

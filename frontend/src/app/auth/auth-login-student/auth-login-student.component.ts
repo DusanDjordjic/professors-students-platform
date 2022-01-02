@@ -46,9 +46,10 @@ export class AuthLoginStudentComponent implements OnInit {
         this.afterSubmitErrors = [];
         // Ako ne postoji err.error znaci da je greska na serveru
         if (!(err && err.error)) {
-          this.internalErrors.push(
-            'Došlo je do greške. Server je u kvaru. Pokušajte opet kasnije'
-          );
+          if (this.internalErrors.length == 0)
+            this.internalErrors.push(
+              'Došlo je do greške. Server je u kvaru. Pokušajte opet kasnije'
+            );
           return;
         }
         this.afterSubmitErrorStatusCode = err.error.status;
@@ -72,15 +73,17 @@ export class AuthLoginStudentComponent implements OnInit {
           this.focusOnField(filedToFocus);
         } else if (err && err.error && err.error.status == 500) {
           // Ako je status code 500 znači da je došlo do greške na serveru
-          this.internalErrors.push(
-            'Došlo je do greške. Server je u kvaru. Pokušajte opet kasnije'
-          );
+          if (this.internalErrors.length == 0)
+            this.internalErrors.push(
+              'Došlo je do greške. Server je u kvaru. Pokušajte opet kasnije'
+            );
         } else {
           // Ako se desila nepredviđena greška
           // TODO Modal da iskoci ako su se desile greske koje nisu do korisnika
-          this.internalErrors.push(
-            'Došlo je do greške. Server je u kvaru. Pokušajte opet kasnije'
-          );
+          if (this.internalErrors.length == 0)
+            this.internalErrors.push(
+              'Došlo je do greške. Server je u kvaru. Pokušajte opet kasnije'
+            );
         }
         // Gasimo spiner
         this.isLoading = false;

@@ -5,7 +5,7 @@ main {
   .form-page-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 100px;
+    gap: $spacing-big;
   }
   aside {
     padding: 1rem;
@@ -15,30 +15,28 @@ main {
       // 1rem padding od containera
       // 1rem padding od aside-a
       top: calc(77px + 2rem);
+      border: none;
     }
     h1 {
       margin-top: 0;
-
       font-weight: 600;
       font-size: 1.75rem;
-      color: $color-secondary-600;
     }
     div {
-      border-top: 2px solid $color-secondary-100;
+      border-top: 2px solid rgba($color: $color-secondary, $alpha: 0.5);
       //   text-align: center;
       & > * {
         margin: 0.5rem;
         display: block;
       }
       a {
-        color: $color-main-500;
         &:hover {
           text-decoration: underline;
         }
       }
     }
     .error-container {
-      color: $color-danger-500;
+      color: $color-danger;
       small {
         display: block;
         width: 100%;
@@ -46,15 +44,15 @@ main {
     }
   }
   button {
-    @include button($color-main-500);
+    @include button($color-main-2);
   }
 
   // Pomocne klase
   .mt {
-    margin-top: 2rem;
+    margin-top: $spacing-base * 2;
   }
   .mb {
-    margin-bottom: 1rem;
+    margin-bottom: $spacing-base;
   }
   .span-full {
     width: 100%;
@@ -75,7 +73,7 @@ main {
   // Greske
   .error-container {
     margin-top: 0.5rem;
-    color: $color-danger-500;
+    color: $color-danger;
     small {
       display: block;
       width: 100%;
@@ -96,14 +94,14 @@ main {
     padding: 1rem;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-    gap: 100px;
+    gap: $spacing-big;
 
     h3 {
       margin-top: 0;
       text-align: center;
       font-weight: 400;
       font-size: 1.5rem;
-      color: $color-secondary-600;
+      color: $color-dark;
     }
     .group {
       display: flex;
@@ -112,14 +110,16 @@ main {
       gap: 2rem;
       .items-list {
         span {
+          @include field-gray;
           cursor: pointer;
-          display: block;
+          display: inline-block;
+          margin: 2px 2px 0 0;
           white-space: nowrap;
-          color: $color-secondary-400;
+          color: $color-secondary;
           i {
             cursor: pointer;
             margin-right: 0.25rem;
-            color: $color-danger-500;
+            color: $color-danger;
           }
         }
       }
@@ -135,18 +135,16 @@ main {
         // }
         transition: transform 0.3s;
 
-        &:focus-within {
-          transform: scale(1.1);
-        }
+        // &:focus-within {
+        //   // transform: scale(1.1);
+        // }
         label {
           display: block;
-          color: $color-main-500;
-          font-size: 14px;
         }
 
         // Zvezdica
         span.required {
-          color: $color-danger-500;
+          color: $color-danger;
         }
         select {
           cursor: pointer;
@@ -159,17 +157,17 @@ main {
           padding: 0.5rem 1rem;
           border-bottom: 2px solid $color-secondary-100;
           color: $color-secondary-400;
-
+          @include input-gray;
           @include placeholder-color;
           @include autoCompleteBg;
         }
 
         .invalid {
-          border-bottom: 2px solid $color-danger-500;
+          border-bottom: 2px solid $color-danger !important;
         }
-        .valid {
-          border-bottom: 2px solid $color-main-500;
-        }
+        // .valid {
+        //   // border-bottom: 2px solid $color-main-2;
+        // }
       }
     }
   }

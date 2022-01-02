@@ -9,7 +9,6 @@ import { SidebarService } from '../sidebar/sidebar.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  navContentVisible: boolean = false;
   loginStatus = false;
   subscriptions: Subscription = new Subscription();
   sidebarState: boolean = false;
@@ -28,7 +27,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.sidebarService.sidebarState$.subscribe((sidebarState) => {
         this.sidebarState = sidebarState;
-        console.log(sidebarState);
       })
     );
     this.subscriptions.add(
@@ -46,9 +44,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
-  toggleNavContent() {
-    this.navContentVisible = !this.navContentVisible;
-  }
+
   logout() {
     this.authService.logout();
   }

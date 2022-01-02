@@ -60,6 +60,14 @@ nav {
       border: none;
     }
   }
+  .auth-links {
+    display: flex;
+    align-items: center;
+    gap: $spacing-base;
+    a {
+      @include field-gray;
+    }
+  }
 }
 .container {
   @include container;

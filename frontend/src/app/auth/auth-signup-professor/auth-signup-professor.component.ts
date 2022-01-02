@@ -77,9 +77,10 @@ export class AuthSignupProfessorComponent implements OnInit {
       },
       error: (err) => {
         // TODO Modal da iskoci ako su se desile greske koje nisu do korisnika
-        this.internalErrors.push(
-          'Došlo je do greške. Server je u kvaru. Pokušajte opet kasnije'
-        );
+        if (this.internalErrors.length == 0)
+          this.internalErrors.push(
+            'Došlo je do greške. Server je u kvaru. Pokušajte opet kasnije'
+          );
       },
     });
     // Uzimamo sve nacine ucenja
@@ -89,9 +90,10 @@ export class AuthSignupProfessorComponent implements OnInit {
       },
       error: (err) => {
         // TODO Modal da iskoci ako su se desile greske koje nisu do korisnika
-        this.internalErrors.push(
-          'Došlo je do greške. Server je u kvaru. Pokušajte opet kasnije'
-        );
+        if (this.internalErrors.length == 0)
+          this.internalErrors.push(
+            'Došlo je do greške. Server je u kvaru. Pokušajte opet kasnije'
+          );
       },
     });
   }
