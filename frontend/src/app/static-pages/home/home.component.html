@@ -1,0 +1,215 @@
+<header>
+  <div class="container">
+    <div class="grid-2">
+      <div class="header-text">
+        <h1>
+          Uči ono što želiš,<br />
+          kako želiš i koliko želiš
+        </h1>
+        <p>
+          Online platforma namenjena spajanju profesora i studenata u cilju
+          proširenja globalnog znanja i pre svega druženju.
+        </p>
+
+        <div class="header-links">
+          <span> Napravi nalog kao </span>
+          <a [routerLink]="['auth', 'signup', 'student']">Student</a
+          ><a [routerLink]="['auth', 'signup', 'professor']">Profesor</a>
+        </div>
+      </div>
+      <div>
+        <img src="assets/images/real/home-student.png" alt="Student" />
+      </div>
+    </div>
+  </div>
+</header>
+<section class="second-section">
+  <div class="container">
+    <div class="grid-3-2">
+      <div class="cards-wrapper">
+        <article>
+          <span>
+            <span class="icon">
+              <i class="fas fa-graduation-cap"></i>
+            </span>
+          </span>
+          <h3>Pronađi profesora</h3>
+          <p>Pogledajte sve profesore i izaberite kod koga ćete učiti.</p>
+          <a routerLink="">
+            <span>
+              <i class="fas fa-chevron-right"></i>
+            </span>
+          </a>
+        </article>
+        <article>
+          <span>
+            <span class="icon">
+              <i class="fas fa-book-open"></i>
+            </span>
+          </span>
+
+          <h3>Preko 37 oblasti</h3>
+          <p>Naša platforma sadrži za svakog po nešto.</p>
+          <a routerLink="">
+            <span>
+              <i class="fas fa-chevron-right"></i>
+            </span>
+          </a>
+        </article>
+        <article>
+          <span>
+            <span class="icon">
+              <i class="fas fa-cog"></i>
+            </span>
+          </span>
+          <h3>24/7 podrška</h3>
+          <p>Ako imate bilo kakva pitanja kontaktirajte našu podršku.</p>
+          <a routerLink="">
+            <span>
+              <i class="fas fa-chevron-right"></i>
+            </span>
+          </a>
+        </article>
+      </div>
+      <div class="second-section-text">
+        <h2>
+          Najbolje od nas<br />
+          samo za tebe
+        </h2>
+        <p>
+          Izdvojili smo najbolje profesore koji će ti pomoći da ostvariš svoje
+          ciljeve.
+        </p>
+        <span>
+          <a routerLink="">Pogledaj još</a>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="get-paid-section">
+  <div class="container">
+    <div class="grid-2-3">
+      <div class="get-paid-text">
+        <h2>
+          Kako da zaradiš<br />
+          na našoj platformi
+        </h2>
+        <p>
+          Iako je naša platforma zamišljena da bude 100% besplatna ostavili smo
+          korisnicima da izaberu da li će da naplate svoje usluge ili ne.
+        </p>
+        <span>
+          <a routerLink="">Počni odmah</a>
+        </span>
+      </div>
+      <div class="cards-wrapper">
+        <article>
+          <span>
+            <span class="icon"> 1 </span>
+          </span>
+          <h3>Registruj se</h3>
+          <p>
+            Registruj se kao profesor, napiši šta predaješ i zašto da studenti
+            izaberu baš tebe.
+          </p>
+        </article>
+        <article>
+          <span>
+            <span class="icon"> 2 </span>
+          </span>
+          <h3>Napravi raspored</h3>
+          <p>
+            Napravi svoj raspored održavanja časova i lekcija. Uvek ga možeš
+            promeniti.
+          </p>
+        </article>
+        <article>
+          <span>
+            <span class="icon"> 3 </span>
+          </span>
+          <h3>Budi korektan i odgovoran</h3>
+          <p>
+            Najvažnije je da ostaviš dobar utisak, preneseš znanje i upoznaš
+            nove ljude.
+          </p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="learn-more-section">
+  <div class="container">
+    <h2>Saznaj više</h2>
+    <div class="buttons-wrapper">
+      <button
+        (click)="changeLearnTab(learnMoreTabs.US)"
+        [ngClass]="{ active: learnMoreActiveTab == learnMoreTabs.US }"
+      >
+        O nama
+      </button>
+      <button
+        (click)="changeLearnTab(learnMoreTabs.SITE)"
+        [ngClass]="{ active: learnMoreActiveTab == learnMoreTabs.SITE }"
+      >
+        O sajtu
+      </button>
+      <button
+        (click)="changeLearnTab(learnMoreTabs.GOAL)"
+        [ngClass]="{ active: learnMoreActiveTab == learnMoreTabs.GOAL }"
+      >
+        O našem cilju
+      </button>
+    </div>
+    <article *ngIf="learnMoreActiveTab == learnMoreTabs.US" class="b-c-1">
+      <h3>Ko smo mi</h3>
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam
+        deserunt ducimus laboriosam saepe veritatis sit facilis eveniet non esse
+        sequi! Numquam minima fuga porro sapiente tempore nobis ea laboriosam
+        nulla?
+      </p>
+
+      <h3>Želiš da nam se pridružiš?</h3>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae,
+        distinctio dolores iusto esse provident sapiente sed eaque ratione ipsa
+        repellendus.
+      </p>
+      <a routerLink="">Ovde</a>
+    </article>
+    <article *ngIf="learnMoreActiveTab == learnMoreTabs.SITE" class="b-c-2">
+      <h3>Ideja iza platforme</h3>
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam
+        deserunt ducimus laboriosam saepe veritatis sit facilis eveniet non esse
+        sequi! Numquam minima fuga porro sapiente tempore nobis ea laboriosam
+        nulla?
+      </p>
+    </article>
+    <article *ngIf="learnMoreActiveTab == learnMoreTabs.GOAL" class="b-c-3">
+      <h3>Šta želimo da postignemo</h3>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. In inventore
+        impedit nesciunt voluptas maxime reiciendis sapiente magni commodi id,
+        cupiditate, ducimus molestiae quo? Tenetur, odit. Lorem ipsum dolor sit
+        amet consectetur adipisicing elit. Quia vero eaque quo consectetur?
+        Voluptatum ipsum illo est nemo dicta facilis.
+      </p>
+    </article>
+  </div>
+</section>
+<section class="action-call-section">
+  <div class="container">
+    <div class="text-wrapper">
+      <h3>Registruj se i počni odmah</h3>
+      <p>
+        Želiš da naučiš kako ti možemo pomoći? Registruj se i pogledaj uputsvo
+        za korišćenje aplikacije - ako ti treba pomoć rado ćemo ti pomoći.
+      </p>
+      <span>
+        <a routerLink="">Probaj besplatno</a>
+      </span>
+    </div>
+  </div>
+</section>

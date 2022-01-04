@@ -9,6 +9,7 @@ import { FooterComponent } from './core/footer/footer.component';
 import { AuthModule } from './auth/auth.module';
 import { SidebarComponent } from './core/sidebar/sidebar.component';
 import { SidebarService } from './core/sidebar/sidebar.service';
+import { HomeComponent } from './static-pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { SidebarService } from './core/sidebar/sidebar.service';
     NavbarComponent,
     FooterComponent,
     SidebarComponent,
+    HomeComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, AuthModule, HttpClientModule],
   providers: [SidebarService],

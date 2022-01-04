@@ -13,6 +13,7 @@ body {
   font-size: 14px;
   background-color: $color-bg;
   color: $color-dark;
+  overflow-x: hidden;
 }
 h1,
 h2,
@@ -21,6 +22,7 @@ h4,
 h5,
 h6 {
   font-family: $font-family-header;
+  font-weight: 600;
 }
 a {
   color: inherit;
@@ -34,4 +36,6 @@ select {
 }
 img {
   user-select: none;
+  width: 100%;
+  height: auto;
 }
