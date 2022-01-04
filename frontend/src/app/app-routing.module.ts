@@ -4,6 +4,8 @@ import { AuthLoginProfessorComponent } from './auth/auth-login-professor/auth-lo
 import { AuthLoginStudentComponent } from './auth/auth-login-student/auth-login-student.component';
 import { AuthSignupProfessorComponent } from './auth/auth-signup-professor/auth-signup-professor.component';
 import { AuthSignupStudentComponent } from './auth/auth-signup-student/auth-signup-student.component';
+import { CanActivateUser } from './profile/guards/canActivateUser.guard';
+import { ProfileComponent } from './profile/profile/profile.component';
 import { HomeComponent } from './static-pages/home/home.component';
 
 const routes: Routes = [
@@ -26,6 +28,11 @@ const routes: Routes = [
   {
     path: 'auth/login/professor',
     component: AuthLoginProfessorComponent,
+  },
+  {
+    path: 'moj-profil',
+    component: ProfileComponent,
+    canActivate: [CanActivateUser],
   },
 ];
 

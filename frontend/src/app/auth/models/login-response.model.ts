@@ -1,4 +1,4 @@
-import { UserType } from '../types/user.type';
+import { UserType } from '../../../shared/types/user.type';
 
 export class LoginResponseModel {
   accessToken: string;

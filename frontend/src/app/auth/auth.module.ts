@@ -11,6 +11,7 @@ import { LoadingSpinnerComponent } from 'src/shared/components/loading-spinner/l
 import { LearningWayService } from 'src/shared/providers/learning-way.service';
 import { AuthService } from './auth.service';
 import { RouterModule } from '@angular/router';
+import { ProfileModule } from '../profile/profile.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { RouterModule } from '@angular/router';
     AuthLoginStudentComponent,
     LoadingSpinnerComponent,
   ],
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, ProfileModule],
   providers: [SubjectsService, LearningWayService, AuthService],
 })
 export class AuthModule {}
