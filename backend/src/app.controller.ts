@@ -1,7 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { LearningWayEntity } from './shared/entities/learning-way.entity';
+import { Controller } from '@nestjs/common';
 
 @Controller()
 export class AppController {
