@@ -10,8 +10,8 @@ import { LoadingSpinnerComponent } from 'src/shared/components/loading-spinner/l
 
 import { LearningWayService } from 'src/shared/providers/learning-way.service';
 import { AuthService } from './auth.service';
-import { RouterModule } from '@angular/router';
 import { ProfileModule } from '../profile/profile.module';
+import { AuthRoutingModule } from './auth-routing.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,12 @@ import { ProfileModule } from '../profile/profile.module';
     AuthLoginStudentComponent,
     LoadingSpinnerComponent,
   ],
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, ProfileModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    AuthRoutingModule,
+    ProfileModule,
+  ],
   providers: [SubjectsService, LearningWayService, AuthService],
 })
 export class AuthModule {}

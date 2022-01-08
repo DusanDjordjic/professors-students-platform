@@ -48,13 +48,6 @@
                 type="text"
                 id="firstName"
                 placeholder="Dušan"
-                [ngClass]="{
-                  invalid:
-                    getFormControl('firstName').invalid &&
-                    (getFormControl('firstName').touched ||
-                      getFormControl('firstName').dirty),
-                  valid: getFormControl('firstName').valid
-                }"
               />
               <div
                 class="error-container"

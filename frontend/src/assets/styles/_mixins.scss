@@ -55,6 +55,7 @@
     // background-color: desaturate($bg-color, 100%);
   }
 }
+
 @mixin icon-btn-shape {
   border-radius: $base-border-radius;
   height: 36px;
@@ -117,7 +118,7 @@
 }
 
 // SPECIAL
-@mixin autoCompleteBg($bg-color: rgba($color-main-2, 0.3)) {
+@mixin autoCompleteBg($bg-color: $color-main-2) {
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
