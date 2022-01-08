@@ -13,6 +13,7 @@ export class UserService {
     @InjectRepository(ProfessorEntity)
     private readonly professorRepo: Repository<ProfessorEntity>,
   ) {}
+  
   async getUser(type: UserType, username: string) {
     if (type == 'student') {
       return await this.studentRepo.findOne({ username: username });
