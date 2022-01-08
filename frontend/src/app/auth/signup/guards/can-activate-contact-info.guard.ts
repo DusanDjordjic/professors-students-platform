@@ -20,6 +20,11 @@ export class CanActivateContactInfo implements CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    return this.signupService.isUserDetailsValid();
+    if (this.signupService.isUserDetailsValid()) {
+      return true;
+    } else {
+      this.router.navigate(['/auth', 'signup']);
+      return false;
+    }
   }
 }

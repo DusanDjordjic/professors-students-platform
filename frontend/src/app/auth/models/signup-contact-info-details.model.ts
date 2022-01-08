@@ -1,7 +1,7 @@
-export class ContactInfoDetails {
+export class SignupContactInfoDetails {
   email: string;
-  phoneNumber: string;
-  website: string;
+  phoneNumber: string | null;
+  website: string | null;
 
   constructor(obj?: any) {
     this.email = (obj && obj.email) || null;

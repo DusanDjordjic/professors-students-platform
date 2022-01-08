@@ -1,7 +1,7 @@
-export class AddressDetails {
+export class SignupAddressDetails {
   city: string;
-  street: string;
-  streetNumber: string;
+  street: string | null;
+  streetNumber: string | null;
 
   constructor(obj?: any) {
     this.city = (obj && obj.city) || null;
