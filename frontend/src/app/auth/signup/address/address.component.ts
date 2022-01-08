@@ -2,47 +2,48 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { checkPasswordsValidator } from 'src/shared/validators/confirm-password.validator';
-import { SignupContactInfoDetails } from '../../models/signup-contact-info-details.model';
+import { SignupAddressDetails } from '../../models/signup-address-details.model';
+
 import { SignupService } from '../signup.service';
 
 @Component({
-  selector: 'app-contact-info',
-  templateUrl: './contact-info.component.html',
-  styleUrls: ['./contact-info.component.scss'],
+  selector: 'app-address',
+  templateUrl: './address.component.html',
+  styleUrls: ['./address.component.scss'],
 })
-export class ContactInfoComponent implements OnInit {
-  contactDetailsForm = new FormGroup(
+export class AddressComponent implements OnInit {
+  addressDetailsForm = new FormGroup(
     {
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      phoneNumber: new FormControl(null),
-      website: new FormControl(null),
+      city: new FormControl(null, [Validators.required]),
+      street: new FormControl(null),
+      streetNumber: new FormControl(null),
     },
     { validators: checkPasswordsValidator }
   );
   constructor(private signupService: SignupService, private router: Router) {}
 
   getFormControl(name: string) {
-    return this.contactDetailsForm.get(name) as FormControl;
+    return this.addressDetailsForm.get(name) as FormControl;
   }
   ngOnInit(): void {}
   onSubmit() {
-    if (this.contactDetailsForm.invalid) {
+    if (this.addressDetailsForm.invalid) {
       return;
     }
     // Updateujemo podakte u servisu
-    const contactInfoDetails = new SignupContactInfoDetails({
-      ...this.contactDetailsForm.value,
+    const addressDetails = new SignupAddressDetails({
+      ...this.addressDetailsForm.value,
     });
-    this.signupService.updateContactInfo(contactInfoDetails);
+    this.signupService.updateAddress(addressDetails);
 
     // Proveravamo za svaki slucaj da li su podaci tacni
-    if (this.signupService.isContactInfoValid()) {
+    if (this.signupService.isAddressValid()) {
       this.signupService
-        .serverValidateContactInfoDetails(contactInfoDetails)
+        .serverValidateAddressDetails(addressDetails)
         .subscribe({
           next: (data) => {
             console.log(data);
-            this.router.navigate(['/auth', 'signup', 'address']);
+            this.router.navigate(['/auth', 'signup', 'subjects']);
             this.signupService.log();
           },
           error: (err) => {

@@ -43,12 +43,12 @@ aside {
           border-radius: $base-border-radius;
           transition: all 0.3s;
           &:hover {
-            background-color: $color-main-1;
+            // background-color: $color-main-1;
             color: $color-dark;
             @include shadow-normal;
           }
           &.active {
-            background-color: $color-main-1;
+            // background-color: $color-main-1;
             color: $color-dark;
           }
           i {
@@ -63,10 +63,10 @@ aside {
           a,
           button {
             &:hover {
-              background-color: $color-main-1;
+              background-color: $color-main-1 !important;
             }
-            .active {
-              background-color: $color-main-1;
+            &.active {
+              background-color: $color-main-1 !important;
             }
           }
         }
@@ -76,10 +76,10 @@ aside {
           a,
           button {
             &:hover {
-              background-color: $color-main-2;
+              background-color: $color-main-2 !important;
             }
-            .active {
-              background-color: $color-main-2;
+            &.active {
+              background-color: $color-main-2 !important;
             }
           }
         }
@@ -89,10 +89,10 @@ aside {
           a,
           button {
             &:hover {
-              background-color: $color-main-3;
+              background-color: $color-main-3 !important;
             }
-            .active {
-              background-color: $color-main-3;
+            &.active {
+              background-color: $color-main-3 !important;
             }
           }
         }

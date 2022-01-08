@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { SignupAddressDetails } from '../models/signup-address-details.model';
 import { SignupContactInfoDetails } from '../models/signup-contact-info-details.model';
 import { SignupUserDetails } from '../models/signup-user-details.model';
 import { SignupUser } from '../models/signup-user.model';
@@ -20,6 +21,7 @@ export class SignupService {
     this.currentSignupUserDetails.type = userDetails.type;
     this.currentSignupUserDetails.password = userDetails.password;
   }
+
   updateContactInfo(contactInfoDetails: SignupContactInfoDetails) {
     this.currentSignupUserDetails.contactInfo.email = contactInfoDetails.email;
     this.currentSignupUserDetails.contactInfo.phoneNumber =
@@ -27,6 +29,14 @@ export class SignupService {
     this.currentSignupUserDetails.contactInfo.website =
       contactInfoDetails.website;
   }
+
+  updateAddress(addressDetails: SignupAddressDetails) {
+    this.currentSignupUserDetails.address.city = addressDetails.city;
+    this.currentSignupUserDetails.address.street = addressDetails.street;
+    this.currentSignupUserDetails.address.streetNumber =
+      addressDetails.streetNumber;
+  }
+
   serverValidateUserDetails(userDetails: SignupUserDetails): Observable<any> {
     return this.http.post(`${validateUrl}/user-details`, userDetails);
   }
@@ -36,6 +46,13 @@ export class SignupService {
   ): Observable<any> {
     return this.http.post(`${validateUrl}/contact-info`, contactInfoDetails);
   }
+
+  serverValidateAddressDetails(
+    addressDetails: SignupAddressDetails
+  ): Observable<any> {
+    return this.http.post(`${validateUrl}/address`, addressDetails);
+  }
+
   isUserDetailsValid(): boolean {
     let userDetailsValid = true;
 
@@ -84,6 +101,7 @@ export class SignupService {
     }
     return userDetailsValid;
   }
+
   isContactInfoValid(): boolean {
     let contactInfoDetailsValid = true;
     if (
@@ -116,5 +134,43 @@ export class SignupService {
       }
     }
     return contactInfoDetailsValid;
+  }
+
+  isAddressValid(): boolean {
+    let addressDetailsValid = true;
+    if (this.currentSignupUserDetails.address.city) {
+      if (typeof this.currentSignupUserDetails.address.city == 'string') {
+        if (this.currentSignupUserDetails.address.city.length <= 0) {
+          addressDetailsValid = false;
+        }
+      } else {
+        addressDetailsValid = false;
+      }
+    } else {
+      addressDetailsValid = false;
+    }
+    if (this.currentSignupUserDetails.address.street !== null) {
+      if (typeof this.currentSignupUserDetails.address.street === 'string') {
+        if (this.currentSignupUserDetails.address.street.length == 0)
+          this.currentSignupUserDetails.address.street = null;
+      } else {
+        addressDetailsValid = false;
+      }
+    }
+
+    if (this.currentSignupUserDetails.address.streetNumber !== null) {
+      if (
+        typeof this.currentSignupUserDetails.address.streetNumber === 'string'
+      ) {
+        if (this.currentSignupUserDetails.address.streetNumber.length == 0)
+          this.currentSignupUserDetails.address.streetNumber = null;
+      } else {
+        addressDetailsValid = false;
+      }
+    }
+    return addressDetailsValid;
+  }
+  log() {
+    console.log(this.currentSignupUserDetails);
   }
 }

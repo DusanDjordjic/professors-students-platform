@@ -56,6 +56,7 @@ export class UserDetailsComponent implements OnInit {
           next: (data) => {
             console.log(data);
             this.router.navigate(['/auth', 'signup', 'contact-info']);
+            this.signupService.log();
           },
           error: (err) => {
             console.log(err);

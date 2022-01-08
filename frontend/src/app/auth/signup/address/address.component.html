@@ -1,0 +1,62 @@
+<div class="container">
+  <main>
+    <h1>Adresa</h1>
+    <form [formGroup]="addressDetailsForm" (ngSubmit)="onSubmit()">
+      <div class="fields-wrapper">
+        <div class="g-2">
+          <div class="form-group">
+            <label for="city">Grad <span class="required">*</span></label>
+            <input
+              type="text"
+              id="city"
+              formControlName="city"
+              [ngClass]="{
+                invalid:
+                  getFormControl('city').invalid &&
+                  (getFormControl('city').touched ||
+                    getFormControl('city').dirty),
+                valid: getFormControl('city').valid
+              }"
+            />
+            <div
+              class="error-container"
+              *ngIf="
+                getFormControl('city').invalid &&
+                (getFormControl('city').touched || getFormControl('city').dirty)
+              "
+            >
+              <small *ngIf="getFormControl('city').errors?.['required']">
+                Grad je obavezan
+              </small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="street">Ulica</label>
+            <input type="text" id="phoneNumber" formControlName="street" />
+          </div>
+        </div>
+        <div>
+          <div class="form-group">
+            <label for="streetNumber">Ulični broj</label>
+            <input
+              type="text"
+              id="streetNumber"
+              formControlName="streetNumber"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button
+            type="submit"
+            class="btn-full"
+            [disabled]="addressDetailsForm.invalid"
+          >
+            Dalje
+          </button>
+        </div>
+      </div>
+    </form>
+  </main>
+</div>

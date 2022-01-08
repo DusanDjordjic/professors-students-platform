@@ -15,7 +15,7 @@
       </div>
       <div class="auth-links" *ngIf="!loginStatus">
         <a [routerLink]="['auth', 'login', 'student']">Login</a>
-        <a [routerLink]="['auth', 'signup', 'student']">Registruj se</a>
+        <a [routerLink]="['auth', 'signup']">Registruj se</a>
       </div>
       <div class="profile-details" *ngIf="loginStatus">
         <img
@@ -24,7 +24,7 @@
         />
         <span>Dušan Đorđić</span>
       </div>
-      <a class="icon-btn notification-btn" routerLink="">
+      <a class="icon-btn notification-btn" routerLink="" *ngIf="loginStatus">
         <i class="fas fa-bell"></i>
       </a>
     </div>
