@@ -62,7 +62,7 @@ nav {
     }
   }
   .auth-links {
-    display: flex;
+    display: none;
     align-items: center;
     gap: $spacing-base;
     a {
@@ -92,7 +92,7 @@ nav {
     }
   }
 }
-@media only screen and (min-width: 471px) {
+@media only screen and (min-width: 483px) {
   nav {
     .search-wrapper {
       input {
@@ -101,9 +101,14 @@ nav {
     }
   }
 }
-@media only screen and (min-width: 655px) {
+@media only screen and (min-width: 677px) {
   nav {
     .profile-details {
+      display: flex;
+    }
+  }
+  nav {
+    .auth-links {
       display: flex;
     }
   }

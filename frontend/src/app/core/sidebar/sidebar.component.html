@@ -29,7 +29,7 @@
         </li>
       </ul>
     </div>
-    <div class="links-group color-2">
+    <div class="links-group color-2" *ngIf="loginStatus">
       <span class="links-group-name">DusanDux001</span>
       <ul>
         <li>
@@ -40,6 +40,11 @@
         <li>
           <a routerLink="chat" routerLinkActive="active"
             ><i class="fas fa-comment"></i>Poruke</a
+          >
+        </li>
+        <li>
+          <a (click)="logout()"
+            ><i class="fas fa-sign-out-alt"></i>Izloguj se</a
           >
         </li>
       </ul>

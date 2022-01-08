@@ -27,9 +27,17 @@ aside {
         display: flex;
         flex-direction: column;
         row-gap: $spacing-base;
-        a {
+        a,
+        button {
+          cursor: pointer;
+          user-select: none;
+          border: none;
+          background-color: transparent;
           white-space: nowrap;
-          display: block;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          width: 100%;
           padding: $spacing-base * 0.5 $spacing-base;
           color: $color-secondary;
           border-radius: $base-border-radius;
@@ -52,7 +60,8 @@ aside {
       }
       &.color-1 {
         ul {
-          a {
+          a,
+          button {
             &:hover {
               background-color: $color-main-1;
             }
@@ -64,7 +73,8 @@ aside {
       }
       &.color-2 {
         ul {
-          a {
+          a,
+          button {
             &:hover {
               background-color: $color-main-2;
             }
@@ -76,7 +86,8 @@ aside {
       }
       &.color-3 {
         ul {
-          a {
+          a,
+          button {
             &:hover {
               background-color: $color-main-3;
             }

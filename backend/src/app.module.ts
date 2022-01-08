@@ -14,12 +14,14 @@ import { ProfessorEntity } from './shared/entities/professor.entity';
 import { StudentEntity } from './shared/entities/student.entity';
 import { SubjectEntity } from './shared/entities/subject.entity';
 import { SubjectsModule } from './subjects/subjects.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
     AuthModule,
     SubjectsModule,
     LearingWayModule,
+    UserModule,
     // TypeOrmModule.forFeature([LearningWayEntity]),
     ConfigModule.forRoot({
       isGlobal: true,

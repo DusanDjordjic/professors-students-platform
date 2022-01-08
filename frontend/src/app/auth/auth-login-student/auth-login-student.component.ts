@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { LoginDataModel } from '../models/login-data.model';
 
@@ -21,7 +22,7 @@ export class AuthLoginStudentComponent implements OnInit {
   });
   isLoading = false;
   internalErrors: string[] = [];
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -39,6 +40,7 @@ export class AuthLoginStudentComponent implements OnInit {
         // Gasimo spiner
         this.isLoading = false;
         this.authService.login(response);
+        this.router.navigate(['/moj-profil']);
       },
       error: (err) => {
         console.log(err);
