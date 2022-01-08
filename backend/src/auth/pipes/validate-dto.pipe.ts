@@ -2,7 +2,7 @@ import { ArgumentMetadata, HttpException, PipeTransform } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { validate } from 'class-validator';
 
-export class ValidateContactInfo implements PipeTransform {
+export class ValidateDto implements PipeTransform {
   async transform(value: any, { metatype }: ArgumentMetadata) {
     if (!metatype || this.toValidate(metatype)) return value;
 

@@ -51,7 +51,17 @@ export class UserDetailsComponent implements OnInit {
 
     // Proveravamo za svaki slucaj da li su podaci tacni
     if (this.signupService.isUserDetailsValid()) {
-      this.router.navigate(['/auth', 'signup', 'contact-info']);
+      this.signupService
+        .serverValidateUserDetails(signupUserDetails)
+        .subscribe({
+          next: (data) => {
+            console.log(data);
+            this.router.navigate(['/auth', 'signup', 'contact-info']);
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
     } else {
       console.log('Greska u podacima');
     }

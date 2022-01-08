@@ -1,20 +1,28 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ConactInfoDto } from 'src/shared/dto/contact_info.dto';
+import { UserDetailsDto } from 'src/shared/dto/user-details.dto';
 
-import { ValidateContactInfo } from '../pipes/validate-email-body.pipe';
+import { ValidateDto } from '../pipes/validate-dto.pipe';
 
-import { EmailService } from '../providers/email.service';
+import { ValidateService } from '../providers/validate.service';
 
 @Controller('api/validate')
 export class ValidateController {
-  constructor(private emailService: EmailService) {}
+  constructor(private validateService: ValidateService) {}
   /**
    * Pipe validira format ceo objekat
    * Kao i da li je email odgovarajuceg tipa
    * email je obavezan, phoneNumber i website nisu
    */
   @Post('/contact-info')
-  async validateEmail(@Body(ValidateContactInfo) contactInfo: ConactInfoDto) {
-    return await this.emailService.validateEmail(contactInfo);
+  @HttpCode(200)
+  async validateContactInfo(@Body(ValidateDto) contactInfo: ConactInfoDto) {
+    return await this.validateService.validateContactInfo(contactInfo);
+  }
+
+  @Post('/user-details')
+  @HttpCode(200)
+  async validateUserDetails(@Body(ValidateDto) userDetails: UserDetailsDto) {
+    return await this.validateService.validateUserDetails(userDetails);
   }
 }

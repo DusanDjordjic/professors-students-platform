@@ -1,10 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { SignupUserDetails } from '../models/signup-user-details.model';
 import { SignupUser } from '../models/signup-user.model';
+const validateUrl = 'http://localhost:3000/api/validate';
+
 @Injectable()
 export class SignupService {
   private currentSignupUserDetails = new SignupUser();
-  constructor() {
+  constructor(private http: HttpClient) {
     console.log(this.currentSignupUserDetails);
   }
   updateUserDetails(userDetails: SignupUserDetails) {
@@ -13,6 +17,9 @@ export class SignupService {
     this.currentSignupUserDetails.lastname = userDetails.lastname;
     this.currentSignupUserDetails.type = userDetails.type;
     this.currentSignupUserDetails.password = userDetails.password;
+  }
+  serverValidateUserDetails(userDetails: SignupUserDetails): Observable<any> {
+    return this.http.post(`${validateUrl}/user-details`, userDetails);
   }
   isUserDetailsValid(): boolean {
     let userDetailsValid = true;
