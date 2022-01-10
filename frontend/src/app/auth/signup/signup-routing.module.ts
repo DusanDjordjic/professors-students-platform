@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
 import { AddressComponent } from './address/address.component';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
 import { CanActivateAddress } from './guards/can-activate-address.guard';
@@ -26,6 +27,15 @@ const routes: Routes = [
   {
     path: 'subjects',
     component: SubjectsComponent,
+    // canActivate: [
+    //   CanActivateContactInfo,
+    //   CanActivateAddress,
+    //   CanActivateSubjects,
+    // ],
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
     // canActivate: [
     //   CanActivateContactInfo,
     //   CanActivateAddress,

@@ -13,6 +13,7 @@ import { CanActivateSubjects } from './guards/can-activate-subjects.guard';
 import { SubjectsComponent } from './subjects/subjects.component';
 import { SignupSubjectsService } from './signup-subject.service';
 import { SubStringDirective } from 'src/shared/directives/sub-string.directive';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   providers: [
@@ -34,6 +35,7 @@ import { SubStringDirective } from 'src/shared/directives/sub-string.directive';
     AddressComponent,
     SubjectsComponent,
     SubStringDirective,
+    AboutComponent,
   ],
 })
 export class SignupModule {}

@@ -67,7 +67,8 @@
         </div>
         <div class="form-group">
           <button
-            type="submit"
+            type="button"
+            (click)="onSubmit()"
             class="btn-full"
             [disabled]="selectedSubjects.length == 0"
           >

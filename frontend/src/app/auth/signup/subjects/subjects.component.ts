@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { checkPasswordsValidator } from 'src/shared/validators/confirm-password.validator';
 import { SignupAddressDetails } from '../../models/signup-address-details.model';
+import { SignupSubjectDetails } from '../../models/signup-subject.model';
 import { GroupModel } from '../models/group.model';
 import { SubjectModel } from '../models/subject.model';
 import { SignupSubjectsService } from '../signup-subject.service';
@@ -116,6 +117,11 @@ export class SubjectsComponent implements OnInit {
     this.getAllSubjects(this.activeGroups);
   }
   onSubmit() {
-    console.log(this.selectedSubjects);
+    if (this.selectedSubjects.length == 0) return;
+    const subjects = this.selectedSubjects.map(
+      (sub) => new SignupSubjectDetails(sub)
+    );
+    this.signupService.updateSubjects(subjects);
+    this.router.navigate(['/auth/signup/about']);
   }
 }

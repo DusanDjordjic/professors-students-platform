@@ -15,86 +15,15 @@ main {
     margin: 0 0 $spacing-base * 2 0;
     text-align: center;
   }
-  .content-wrapper {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: $spacing-big;
-    aside {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: $spacing-base;
-
-      button {
-        @include button-gray;
-      }
-    }
-  }
   .fields-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-base * 2;
     .g-2 {
       display: grid;
       column-gap: $spacing-base;
       row-gap: $spacing-base * 2;
       grid-template-columns: repeat(1, 1fr);
-      .subject-box-wrapper {
-        display: flex;
-        flex-wrap: wrap;
-        .subject-box {
-          position: relative;
-          z-index: 10;
-          height: calc(100% - 36px);
-          padding: $spacing-base;
-          border-radius: $base-border-radius $base-border-radius 0 0;
-          border: 1px solid rgba($color: $color-secondary, $alpha: 0.5);
-          color: $color-secondary;
-          transition: all 0.3s;
-          width: 100%;
-          a {
-            &:hover {
-              text-decoration: underline;
-            }
-          }
-          h3 {
-            margin: 0 0 $spacing-base * 0.5 0;
-          }
-          p {
-            margin: $spacing-base 0 0 0;
-          }
-        }
-        &.selected {
-          .subject-box {
-            // background-color: rgba($color: $color-main-2, $alpha: 0.3);
-            color: $color-dark;
-          }
-        }
-        button {
-          border-radius: 0 0 $base-border-radius $base-border-radius !important;
-          width: 100%;
-          &.remove {
-            @include button($color-danger, $color-light);
-          }
-        }
-      }
-    }
-    .spacer {
-      height: 1px;
-      background-color: rgba($color: $color-secondary, $alpha: 0.5);
-      width: 100%;
-      margin: $spacing-big 0;
-    }
-    .selected-subjects-box {
-      margin-bottom: $spacing-big;
-      h2 {
-        text-align: center;
-        margin-top: 0;
-      }
-      .subject-button-wrapper {
-        display: flex;
-        gap: $spacing-base;
-        flex-wrap: wrap;
-        .subject-button {
-          @include button($color-danger, $color-light);
-        }
-      }
     }
   }
   .form-group {
@@ -105,12 +34,14 @@ main {
         color: $color-danger;
       }
     }
-    input {
-      @include placeholder-color;
-      @include autoCompleteBg;
+    textarea {
+      //   @include placeholder-color;
+      //   @include autoCompleteBg;
       @include input-gray();
       display: block;
       width: 100%;
+      resize: vertical;
+      min-height: 100px;
     }
     button {
       display: block;
@@ -197,25 +128,10 @@ main {
     }
   }
 }
-@media only screen and (min-width: 400px) {
-  main {
-    // width: 80%;
-    .content-wrapper {
-      aside {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-  }
-}
+
 @include sm() {
   main {
-    // width: 80%;
-    .content-wrapper {
-      grid-template-columns: auto 1fr;
-      aside {
-        grid-template-columns: 1fr;
-      }
-    }
+    width: 80%;
     .fields-wrapper {
       .g-2 {
         display: grid;
@@ -227,11 +143,6 @@ main {
 
 @include xl() {
   main {
-    .fields-wrapper {
-      .g-2 {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
+    width: 60%;
   }
 }

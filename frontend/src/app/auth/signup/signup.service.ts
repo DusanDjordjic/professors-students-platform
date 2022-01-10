@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { SignupAboutDetails } from '../models/signup-about.model';
 import { SignupAddressDetails } from '../models/signup-address-details.model';
 import { SignupContactInfoDetails } from '../models/signup-contact-info-details.model';
+import { SignupSubjectDetails } from '../models/signup-subject.model';
 import { SignupUserDetails } from '../models/signup-user-details.model';
 import { SignupUser } from '../models/signup-user.model';
 
@@ -37,6 +39,14 @@ export class SignupService {
       addressDetails.streetNumber;
   }
 
+  updateSubjects(subjects: SignupSubjectDetails[]) {
+    this.currentSignupUserDetails.subjects = subjects;
+  }
+
+  updateAbout(aboutDetails: SignupAboutDetails) {
+    this.currentSignupUserDetails.about = aboutDetails;
+  }
+
   serverValidateUserDetails(userDetails: SignupUserDetails): Observable<any> {
     return this.http.post(`${validateUrl}/user-details`, userDetails);
   }
@@ -51,6 +61,11 @@ export class SignupService {
     addressDetails: SignupAddressDetails
   ): Observable<any> {
     return this.http.post(`${validateUrl}/address`, addressDetails);
+  }
+  serverValidateAboutDetails(
+    aboutDetails: SignupAboutDetails
+  ): Observable<any> {
+    return this.http.post(`${validateUrl}/about`, aboutDetails);
   }
 
   isUserDetailsValid(): boolean {
@@ -170,6 +185,20 @@ export class SignupService {
     }
     return addressDetailsValid;
   }
+
+  areSubjectsValid(): boolean {
+    if (this.currentSignupUserDetails.subjects.length > 0) {
+      return true;
+    }
+    return false;
+  }
+  isAboutValid(): boolean {
+    if (this.currentSignupUserDetails.about.about.length >= 100) {
+      return true;
+    }
+    return false;
+  }
+
   log() {
     console.log(this.currentSignupUserDetails);
   }
