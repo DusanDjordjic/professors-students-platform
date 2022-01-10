@@ -44,6 +44,7 @@
   border: none;
   padding: 8px 20px;
   transition: all 0.3s;
+
   &:hover {
     @include shadow-normal();
     background-color: darken($color: $bg-color, $amount: 10);
@@ -55,7 +56,31 @@
     // background-color: desaturate($bg-color, 100%);
   }
 }
-
+@mixin button-gray {
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: $color-light;
+  color: $color-secondary;
+  padding: 8px 20px;
+  transition: all 0.3s;
+  border: 1px solid rgba($color-secondary, 0.5);
+  &:hover {
+    color: $color-dark;
+    border-color: transparent;
+    box-shadow: 3px 3px 10px rgba($color-dark, 0.2);
+  }
+  &.active {
+    background-color: $color-main-2;
+    border-color: transparent;
+    color: $color-dark;
+  }
+  &:disabled {
+    cursor: default;
+    box-shadow: none;
+    background-color: $color-secondary;
+    // background-color: desaturate($bg-color, 100%);
+  }
+}
 @mixin icon-btn-shape {
   border-radius: $base-border-radius;
   height: 36px;

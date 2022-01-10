@@ -1,5 +1,6 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { AddressDto } from 'src/shared/dto/address.dto';
 import { ConactInfoDto } from 'src/shared/dto/contact_info.dto';
 import { UserDetailsDto } from 'src/shared/dto/user-details.dto';
 import { User } from 'src/shared/entities/user.entity';
@@ -48,6 +49,16 @@ export class ValidateService {
       } else {
         return userDetails;
       }
+    } catch (err) {
+      if (err instanceof ErrorModel)
+        throw new HttpException(err.text, err.status);
+      console.log(err);
+      throw new HttpException('Greška na serveru', 500);
+    }
+  }
+  async validateAddress(addressDetails: AddressDto) {
+    try {
+      return addressDetails;
     } catch (err) {
       if (err instanceof ErrorModel)
         throw new HttpException(err.text, err.status);

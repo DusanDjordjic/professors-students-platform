@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { ProfileService } from '../profile/profile.service';
+
 import { LoginDataModel } from './models/login-data.model';
 import { LoginResponseModel } from './models/login-response.model';
-import { SignupProfessorModel } from './models/signup-professor.model';
-import { SignupStudentModel } from './models/signup-student.model';
+
 import { UserType } from '../../shared/types/user.type';
 
 const baseUrl = 'http://localhost:3000/api/auth';
@@ -25,12 +24,6 @@ export class AuthService {
     this.currentUserType.next(this.getCurrentUserType());
   }
 
-  signupStudent(newStudent: SignupStudentModel): Observable<any> {
-    return this.http.post(`${baseUrl}/signup/student`, newStudent);
-  }
-  signupProfessor(newProfessor: SignupProfessorModel): Observable<any> {
-    return this.http.post(`${baseUrl}/signup/professor`, newProfessor);
-  }
   loginStudent(logindata: LoginDataModel): Observable<LoginResponseModel> {
     return this.http
       .post(`${baseUrl}/login/student`, logindata)

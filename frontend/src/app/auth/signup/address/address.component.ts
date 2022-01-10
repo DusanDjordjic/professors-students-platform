@@ -42,7 +42,7 @@ export class AddressComponent implements OnInit {
         .serverValidateAddressDetails(addressDetails)
         .subscribe({
           next: (data) => {
-            console.log(data);
+            // console.log(data);
             this.router.navigate(['/auth', 'signup', 'subjects']);
             this.signupService.log();
           },

@@ -62,22 +62,8 @@ main {
       width: 70%;
       margin: 0 auto;
       button {
+        @include button-gray;
         width: 100%;
-        cursor: pointer;
-        border-radius: 0px;
-        color: $color-secondary;
-        background-color: $color-light;
-        border: 1px solid rgba($color: $color-secondary, $alpha: 0.5);
-        padding: 8px 20px;
-        transition: all 0.3s;
-        &:hover {
-          color: $color-dark;
-          background-color: darken($color: $color-main-2, $amount: 10);
-        }
-        &.active {
-          color: $color-dark;
-          background-color: $color-main-2;
-        }
         &:first-of-type {
           border-radius: 4px 0 0 4px;
           position: relative;

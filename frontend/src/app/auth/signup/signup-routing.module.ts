@@ -5,6 +5,7 @@ import { ContactInfoComponent } from './contact-info/contact-info.component';
 import { CanActivateAddress } from './guards/can-activate-address.guard';
 import { CanActivateContactInfo } from './guards/can-activate-contact-info.guard';
 import { CanActivateSubjects } from './guards/can-activate-subjects.guard';
+import { SubjectsComponent } from './subjects/subjects.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 
 const routes: Routes = [
@@ -15,21 +16,21 @@ const routes: Routes = [
   {
     path: 'contact-info',
     component: ContactInfoComponent,
-    canActivate: [CanActivateContactInfo],
+    // canActivate: [CanActivateContactInfo],
   },
   {
     path: 'address',
     component: AddressComponent,
-    canActivate: [CanActivateContactInfo, CanActivateAddress],
+    // canActivate: [CanActivateContactInfo, CanActivateAddress],
   },
   {
     path: 'subjects',
-    component: AddressComponent,
-    canActivate: [
-      CanActivateContactInfo,
-      CanActivateAddress,
-      CanActivateSubjects,
-    ],
+    component: SubjectsComponent,
+    // canActivate: [
+    //   CanActivateContactInfo,
+    //   CanActivateAddress,
+    //   CanActivateSubjects,
+    // ],
   },
 ];
 

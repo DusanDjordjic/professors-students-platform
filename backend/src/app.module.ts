@@ -15,11 +15,12 @@ import { GroupDetails } from './shared/entities/group-details.entity';
 import { SelectedSubject } from './shared/entities/selected-subject.entity';
 import { SubjectDetails } from './shared/entities/subject-details.entity';
 import { User } from './shared/entities/user.entity';
+import { SubjectModule } from './subjects/subject.module';
 
 @Module({
   imports: [
     AuthModule,
-
+    SubjectModule,
     // TypeOrmModule.forFeature([LearningWayEntity]),
     ConfigModule.forRoot({
       isGlobal: true,

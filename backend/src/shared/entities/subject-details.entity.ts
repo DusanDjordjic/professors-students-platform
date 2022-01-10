@@ -18,6 +18,7 @@ export class SubjectDetails {
   description: string;
   @ManyToOne(() => GroupDetails, (groupDetails) => groupDetails.subjectDetails)
   groupDetails: GroupDetails;
+
   @OneToMany(
     () => SelectedSubject,
     (selectedSubject) => selectedSubject.subjectDetails,

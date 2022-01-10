@@ -10,6 +10,9 @@ import { CanActivateContactInfo } from './guards/can-activate-contact-info.guard
 import { AddressComponent } from './address/address.component';
 import { CanActivateAddress } from './guards/can-activate-address.guard';
 import { CanActivateSubjects } from './guards/can-activate-subjects.guard';
+import { SubjectsComponent } from './subjects/subjects.component';
+import { SignupSubjectsService } from './signup-subject.service';
+import { SubStringDirective } from 'src/shared/directives/sub-string.directive';
 
 @NgModule({
   providers: [
@@ -17,6 +20,7 @@ import { CanActivateSubjects } from './guards/can-activate-subjects.guard';
     CanActivateContactInfo,
     CanActivateAddress,
     CanActivateSubjects,
+    SignupSubjectsService,
   ],
   imports: [
     CommonModule,
@@ -24,6 +28,12 @@ import { CanActivateSubjects } from './guards/can-activate-subjects.guard';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  declarations: [UserDetailsComponent, ContactInfoComponent, AddressComponent],
+  declarations: [
+    UserDetailsComponent,
+    ContactInfoComponent,
+    AddressComponent,
+    SubjectsComponent,
+    SubStringDirective,
+  ],
 })
 export class SignupModule {}
