@@ -22,7 +22,7 @@ export class CanActivateAddress implements CanActivate {
     if (this.signupService.isContactInfoValid()) {
       return true;
     } else {
-      this.router.navigate(['/auth', 'signup']);
+      this.router.navigate(['/auth', 'signup', 'contact-info']);
       return false;
     }
   }

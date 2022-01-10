@@ -7,10 +7,10 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/auth/auth.service';
 import { SignupService } from '../signup.service';
+
 @Injectable()
-export class CanActivateSubjects implements CanActivate {
+export class CanActivateAbout implements CanActivate {
   constructor(private signupService: SignupService, private router: Router) {}
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -20,10 +20,10 @@ export class CanActivateSubjects implements CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    if (this.signupService.isAddressValid()) {
+    if (this.signupService.areSubjectsValid()) {
       return true;
     } else {
-      this.router.navigate(['/auth', 'signup', 'address']);
+      this.router.navigate(['/auth', 'signup', 'subjects']);
       return false;
     }
   }

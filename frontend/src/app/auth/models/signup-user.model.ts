@@ -1,5 +1,4 @@
 import { UserType } from 'src/shared/types/user.type';
-import { SignupAboutDetails } from './signup-about.model';
 import { SignupAddressDetails } from './signup-address-details.model';
 import { SignupContactInfoDetails } from './signup-contact-info-details.model';
 import { SignupSubjectDetails } from './signup-subject.model';
@@ -13,7 +12,7 @@ export class SignupUser {
   contactInfo: SignupContactInfoDetails;
   address: SignupAddressDetails;
   subjects: SignupSubjectDetails[];
-  about: SignupAboutDetails;
+  about: string;
   constructor(obj?: any) {
     this.firstname = (obj && obj.firstname) || null;
     this.lastname = (obj && obj.lastname) || null;
@@ -29,8 +28,6 @@ export class SignupUser {
       (obj && obj.address && new SignupAddressDetails(obj.address)) ||
       new SignupAddressDetails();
     this.subjects = [];
-    this.about =
-      (obj && obj.about && new SignupAboutDetails(obj)) ||
-      new SignupAboutDetails();
+    this.about = (obj && obj.about) || '';
   }
 }

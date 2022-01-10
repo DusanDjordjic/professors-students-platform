@@ -1,12 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SignupAboutDetails } from '../models/signup-about.model';
-import { SignupAddressDetails } from '../models/signup-address-details.model';
 import { SignupContactInfoDetails } from '../models/signup-contact-info-details.model';
 import { SignupSubjectDetails } from '../models/signup-subject.model';
 import { SignupUserDetails } from '../models/signup-user-details.model';
 import { SignupUser } from '../models/signup-user.model';
+import { SignupAddressDetails } from '../models/signup-address-details.model';
 
 const validateUrl = 'http://localhost:3000/api/validate';
 
@@ -43,8 +42,8 @@ export class SignupService {
     this.currentSignupUserDetails.subjects = subjects;
   }
 
-  updateAbout(aboutDetails: SignupAboutDetails) {
-    this.currentSignupUserDetails.about = aboutDetails;
+  updateAbout(about: string) {
+    this.currentSignupUserDetails.about = about;
   }
 
   serverValidateUserDetails(userDetails: SignupUserDetails): Observable<any> {
@@ -62,10 +61,10 @@ export class SignupService {
   ): Observable<any> {
     return this.http.post(`${validateUrl}/address`, addressDetails);
   }
-  serverValidateAboutDetails(
-    aboutDetails: SignupAboutDetails
-  ): Observable<any> {
-    return this.http.post(`${validateUrl}/about`, aboutDetails);
+
+  serverValidateAboutDetails(aboutText: string): Observable<any> {
+    const about = { text: aboutText };
+    return this.http.post(`${validateUrl}/about`, about);
   }
 
   isUserDetailsValid(): boolean {
@@ -192,8 +191,9 @@ export class SignupService {
     }
     return false;
   }
+
   isAboutValid(): boolean {
-    if (this.currentSignupUserDetails.about.about.length >= 100) {
+    if (this.currentSignupUserDetails.about.length >= 100) {
       return true;
     }
     return false;

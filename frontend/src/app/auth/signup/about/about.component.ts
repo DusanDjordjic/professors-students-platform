@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { checkPasswordsValidator } from 'src/shared/validators/confirm-password.validator';
-import { SignupAboutDetails } from '../../models/signup-about.model';
-import { SignupAddressDetails } from '../../models/signup-address-details.model';
 
 import { SignupService } from '../signup.service';
 @Component({
@@ -32,9 +30,7 @@ export class AboutComponent implements OnInit {
       return;
     }
     // Updateujemo podakte u servisu
-    const aboutUser = new SignupAboutDetails({
-      ...this.aboutForm.value,
-    });
+    const aboutUser = this.aboutForm.value.about;
     this.signupService.updateAbout(aboutUser);
 
     // Proveravamo za svaki slucaj da li su podaci tacni
@@ -42,7 +38,7 @@ export class AboutComponent implements OnInit {
       this.signupService.serverValidateAboutDetails(aboutUser).subscribe({
         next: (data) => {
           // console.log(data);
-          this.router.navigate(['/auth', 'signup', 'subjects']);
+          this.router.navigate(['/auth', 'signup', 'checkout']);
           this.signupService.log();
         },
         error: (err) => {

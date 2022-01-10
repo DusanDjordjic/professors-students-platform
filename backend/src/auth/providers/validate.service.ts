@@ -66,4 +66,16 @@ export class ValidateService {
       throw new HttpException('Greška na serveru', 500);
     }
   }
+  async validateAbout(aboutText: string) {
+    console.log('c');
+    try {
+      console.log('d');
+      return aboutText;
+    } catch (err) {
+      if (err instanceof ErrorModel)
+        throw new HttpException(err.text, err.status);
+      console.log(err);
+      throw new HttpException('Greška na serveru', 500);
+    }
+  }
 }

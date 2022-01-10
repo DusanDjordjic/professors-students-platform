@@ -14,6 +14,7 @@ import { SubjectsComponent } from './subjects/subjects.component';
 import { SignupSubjectsService } from './signup-subject.service';
 import { SubStringDirective } from 'src/shared/directives/sub-string.directive';
 import { AboutComponent } from './about/about.component';
+import { CanActivateAbout } from './guards/can-activate-about.guard';
 
 @NgModule({
   providers: [
@@ -21,6 +22,7 @@ import { AboutComponent } from './about/about.component';
     CanActivateContactInfo,
     CanActivateAddress,
     CanActivateSubjects,
+    CanActivateAbout,
     SignupSubjectsService,
   ],
   imports: [
