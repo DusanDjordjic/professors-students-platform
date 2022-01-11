@@ -193,7 +193,10 @@ export class SignupService {
   }
 
   isAboutValid(): boolean {
-    if (this.currentSignupUserDetails.about.length >= 100) {
+    if (
+      this.currentSignupUserDetails.about &&
+      this.currentSignupUserDetails.about.length >= 100
+    ) {
       return true;
     }
     return false;

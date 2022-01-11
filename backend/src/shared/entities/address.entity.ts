@@ -14,6 +14,7 @@ export class Address {
 
   @Column({ nullable: true })
   streetNumber: string;
+
   @OneToOne(() => User, (user) => user.contactInfo, {
     nullable: false,
     onUpdate: 'CASCADE',

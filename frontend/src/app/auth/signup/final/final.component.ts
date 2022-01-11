@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
+import { AuthService } from '../../auth.service';
 
 import { SignupUser } from '../../models/signup-user.model';
 import { SubjectModel } from '../models/subject.model';
@@ -17,6 +18,7 @@ export class FinalComponent implements OnInit {
   selectedSubjects: SubjectModel[] = [];
   constructor(
     private signupService: SignupService,
+    private authService: AuthService,
     private router: Router,
     private signupSubjectsService: SignupSubjectsService
   ) {}
@@ -24,12 +26,20 @@ export class FinalComponent implements OnInit {
   ngOnInit(): void {
     this.userDetails = this.signupService.userDetails;
     this.signupSubjectsService.getAllSubjects().subscribe((allSubjects) => {
-      console.log(this.userDetails.subjects);
       const subjectIds = this.userDetails.subjects.map((sub) => sub.id);
       this.selectedSubjects = allSubjects.filter((sub) =>
         subjectIds.includes(sub.id)
       );
     });
   }
-  onSubmit() {}
+  onSubmit() {
+    this.authService.signupUser(this.userDetails).subscribe({
+      next: (data) => {
+        console.log(data);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 }

@@ -6,6 +6,7 @@ import { LoginDataModel } from './models/login-data.model';
 import { LoginResponseModel } from './models/login-response.model';
 
 import { UserType } from '../../shared/types/user.type';
+import { SignupUser } from './models/signup-user.model';
 
 const baseUrl = 'http://localhost:3000/api/auth';
 
@@ -23,7 +24,10 @@ export class AuthService {
     this.loginStatus.next(this.isLoggenIn());
     this.currentUserType.next(this.getCurrentUserType());
   }
-
+  signupUser(userData: SignupUser) {
+    const subjects = userData.subjects.map((sub) => sub.id);
+    return this.http.post(`${baseUrl}/signup`, { ...userData, subjects });
+  }
   loginStudent(logindata: LoginDataModel): Observable<LoginResponseModel> {
     return this.http
       .post(`${baseUrl}/login/student`, logindata)

@@ -28,6 +28,9 @@ export class User {
   password: string;
 
   @Column()
+  about: string;
+
+  @Column()
   type: 'student' | 'professor';
 
   @OneToOne(() => ContactInfo, (contact) => contact.user, {

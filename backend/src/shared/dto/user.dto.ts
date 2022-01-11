@@ -11,6 +11,7 @@ import {
   Validate,
   ValidateNested,
 } from 'class-validator';
+import { IsArrayDistinct } from '../class-validators/array-dstinct.validator';
 import { isTypeValid } from '../class-validators/type-validator.validator';
 import { AddressDto, UpdateAddressDto } from './address.dto';
 import { ConactInfoDto, UpdateContactInfoDto } from './contact_info.dto';
@@ -30,6 +31,14 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   lastname: string;
+  @IsNotEmpty()
+  @IsString()
+  @Validate(isTypeValid)
+  type: 'student' | 'professor';
+  @IsString()
+  @MaxLength(255)
+  @IsNotEmpty()
+  about: string;
   @IsDefined()
   @ValidateNested()
   @Type(() => ConactInfoDto)
@@ -38,15 +47,11 @@ export class CreateUserDto {
   @ValidateNested()
   @Type(() => AddressDto)
   address: AddressDto;
-  // @IsDefined()
-  // @ArrayNotEmpty()
-  // @Validate(IsArrayDistinct)
-  // @Min(0, { each: true })
-  // subjects: Set<number>;
-  @IsNotEmpty()
-  @IsString()
-  @Validate(isTypeValid)
-  type: 'student' | 'professor';
+  @IsDefined()
+  @ArrayNotEmpty()
+  @Validate(IsArrayDistinct)
+  @Min(0, { each: true })
+  subjects: number[];
 }
 
 export class UpdateUserDto {

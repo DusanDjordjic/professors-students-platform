@@ -11,6 +11,8 @@ import { Address } from 'src/shared/entities/address.entity';
 import { AuthService } from './providers/auth.service';
 import { ValidateService } from './providers/validate.service';
 import { ValidateController } from './controllers/validate.controller';
+import { SelectedSubject } from 'src/shared/entities/selected-subject.entity';
+import { SubjectDetails } from 'src/shared/entities/subject-details.entity';
 
 @Module({
   controllers: [AuthController, ValidateController],
@@ -27,7 +29,13 @@ import { ValidateController } from './controllers/validate.controller';
 
       inject: [ConfigService],
     }),
-    TypeOrmModule.forFeature([User, ContactInfo, Address]),
+    TypeOrmModule.forFeature([
+      User,
+      ContactInfo,
+      Address,
+      SelectedSubject,
+      SubjectDetails,
+    ]),
   ],
 })
 export class AuthModule {}

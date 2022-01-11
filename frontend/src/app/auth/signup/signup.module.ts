@@ -16,6 +16,7 @@ import { SubStringDirective } from 'src/shared/directives/sub-string.directive';
 import { AboutComponent } from './about/about.component';
 import { CanActivateAbout } from './guards/can-activate-about.guard';
 import { FinalComponent } from './final/final.component';
+import { CanActivateFinal } from './guards/can-activate-final.guard';
 
 @NgModule({
   providers: [
@@ -24,6 +25,7 @@ import { FinalComponent } from './final/final.component';
     CanActivateAddress,
     CanActivateSubjects,
     CanActivateAbout,
+    CanActivateFinal,
     SignupSubjectsService,
   ],
   imports: [

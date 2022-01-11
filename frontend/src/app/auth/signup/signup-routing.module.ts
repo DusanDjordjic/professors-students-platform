@@ -7,6 +7,7 @@ import { FinalComponent } from './final/final.component';
 import { CanActivateAbout } from './guards/can-activate-about.guard';
 import { CanActivateAddress } from './guards/can-activate-address.guard';
 import { CanActivateContactInfo } from './guards/can-activate-contact-info.guard';
+import { CanActivateFinal } from './guards/can-activate-final.guard';
 import { CanActivateSubjects } from './guards/can-activate-subjects.guard';
 import { SubjectsComponent } from './subjects/subjects.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
@@ -19,31 +20,31 @@ const routes: Routes = [
   {
     path: 'contact-info',
     component: ContactInfoComponent,
-    // canActivate: [CanActivateContactInfo],
+    canActivate: [CanActivateContactInfo],
   },
   {
     path: 'address',
     component: AddressComponent,
-    // canActivate: [CanActivateAddress, CanActivateContactInfo],
+    canActivate: [CanActivateAddress, CanActivateContactInfo],
   },
   {
     path: 'subjects',
     component: SubjectsComponent,
-    // canActivate: [
-    //   CanActivateSubjects,
-    //   CanActivateAddress,
-    //   CanActivateContactInfo,
-    // ],
+    canActivate: [
+      CanActivateSubjects,
+      CanActivateAddress,
+      CanActivateContactInfo,
+    ],
   },
   {
     path: 'about',
     component: AboutComponent,
-    // canActivate: [
-    //   CanActivateAbout,
-    //   CanActivateSubjects,
-    //   CanActivateAddress,
-    //   CanActivateContactInfo,
-    // ],
+    canActivate: [
+      CanActivateAbout,
+      CanActivateSubjects,
+      CanActivateAddress,
+      CanActivateContactInfo,
+    ],
   },
   {
     path: 'edit',
@@ -52,42 +53,42 @@ const routes: Routes = [
   {
     path: 'contact-info/edit',
     component: ContactInfoComponent,
-    // canActivate: [CanActivateContactInfo],
+    canActivate: [CanActivateContactInfo],
   },
   {
     path: 'address/edit',
     component: AddressComponent,
-    // canActivate: [CanActivateAddress, CanActivateContactInfo],
+    canActivate: [CanActivateAddress, CanActivateContactInfo],
   },
   {
     path: 'subjects/edit',
     component: SubjectsComponent,
-    // canActivate: [
-    //   CanActivateSubjects,
-    //   CanActivateAddress,
-    //   CanActivateContactInfo,
-    // ],
+    canActivate: [
+      CanActivateSubjects,
+      CanActivateAddress,
+      CanActivateContactInfo,
+    ],
   },
   {
     path: 'about/edit',
     component: AboutComponent,
-    // canActivate: [
-    //   CanActivateAbout,
-    //   CanActivateSubjects,
-    //   CanActivateAddress,
-    //   CanActivateContactInfo,
-    // ],
+    canActivate: [
+      CanActivateAbout,
+      CanActivateSubjects,
+      CanActivateAddress,
+      CanActivateContactInfo,
+    ],
   },
   {
     path: 'final',
     component: FinalComponent,
-    // canActivate: [
-    //   CanActivateFinal
-    //   CanActivateAbout,
-    //   CanActivateSubjects,
-    //   CanActivateAddress,
-    //   CanActivateContactInfo,
-    // ],
+    canActivate: [
+      CanActivateFinal,
+      CanActivateAbout,
+      CanActivateSubjects,
+      CanActivateAddress,
+      CanActivateContactInfo,
+    ],
   },
 ];
 
