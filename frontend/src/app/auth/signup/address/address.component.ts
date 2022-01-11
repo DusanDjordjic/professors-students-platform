@@ -12,6 +12,7 @@ import { SignupService } from '../signup.service';
   styleUrls: ['./address.component.scss'],
 })
 export class AddressComponent implements OnInit {
+  isEdit: boolean = false;
   addressDetailsForm = new FormGroup(
     {
       city: new FormControl(null, [Validators.required]),
@@ -25,7 +26,14 @@ export class AddressComponent implements OnInit {
   getFormControl(name: string) {
     return this.addressDetailsForm.get(name) as FormControl;
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.router.url.includes('edit')) {
+      this.isEdit = true;
+      this.addressDetailsForm.patchValue(
+        this.signupService.userDetails.address
+      );
+    }
+  }
   onSubmit() {
     if (this.addressDetailsForm.invalid) {
       return;
@@ -42,9 +50,11 @@ export class AddressComponent implements OnInit {
         .serverValidateAddressDetails(addressDetails)
         .subscribe({
           next: (data) => {
-            // console.log(data);
-            this.router.navigate(['/auth', 'signup', 'subjects']);
-            this.signupService.log();
+            if (this.isEdit) {
+              this.router.navigate(['/auth', 'signup', 'final']);
+            } else {
+              this.router.navigate(['/auth', 'signup', 'subjects']);
+            }
           },
           error: (err) => {
             console.log(err);

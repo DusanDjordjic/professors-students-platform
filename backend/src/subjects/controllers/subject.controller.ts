@@ -6,8 +6,14 @@ import { SubjectService } from '../providers/subject.service';
 export class SubjectController {
   constructor(private readonly subjectService: SubjectService) {}
   @Get()
-  async getAllSubjects(@Query('groups', GroupsTransformPipe) groups: number[]) {
-    return await this.subjectService.getAllSubjects(groups);
+  async getSubjectsByGroup(
+    @Query('groups', GroupsTransformPipe) groups: number[],
+  ) {
+    return await this.subjectService.getSubjectsByGroup(groups);
+  }
+  @Get('all')
+  async getAllSubjects() {
+    return await this.subjectService.getAllSubjects();
   }
   @Get('/groups')
   async getAllGroups() {

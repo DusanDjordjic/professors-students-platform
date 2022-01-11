@@ -198,7 +198,9 @@ export class SignupService {
     }
     return false;
   }
-
+  get userDetails() {
+    return this.currentSignupUserDetails;
+  }
   log() {
     console.log(this.currentSignupUserDetails);
   }

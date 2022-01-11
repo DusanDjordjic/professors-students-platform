@@ -8,7 +8,7 @@ const subjectsUrl = 'http://localhost:3000/api/subjects';
 @Injectable()
 export class SignupSubjectsService {
   constructor(private http: HttpClient) {}
-  getAllSubjects(
+  getSubjectByGroup(
     groups: { id: number; active: boolean }[] = []
   ): Observable<SubjectModel[]> {
     let activeGroups = groups
@@ -21,6 +21,15 @@ export class SignupSubjectsService {
           activeGroups.length > 0 ? JSON.stringify(activeGroups) : '[]'
         ),
       })
+      .pipe(
+        map((subjects: any) =>
+          subjects.map((sub: any) => new SubjectModel(sub))
+        )
+      );
+  }
+  getAllSubjects(): Observable<SubjectModel[]> {
+    return this.http
+      .get(`${subjectsUrl}/all`)
       .pipe(
         map((subjects: any) =>
           subjects.map((sub: any) => new SubjectModel(sub))

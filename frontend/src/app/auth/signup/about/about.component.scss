@@ -27,13 +27,6 @@ main {
     }
   }
   .form-group {
-    label {
-      display: inline-block;
-      // Zvezdica
-      span.required {
-        color: $color-danger;
-      }
-    }
     textarea {
       //   @include placeholder-color;
       //   @include autoCompleteBg;
@@ -47,47 +40,6 @@ main {
       display: block;
       &.btn-full {
         width: 100%;
-      }
-    }
-    .invalid {
-      border-bottom: 2px solid $color-danger !important;
-    }
-  }
-  .user-type-picker {
-    h3 {
-      text-align: center;
-    }
-    .buttons-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 70%;
-      margin: 0 auto;
-      button {
-        width: 100%;
-        cursor: pointer;
-        border-radius: 0px;
-        color: $color-secondary;
-        background-color: $color-light;
-        border: 1px solid rgba($color: $color-secondary, $alpha: 0.5);
-        padding: 8px 20px;
-        transition: all 0.3s;
-        &:hover {
-          color: $color-dark;
-          background-color: darken($color: $color-main-2, $amount: 10);
-        }
-        &.active {
-          color: $color-dark;
-          background-color: $color-main-2;
-        }
-        &:first-of-type {
-          border-radius: 4px 0 0 4px;
-          position: relative;
-          left: 1px;
-        }
-        &:last-of-type {
-          border-radius: 0 4px 4px 0;
-        }
       }
     }
   }
@@ -143,6 +95,6 @@ main {
 
 @include xl() {
   main {
-    width: 60%;
+    width: 70%;
   }
 }

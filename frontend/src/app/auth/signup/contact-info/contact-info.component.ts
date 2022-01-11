@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { checkPasswordsValidator } from 'src/shared/validators/confirm-password.validator';
 import { SignupContactInfoDetails } from '../../models/signup-contact-info-details.model';
 import { SignupService } from '../signup.service';
@@ -11,6 +11,7 @@ import { SignupService } from '../signup.service';
   styleUrls: ['./contact-info.component.scss'],
 })
 export class ContactInfoComponent implements OnInit {
+  isEdit: boolean = false;
   contactDetailsForm = new FormGroup(
     {
       email: new FormControl(null, [Validators.required, Validators.email]),
@@ -19,12 +20,23 @@ export class ContactInfoComponent implements OnInit {
     },
     { validators: checkPasswordsValidator }
   );
-  constructor(private signupService: SignupService, private router: Router) {}
+  constructor(
+    private signupService: SignupService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   getFormControl(name: string) {
     return this.contactDetailsForm.get(name) as FormControl;
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.router.url.includes('edit')) {
+      this.isEdit = true;
+      this.contactDetailsForm.patchValue(
+        this.signupService.userDetails.contactInfo
+      );
+    }
+  }
   onSubmit() {
     if (this.contactDetailsForm.invalid) {
       return;
@@ -41,9 +53,11 @@ export class ContactInfoComponent implements OnInit {
         .serverValidateContactInfoDetails(contactInfoDetails)
         .subscribe({
           next: (data) => {
-            console.log(data);
-            this.router.navigate(['/auth', 'signup', 'address']);
-            this.signupService.log();
+            if (this.isEdit) {
+              this.router.navigate(['/auth', 'signup', 'final']);
+            } else {
+              this.router.navigate(['/auth', 'signup', 'address']);
+            }
           },
           error: (err) => {
             console.log(err);

@@ -88,11 +88,13 @@ main {
         margin-top: 0;
       }
       .subject-button-wrapper {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
         gap: $spacing-base;
         flex-wrap: wrap;
         .subject-button {
           @include button($color-danger, $color-light);
+          text-align: center;
         }
       }
     }
@@ -209,7 +211,6 @@ main {
 }
 @include sm() {
   main {
-    // width: 80%;
     .content-wrapper {
       grid-template-columns: auto 1fr;
       aside {
@@ -221,6 +222,11 @@ main {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
       }
+      .selected-subjects-box {
+        .subject-button-wrapper {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
     }
   }
 }
@@ -231,6 +237,11 @@ main {
       .g-2 {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
+      }
+      .selected-subjects-box {
+        .subject-button-wrapper {
+          grid-template-columns: repeat(3, 1fr);
+        }
       }
     }
   }

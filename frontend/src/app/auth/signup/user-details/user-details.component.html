@@ -1,6 +1,10 @@
 <div class="container">
   <main>
-    <h1>Registruj se potpuno besplatno</h1>
+    <h1>
+      {{
+        isEdit ? "Promena ličnih podataka" : "Registruj se potpuno besplatno"
+      }}
+    </h1>
     <form [formGroup]="userDetailsForm" (ngSubmit)="onSubmit()">
       <div class="fields-wrapper">
         <div class="g-2">

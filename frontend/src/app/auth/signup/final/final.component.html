@@ -1,0 +1,121 @@
+<div class="container">
+  <main>
+    <h1>Finalna provera podataka</h1>
+
+    <div class="fields-wrapper">
+      <div class="group">
+        <h2>
+          <a [routerLink]="['/auth', 'signup', 'edit']">Lični podaci</a
+          ><i class="fas fa-pen"></i>
+        </h2>
+
+        <div class="details-wrapper">
+          <div class="details-group-grid">
+            <div class="details-name">
+              <span>Ime: </span>
+              <span>Prezime: </span>
+              <span>Korisnicko ime: </span>
+              <span>Tip korisnika: </span>
+            </div>
+            <div class="details-values">
+              <span>
+                {{ userDetails.firstname }}
+              </span>
+              <span>
+                {{ userDetails.lastname }}
+              </span>
+              <span>
+                {{ userDetails.username }}
+              </span>
+              <span>
+                {{ userDetails.type }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="group">
+        <h2>
+          <a [routerLink]="['/auth', 'signup', 'contact-info', 'edit']"
+            >Kontakt informacije</a
+          ><i class="fas fa-pen"></i>
+        </h2>
+
+        <div class="details-wrapper">
+          <div class="details-group-grid">
+            <div class="details-name">
+              <span>Email: </span>
+              <span>Telefon: </span>
+              <span>Websajt: </span>
+            </div>
+            <div class="details-values">
+              <span>
+                {{ userDetails.contactInfo.email }}
+              </span>
+              <span>
+                {{ userDetails.contactInfo.phoneNumber }}
+              </span>
+              <span>
+                {{ userDetails.contactInfo.website }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="group">
+        <h2>
+          <a [routerLink]="['/auth', 'signup', 'address', 'edit']">Adresa</a
+          ><i class="fas fa-pen"></i>
+        </h2>
+
+        <div class="details-wrapper">
+          <div class="details-group-grid">
+            <div class="details-name">
+              <span>Grad: </span>
+              <span>Ulica: </span>
+              <span>Broj: </span>
+            </div>
+            <div class="details-values">
+              <span>
+                {{ userDetails.address.city }}
+              </span>
+              <span>
+                {{ userDetails.address.street }}
+              </span>
+              <span>
+                {{ userDetails.address.streetNumber }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group">
+        <h2>
+          <a [routerLink]="['/auth', 'signup', 'subjects', 'edit']"
+            >Izabrani predmeti</a
+          ><i class="fas fa-pen"></i>
+        </h2>
+        <div class="subjects-table">
+          <div *ngFor="let sub of selectedSubjects">
+            {{ sub.name }}
+          </div>
+        </div>
+      </div>
+      <div class="group">
+        <h2>
+          <a [routerLink]="['/auth', 'signup', 'about', 'edit']"
+            >Više o korisniku</a
+          ><i class="fas fa-pen"></i>
+        </h2>
+
+        <span class="justify"> {{ userDetails.about }}</span>
+      </div>
+      <div class="group">
+        <button type="button" (click)="onSubmit()" class="btn-full">
+          Registruj se
+        </button>
+      </div>
+    </div>
+  </main>
+</div>

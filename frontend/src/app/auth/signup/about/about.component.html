@@ -1,6 +1,8 @@
 <div class="container">
   <main>
-    <h1>Reci nam malo više o sebi</h1>
+    <h1>
+      {{ isEdit ? "Promena teksta o sebi" : "Reci nam malo više o sebi" }}
+    </h1>
     <form [formGroup]="aboutForm" (ngSubmit)="onSubmit()">
       <div class="fields-wrapper">
         <div class="form-group">
@@ -29,7 +31,9 @@
             <small *ngIf="getFormControl('about').errors?.['minlength']">
               Minimalno 100 karaktera ({{getFormControl('about').errors?.['minlength'].actualLength
 
+
               }}/{{getFormControl('about').errors?.['minlength'].requiredLength
+
 
               }})
             </small>

@@ -21,7 +21,7 @@ export class SubjectsComponent implements OnInit {
   selectedSubjects: SubjectModel[] = [];
   activeGroups: { id: number; active: boolean }[] = [];
   setup: boolean = true;
-
+  isEdit: boolean = false;
   constructor(
     private signupService: SignupService,
     private signupSubjectService: SignupSubjectsService,
@@ -58,10 +58,22 @@ export class SubjectsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.router.url.includes('edit')) {
+      this.isEdit = true;
+      const subjectIds = this.signupService.userDetails.subjects.map(
+        (sub) => sub.id
+      );
+
+      this.signupSubjectService.getAllSubjects().subscribe((allSubjects) => {
+        this.selectedSubjects = allSubjects.filter((sub) =>
+          subjectIds.includes(sub.id)
+        );
+      });
+    }
     this.getAllGroups();
   }
-  getAllSubjects(groups?: { id: number; active: boolean }[]) {
-    this.signupSubjectService.getAllSubjects(groups).subscribe({
+  getSubjectByGroup(groups?: { id: number; active: boolean }[]) {
+    this.signupSubjectService.getSubjectByGroup(groups).subscribe({
       next: (subjects) => {
         this.subjects = subjects;
       },
@@ -76,7 +88,7 @@ export class SubjectsComponent implements OnInit {
           active: true,
         }));
         if (this.setup) {
-          this.getAllSubjects(this.activeGroups);
+          this.getSubjectByGroup(this.activeGroups);
           this.setup = false;
         }
       },
@@ -90,8 +102,9 @@ export class SubjectsComponent implements OnInit {
       if (group.active == false) areAllSelected = false;
     });
     this.areAllSelected = areAllSelected;
-    this.getAllSubjects(this.activeGroups);
+    this.getSubjectByGroup(this.activeGroups);
   }
+
   isGroupActive(id: number) {
     let active: boolean = true;
     this.activeGroups.forEach((group) => {
@@ -114,7 +127,7 @@ export class SubjectsComponent implements OnInit {
       });
       this.areAllSelected = true;
     }
-    this.getAllSubjects(this.activeGroups);
+    this.getSubjectByGroup(this.activeGroups);
   }
   onSubmit() {
     if (this.selectedSubjects.length == 0) return;
@@ -122,6 +135,10 @@ export class SubjectsComponent implements OnInit {
       (sub) => new SignupSubjectDetails(sub)
     );
     this.signupService.updateSubjects(subjects);
-    this.router.navigate(['/auth/signup/about']);
+    if (this.isEdit) {
+      this.router.navigate(['/auth', 'signup', 'final']);
+    } else {
+      this.router.navigate(['/auth', 'signup', 'about']);
+    }
   }
 }

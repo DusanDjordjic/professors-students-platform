@@ -1,6 +1,8 @@
 <div class="container">
   <main>
-    <h1>Adresa</h1>
+    <h1>
+      {{ isEdit ? "Promena adrese" : "Adresa" }}
+    </h1>
     <form [formGroup]="addressDetailsForm" (ngSubmit)="onSubmit()">
       <div class="fields-wrapper">
         <div class="g-2">

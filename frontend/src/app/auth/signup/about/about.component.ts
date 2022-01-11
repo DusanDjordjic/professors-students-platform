@@ -1,30 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { checkPasswordsValidator } from 'src/shared/validators/confirm-password.validator';
-
 import { SignupService } from '../signup.service';
+
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss'],
 })
 export class AboutComponent implements OnInit {
-  aboutForm = new FormGroup(
-    {
-      about: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(100),
-      ]),
-    },
-    { validators: checkPasswordsValidator }
-  );
+  isEdit: boolean = false;
+  aboutForm = new FormGroup({
+    about: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(100),
+    ]),
+  });
   constructor(private signupService: SignupService, private router: Router) {}
 
   getFormControl(name: string) {
     return this.aboutForm.get(name) as FormControl;
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.router.url.includes('edit')) {
+      this.isEdit = true;
+      this.aboutForm.patchValue(this.signupService.userDetails);
+    }
+  }
   onSubmit() {
     if (this.aboutForm.invalid) {
       return;
@@ -37,9 +39,7 @@ export class AboutComponent implements OnInit {
     if (this.signupService.isAboutValid()) {
       this.signupService.serverValidateAboutDetails(aboutUser).subscribe({
         next: (data) => {
-          // console.log(data);
-          this.router.navigate(['/auth', 'signup', 'checkout']);
-          this.signupService.log();
+          this.router.navigate(['/auth', 'signup', 'final']);
         },
         error: (err) => {
           console.log(err);

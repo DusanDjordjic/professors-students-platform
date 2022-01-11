@@ -15,7 +15,7 @@ export class SubjectService {
     @InjectRepository(SelectedSubject)
     private readonly selectedSubjectRepo: Repository<SelectedSubject>,
   ) {}
-  async getAllSubjects(groups: number[]) {
+  async getSubjectsByGroup(groups: number[]) {
     try {
       let subjects = await this.subjectRepo
         .createQueryBuilder('subject')
@@ -25,6 +25,20 @@ export class SubjectService {
         .getMany();
 
       subjects = subjects.filter((sub) => groups.includes(sub.groupDetails.id));
+      return subjects;
+    } catch (err) {
+      console.log(err);
+      throw new HttpException('Unhandled error', 500);
+    }
+  }
+  async getAllSubjects() {
+    try {
+      let subjects = await this.subjectRepo
+        .createQueryBuilder('subject')
+        .select()
+        .leftJoinAndSelect('subject.groupDetails', 'groupDetails')
+        .orderBy('groupDetails.id', 'ASC')
+        .getMany();
       return subjects;
     } catch (err) {
       console.log(err);

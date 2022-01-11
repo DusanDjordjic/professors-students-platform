@@ -12,6 +12,7 @@ import { SignupService } from '../signup.service';
   styleUrls: ['./user-details.component.scss'],
 })
 export class UserDetailsComponent implements OnInit {
+  isEdit: boolean = false;
   activeType: UserType = 'student';
   userDetailsForm = new FormGroup(
     {
@@ -36,7 +37,13 @@ export class UserDetailsComponent implements OnInit {
   getFormControl(name: string) {
     return this.userDetailsForm.get(name) as FormControl;
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.router.url.includes('edit')) {
+      this.activeType = this.signupService.userDetails.type;
+      this.isEdit = true;
+      this.userDetailsForm.patchValue(this.signupService.userDetails);
+    }
+  }
   onSubmit() {
     if (this.userDetailsForm.invalid) {
       return;
@@ -54,9 +61,11 @@ export class UserDetailsComponent implements OnInit {
         .serverValidateUserDetails(signupUserDetails)
         .subscribe({
           next: (data) => {
-            console.log(data);
-            this.router.navigate(['/auth', 'signup', 'contact-info']);
-            this.signupService.log();
+            if (this.isEdit) {
+              this.router.navigate(['/auth', 'signup', 'final']);
+            } else {
+              this.router.navigate(['/auth', 'signup', 'contact-info']);
+            }
           },
           error: (err) => {
             console.log(err);
