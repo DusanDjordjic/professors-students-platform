@@ -7,9 +7,10 @@ import { LoadingSpinnerComponent } from 'src/shared/components/loading-spinner/l
 import { AuthService } from './auth.service';
 import { ProfileModule } from '../profile/profile.module';
 import { AuthRoutingModule } from './auth-routing.module';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
-  declarations: [LoadingSpinnerComponent],
+  declarations: [LoadingSpinnerComponent, LoginComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

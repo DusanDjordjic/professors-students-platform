@@ -1,0 +1,75 @@
+<div class="container">
+  <main>
+    <h1>Uloguj se</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="fields-wrapper">
+        <div class="form-group">
+          <label for="username">Korisničko ime</label>
+          <input
+            type="text"
+            id="username"
+            formControlName="username"
+            [ngClass]="{
+              invalid:
+                getFormControl('username').invalid &&
+                (getFormControl('username').touched ||
+                  getFormControl('username').dirty),
+              valid: getFormControl('username').valid
+            }"
+          />
+          <div
+            class="error-container"
+            *ngIf="
+              getFormControl('username').invalid &&
+              (getFormControl('username').touched ||
+                getFormControl('username').dirty)
+            "
+          >
+            <small *ngIf="getFormControl('username').errors?.['required']">
+              Korisničko ime je obavezno
+            </small>
+            <small *ngIf="getFormControl('username').errors?.['minlength']">
+              Minimalna dužina je 8 karaktera
+            </small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Lozinka</label>
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            [ngClass]="{
+              invalid:
+                getFormControl('password').invalid &&
+                (getFormControl('password').touched ||
+                  getFormControl('password').dirty),
+              valid: getFormControl('password').valid
+            }"
+          />
+          <div
+            class="error-container"
+            *ngIf="
+              getFormControl('password').invalid &&
+              (getFormControl('password').touched ||
+                getFormControl('password').dirty)
+            "
+          >
+            <small *ngIf="getFormControl('password').errors?.['required']">
+              Korisničko ime je obavezno
+            </small>
+            <small *ngIf="getFormControl('password').errors?.['minlength']">
+              Minimalna dužina je 8 karaktera
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn-full" [disabled]="loginForm.invalid">
+            Dalje
+          </button>
+        </div>
+      </div>
+    </form>
+  </main>
+</div>

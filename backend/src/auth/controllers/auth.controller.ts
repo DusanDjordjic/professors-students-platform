@@ -7,6 +7,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/core/guards/jwt-auth.guard';
+import { LoginDataDto } from 'src/shared/dto/login-data.dto';
 
 import { CreateUserDto } from 'src/shared/dto/user.dto';
 import { ValidateDto } from '../pipes/validate-dto.pipe';
@@ -20,6 +21,10 @@ export class AuthController {
   @Post('signup')
   async signupUser(@Body(ValidateDto) userDetails: CreateUserDto) {
     return this.authService.signupUser(userDetails);
+  }
+  @Post('login')
+  async loginUSer(@Body(ValidateDto) userData: LoginDataDto) {
+    return this.authService.loginUser(userData);
   }
   // @Post('login/professor')
   // async loginProfessor(

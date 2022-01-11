@@ -10,6 +10,7 @@ import * as bcrypt from 'bcrypt';
 import { ErrorModel } from 'src/shared/models/error.model';
 import { SubjectDetails } from 'src/shared/entities/subject-details.entity';
 import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
@@ -24,6 +25,7 @@ export class AuthService {
     @InjectRepository(SubjectDetails)
     private readonly selectedDetailsRepo: Repository<SubjectDetails>,
     private readonly configService: ConfigService,
+    private readonly jwtService: JwtService,
   ) {}
   async signupUser(userDetails: CreateUserDto) {
     try {
@@ -66,6 +68,44 @@ export class AuthService {
         this.selectedSubjectRepo.save(selectedSubjectRow);
       }
       return savedUser;
+    } catch (err) {
+      if (err instanceof ErrorModel)
+        throw new HttpException(err.text, err.status);
+      console.log(err);
+      throw new HttpException('Greška na serveru', 500);
+    }
+  }
+  async loginUser(loginUserData: { username: string; password: string }) {
+    try {
+      // Trazimo profesora sa istim username
+      let user = await this.userRepo.findOne({
+        username: loginUserData.username,
+      });
+      // Ako profesor ne postoji vracamo 404 not found
+      if (!user) {
+        throw new ErrorModel('Korisnik nije pronađen', 404);
+      }
+      // Da li se sifre poklapaju
+      const isPasswordMatch = await bcrypt.compare(
+        loginUserData.password,
+        user.password,
+      );
+      // Ako se na poklapaju sifre vracamo 403 unauthorized
+      if (!isPasswordMatch) {
+        throw new ErrorModel('Pogrešna šifra', 403);
+      }
+
+      const payload = {
+        id: user.id,
+        username: user.username,
+        sub: user.id,
+      };
+      // Vracamo accessToken i expiresAt(broj milisekundi)
+      return {
+        accessToken: this.jwtService.sign(payload),
+        username: user.username,
+        expiresAt: new Date().getTime() + 3600 * 1000 * 24,
+      };
     } catch (err) {
       if (err instanceof ErrorModel)
         throw new HttpException(err.text, err.status);

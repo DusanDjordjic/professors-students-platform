@@ -10,7 +10,7 @@ export class ProfileComponent implements OnInit {
   constructor(private profileService: ProfileService) {}
 
   ngOnInit(): void {
-    this.profileService.getUserDetails('student').subscribe((data) => {
+    this.profileService.getUserDetails('full').subscribe((data) => {
       console.log(data);
     });
   }

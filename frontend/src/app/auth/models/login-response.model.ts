@@ -1,12 +1,10 @@
-import { UserType } from '../../../shared/types/user.type';
-
 export class LoginResponseModel {
   accessToken: string;
   expiresAt: number;
-  type: UserType;
+  username: string;
   constructor(obj?: any) {
     this.accessToken = (obj && obj.accessToken) || '';
     this.expiresAt = (obj && obj.expiresAt) || 0;
-    this.type = (obj && obj.type) || null;
+    this.username = (obj && obj.username) || '';
   }
 }

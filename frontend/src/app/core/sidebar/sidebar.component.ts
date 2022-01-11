@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
+import { ProfileService } from 'src/app/profile/profile.service';
+import { SimpleUser } from 'src/shared/models/simple-user.model';
 import { SidebarService } from './sidebar.service';
 
 @Component({
@@ -13,9 +15,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
   sidebarState: boolean = false;
   loginStatus: boolean = false;
   subscriptions = new Subscription();
+  user: SimpleUser = new SimpleUser();
   constructor(
     private sidebarSerice: SidebarService,
     private authService: AuthService,
+    private profileService: ProfileService,
     private router: Router
   ) {}
 
@@ -28,6 +32,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.authService.loginStatus$.subscribe((loginStatus) => {
         this.loginStatus = loginStatus;
+        if (loginStatus) {
+          this.profileService.getUserDetails('simple').subscribe((data) => {
+            this.user = new SimpleUser(data);
+          });
+        }
       })
     );
   }
