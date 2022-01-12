@@ -33,7 +33,9 @@
       <span class="links-group-name">{{ user.username }}</span>
       <ul>
         <li>
-          <a routerLink="profile" routerLinkActive="active"
+          <a
+            [routerLink]="['/profile', user.username]"
+            routerLinkActive="active"
             ><i class="fas fa-user"></i>Moj Profil</a
           >
         </li>

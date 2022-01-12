@@ -39,7 +39,12 @@ export class UsersService {
     try {
       const query = this.userRepo.createQueryBuilder('user');
       if (shape == 'simple') {
-        query.select(['user.username', 'user.firstname', 'user.lastname']);
+        query.select([
+          'user.username',
+          'user.firstname',
+          'user.lastname',
+          'user.type',
+        ]);
       }
       if (shape == 'full') {
         query

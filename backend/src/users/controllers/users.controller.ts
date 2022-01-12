@@ -23,7 +23,7 @@ export class UsersController {
   }
   @Get('profile')
   @UseGuards(JwtAuthGuard)
-  async getUsersProfile(
+  async getOwnersProfile(
     @Query('shape', ValidateShapePipe) shape: RequestShapeType,
     @Req() req: Request,
   ) {
@@ -33,5 +33,16 @@ export class UsersController {
       (req.user as any).username || '',
       shape,
     );
+  }
+  @Get(':username/profile')
+  @UseGuards(JwtAuthGuard)
+  async getUsersProfile(
+    @Query('shape', ValidateShapePipe) shape: RequestShapeType,
+    @Param('username') username: string,
+    @Req() req: Request,
+  ) {
+    if (!req.user) throw new HttpException('UnAuthorized', 403);
+
+    return await this.userService.getUserProfile(username || '', shape);
   }
 }

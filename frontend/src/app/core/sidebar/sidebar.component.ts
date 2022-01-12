@@ -33,7 +33,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.authService.loginStatus$.subscribe((loginStatus) => {
         this.loginStatus = loginStatus;
         if (loginStatus) {
-          this.profileService.getUserDetails('simple').subscribe((data) => {
+          this.profileService.getOwnerDetails('simple').subscribe((data) => {
             this.user = new SimpleUser(data);
           });
         }
