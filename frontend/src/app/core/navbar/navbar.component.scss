@@ -52,6 +52,9 @@ nav {
   .profile-details {
     display: none;
     align-items: center;
+    a {
+      max-height: 36px;
+    }
     img {
       @include field-gray;
       @include icon-btn-shape;

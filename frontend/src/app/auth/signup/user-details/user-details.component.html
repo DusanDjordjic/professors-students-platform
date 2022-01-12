@@ -1,0 +1,202 @@
+<div class="container">
+  <main>
+    <h1>
+      {{
+        isEdit ? "Promena ličnih podataka" : "Registruj se potpuno besplatno"
+      }}
+    </h1>
+    <form [formGroup]="userDetailsForm" (ngSubmit)="onSubmit()">
+      <div class="fields-wrapper">
+        <div class="g-2">
+          <div class="form-group">
+            <label for="firstname">Ime <span class="required">*</span></label>
+            <input
+              type="text"
+              id="firstname"
+              formControlName="firstname"
+              [ngClass]="{
+                invalid:
+                  getFormControl('firstname').invalid &&
+                  (getFormControl('firstname').touched ||
+                    getFormControl('firstname').dirty),
+                valid: getFormControl('firstname').valid
+              }"
+            />
+            <div
+              class="error-container"
+              *ngIf="
+                getFormControl('firstname').invalid &&
+                (getFormControl('firstname').touched ||
+                  getFormControl('firstname').dirty)
+              "
+            >
+              <small *ngIf="getFormControl('firstname').errors?.['required']">
+                Ime je obavezno
+              </small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="lastname"
+              >Prezime <span class="required">*</span></label
+            >
+            <input
+              type="text"
+              id="lastname"
+              formControlName="lastname"
+              [ngClass]="{
+                invalid:
+                  getFormControl('lastname').invalid &&
+                  (getFormControl('lastname').touched ||
+                    getFormControl('lastname').dirty),
+                valid: getFormControl('lastname').valid
+              }"
+            />
+            <div
+              class="error-container"
+              *ngIf="
+                getFormControl('lastname').invalid &&
+                (getFormControl('lastname').touched ||
+                  getFormControl('lastname').dirty)
+              "
+            >
+              <small *ngIf="getFormControl('lastname').errors?.['required']">
+                Prezime je obavezno
+              </small>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="form-group">
+            <label for="username"
+              >Korisničko ime <span class="required">*</span></label
+            >
+            <input
+              type="text"
+              id="username"
+              formControlName="username"
+              [ngClass]="{
+                invalid:
+                  getFormControl('username').invalid &&
+                  (getFormControl('username').touched ||
+                    getFormControl('username').dirty),
+                valid: getFormControl('username').valid
+              }"
+            />
+            <div
+              class="error-container"
+              *ngIf="
+                getFormControl('username').invalid &&
+                (getFormControl('username').touched ||
+                  getFormControl('username').dirty)
+              "
+            >
+              <small *ngIf="getFormControl('username').errors?.['required']">
+                Korisničko ime je obavezno
+              </small>
+              <small *ngIf="getFormControl('username').errors?.['pattern']">
+                Dužina korisničkog imena mora biti najmanje 8 karaktera, mora
+                sadržati samo slova i brojeve. Jedno slovo mora biti veliko.
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="g-2">
+          <div class="form-group">
+            <label for="password"
+              >Lozinka <span class="required">*</span></label
+            >
+            <input
+              type="password"
+              id="password"
+              formControlName="password"
+              [ngClass]="{
+                invalid:
+                  getFormControl('password').invalid &&
+                  (getFormControl('password').touched ||
+                    getFormControl('password').dirty),
+                valid: getFormControl('password').valid
+              }"
+            />
+            <div
+              class="error-container"
+              *ngIf="
+                getFormControl('password').invalid &&
+                (getFormControl('password').touched ||
+                  getFormControl('password').dirty)
+              "
+            >
+              <small *ngIf="getFormControl('password').errors?.['required']">
+                Lozinka je obavezna
+              </small>
+              <small *ngIf="getFormControl('password').errors?.['pattern']">
+                Dužina lozinke mora biti najmanje 8 karaktera, sadržati barem
+                jedno veliko slovo, jedan broj i jedan specijalni karakter
+              </small>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="passwordRepeat"
+              >Potvrdi lozinku <span class="required">*</span></label
+            >
+            <input
+              type="password"
+              id="passwordRepeat"
+              formControlName="passwordRepeat"
+              [ngClass]="{
+                invalid:
+                  (getFormControl('passwordRepeat').touched ||
+                    getFormControl('passwordRepeat').dirty) &&
+                  userDetailsForm.hasError('notSame'),
+                valid:
+                  !userDetailsForm.hasError('notSame') &&
+                  (getFormControl('passwordRepeat').touched ||
+                    getFormControl('passwordRepeat').dirty) &&
+                  getFormControl('passwordRepeat').valid
+              }"
+            />
+            <div
+              class="error-container"
+              *ngIf="
+                getFormControl('passwordRepeat').touched ||
+                getFormControl('passwordRepeat').dirty
+              "
+            >
+              <small *ngIf="userDetailsForm.hasError('notSame')"
+                >Lozinke moraju da se podudaraju</small
+              >
+            </div>
+          </div>
+        </div>
+        <div class="form-group user-type-picker">
+          <h3>Registruj se kao</h3>
+          <div class="buttons-wrapper">
+            <button
+              type="button"
+              [ngClass]="{ active: activeType === 'student' }"
+              (click)="changeType('student')"
+            >
+              Student
+            </button>
+            <button
+              type="button"
+              [ngClass]="{ active: activeType === 'professor' }"
+              (click)="changeType('professor')"
+            >
+              Profesor
+            </button>
+          </div>
+        </div>
+        <div class="form-group">
+          <button
+            type="submit"
+            class="btn-full"
+            [disabled]="userDetailsForm.invalid"
+          >
+            Dalje
+          </button>
+        </div>
+      </div>
+    </form>
+  </main>
+</div>

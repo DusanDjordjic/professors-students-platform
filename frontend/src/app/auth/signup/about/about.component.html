@@ -1,0 +1,51 @@
+<div class="container">
+  <main>
+    <h1>
+      {{ isEdit ? "Promena teksta o sebi" : "Reci nam malo više o sebi" }}
+    </h1>
+    <form [formGroup]="aboutForm" (ngSubmit)="onSubmit()">
+      <div class="fields-wrapper">
+        <div class="form-group">
+          <textarea
+            type="text"
+            id="about"
+            formControlName="about"
+            [ngClass]="{
+              invalid:
+                getFormControl('about').invalid &&
+                (getFormControl('about').touched ||
+                  getFormControl('about').dirty),
+              valid: getFormControl('about').valid
+            }"
+          ></textarea>
+          <div
+            class="error-container"
+            *ngIf="
+              getFormControl('about').invalid &&
+              (getFormControl('about').touched || getFormControl('about').dirty)
+            "
+          >
+            <small *ngIf="getFormControl('about').errors?.['required']">
+              Opis je obavezan
+            </small>
+            <small *ngIf="getFormControl('about').errors?.['minlength']">
+              Minimalno 100 karaktera ({{getFormControl('about').errors?.['minlength'].actualLength
+
+
+              }}/{{getFormControl('about').errors?.['minlength'].requiredLength
+
+
+              }})
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn-full" [disabled]="aboutForm.invalid">
+            Dalje
+          </button>
+        </div>
+      </div>
+    </form>
+  </main>
+</div>

@@ -1,0 +1,81 @@
+<div class="container">
+  <main>
+    <h1>Izaberite predmete</h1>
+    <div class="content-wrapper">
+      <div>
+        <aside>
+          <button
+            [ngClass]="{ active: areAllSelected }"
+            (click)="AllSelectedClick()"
+          >
+            Sve
+          </button>
+          <button
+            [ngClass]="{ active: isGroupActive(group.id) }"
+            *ngFor="let group of groups"
+            (click)="changeGroupState(group.id)"
+          >
+            {{ group.name }}
+          </button>
+        </aside>
+      </div>
+
+      <div class="fields-wrapper">
+        <div class="g-2">
+          <div
+            *ngFor="let sub of subjects"
+            class="subject-box-wrapper"
+            [ngClass]="{ selected: existsInSelected(sub.id) }"
+          >
+            <div class="subject-box">
+              <h3>
+                <a [routerLink]="['/subjects', sub.name]">
+                  {{ sub.name }}
+                </a>
+              </h3>
+
+              <small
+                ><a
+                  [routerLink]="['/subjects', 'groups', sub.groupDetails.name]"
+                >
+                  {{ sub.groupDetails.name }}
+                </a></small
+              >
+              <p appSubString [length]="70">{{ sub.description }}</p>
+            </div>
+            <button
+              (click)="selectSubject(sub.id)"
+              [ngClass]="{ remove: existsInSelected(sub.id) }"
+            >
+              {{ existsInSelected(sub.id) ? "Izbaci" : "Dodaj" }}
+            </button>
+          </div>
+        </div>
+        <div class="spacer"></div>
+        <div class="selected-subjects-box">
+          <h2>Izabrani predmeti</h2>
+          <div class="subject-button-wrapper">
+            <div *ngFor="let selectedSub of selectedSubjects">
+              <div
+                (click)="removeSubject(selectedSub.id)"
+                class="subject-button"
+              >
+                {{ selectedSub.name }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button
+            type="button"
+            (click)="onSubmit()"
+            class="btn-full"
+            [disabled]="selectedSubjects.length == 0"
+          >
+            Dalje
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

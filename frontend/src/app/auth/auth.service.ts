@@ -1,12 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { ProfileService } from '../profile/profile.service';
+
 import { LoginDataModel } from './models/login-data.model';
 import { LoginResponseModel } from './models/login-response.model';
-import { SignupProfessorModel } from './models/signup-professor.model';
-import { SignupStudentModel } from './models/signup-student.model';
-import { UserType } from '../../shared/types/user.type';
+
+import { SignupUser } from './models/signup-user.model';
 
 const baseUrl = 'http://localhost:3000/api/auth';
 
@@ -17,64 +16,48 @@ export class AuthService {
   );
   loginStatus$: Observable<boolean> = this.loginStatus.asObservable();
 
-  private currentUserType: BehaviorSubject<UserType> =
-    new BehaviorSubject<UserType>(null);
-  currentUserType$: Observable<UserType> = this.currentUserType.asObservable();
   constructor(private http: HttpClient) {
-    this.loginStatus.next(this.isLoggenIn());
-    this.currentUserType.next(this.getCurrentUserType());
+    this.loginStatus.next(this.isLoggedIn());
   }
-
-  signupStudent(newStudent: SignupStudentModel): Observable<any> {
-    return this.http.post(`${baseUrl}/signup/student`, newStudent);
+  signupUser(userData: SignupUser) {
+    const subjects = userData.subjects.map((sub) => sub.id);
+    return this.http.post(`${baseUrl}/signup`, { ...userData, subjects });
   }
-  signupProfessor(newProfessor: SignupProfessorModel): Observable<any> {
-    return this.http.post(`${baseUrl}/signup/professor`, newProfessor);
-  }
-  loginStudent(logindata: LoginDataModel): Observable<LoginResponseModel> {
-    return this.http
-      .post(`${baseUrl}/login/student`, logindata)
-      .pipe(map((response: any) => new LoginResponseModel(response)));
-  }
-  loginProfessor(logindata: LoginDataModel): Observable<LoginResponseModel> {
-    return this.http
-      .post(`${baseUrl}/login/professor`, logindata)
-      .pipe(map((response: any) => new LoginResponseModel(response)));
-  }
-
-  login(loginData: LoginResponseModel) {
+  saveUserData(userData: LoginResponseModel) {
+    localStorage.setItem('accessToken', userData.accessToken);
+    localStorage.setItem('username', userData.username);
+    localStorage.setItem('expiresAt', userData.expiresAt.toString());
     this.loginStatus.next(true);
-    this.currentUserType.next(loginData.type);
-    if (loginData.type) localStorage.setItem('currentUserType', loginData.type);
-    localStorage.setItem('accessToken', loginData.accessToken);
-    localStorage.setItem('expiresAt', loginData.expiresAt.toString());
   }
+
+  login(loginData: LoginDataModel): Observable<LoginResponseModel> {
+    return this.http
+      .post(`${baseUrl}/login`, loginData)
+      .pipe(map((response: any) => new LoginResponseModel(response)));
+  }
+
   logout() {
     this.loginStatus.next(false);
-    this.currentUserType.next(null);
-    localStorage.removeItem('currentUserType');
     localStorage.removeItem('accessToken');
     localStorage.removeItem('expiresAt');
+    localStorage.removeItem('username');
   }
-  getCurrentUserType(): UserType {
-    const currentUserType = localStorage.getItem('currentUserType');
-    if (currentUserType == 'student' || currentUserType == 'professor') {
-      return currentUserType;
-    }
-    return null;
-  }
-  isLoggenIn() {
-    const expired =
+
+  isLoggedIn() {
+    const notExpired =
       Number(localStorage.getItem('expiresAt')) > new Date().getTime();
-    const currentUserType = localStorage.getItem('currentUserType');
-    if (expired && currentUserType) return true;
+
+    if (notExpired) return true;
     return false;
   }
   isLoggedOut() {
-    return !this.isLoggenIn();
+    return !this.isLoggedIn();
   }
   getExpiration() {
     const expiresAt = Number(localStorage.getItem('expiresAt'));
     return expiresAt;
+  }
+  getUsersUsername() {
+    return localStorage.getItem('username') || '';
   }
 }

@@ -30,10 +30,12 @@
       </ul>
     </div>
     <div class="links-group color-2" *ngIf="loginStatus">
-      <span class="links-group-name">DusanDux001</span>
+      <span class="links-group-name">{{ user.username }}</span>
       <ul>
         <li>
-          <a routerLink="profile" routerLinkActive="active"
+          <a
+            [routerLink]="['/profile', user.username]"
+            routerLinkActive="active"
             ><i class="fas fa-user"></i>Moj Profil</a
           >
         </li>
@@ -49,6 +51,22 @@
         </li>
       </ul>
     </div>
+    <div class="links-group color-2" *ngIf="!loginStatus">
+      <span class="links-group-name">Profil</span>
+      <ul>
+        <li>
+          <a [routerLink]="['auth', 'signup']" routerLinkActive="active"
+            ><i class="fas fa-user-plus"></i>Registruj se</a
+          >
+        </li>
+        <li>
+          <a [routerLink]="['auth', 'login']" routerLinkActive="active"
+            ><i class="fas fa-sign-in-alt"></i>Uloguj se</a
+          >
+        </li>
+      </ul>
+    </div>
+
     <div class="links-group color-3">
       <span class="links-group-name">Podrška</span>
       <ul>

@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
+import { ProfileService } from 'src/app/profile/profile.service';
+import { SimpleUser } from 'src/shared/models/simple-user.model';
 import { SidebarService } from '../sidebar/sidebar.service';
 
 @Component({
@@ -12,9 +14,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   loginStatus = false;
   subscriptions: Subscription = new Subscription();
   sidebarState: boolean = false;
+  user: SimpleUser = new SimpleUser();
   constructor(
     private authService: AuthService,
-    private sidebarService: SidebarService
+    private sidebarService: SidebarService,
+    private profileService: ProfileService
   ) {}
   toggleSidebar() {
     if (this.sidebarState) {
@@ -32,12 +36,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.authService.loginStatus$.subscribe((loginStatus) => {
         this.loginStatus = loginStatus;
-        console.log('loginStatus', loginStatus);
-      })
-    );
-    this.subscriptions.add(
-      this.authService.currentUserType$.subscribe((userType) => {
-        console.log('userType', userType);
+        if (loginStatus) {
+          this.profileService.getOwnerDetails('simple').subscribe((data) => {
+            this.user = new SimpleUser(data);
+          });
+        }
       })
     );
   }

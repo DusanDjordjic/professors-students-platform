@@ -1,1 +1,50 @@
-<p>profile works!</p>
+<div class="container">
+  <button
+    id="toggle-sidebar"
+    [ngClass]="{ active: sidebarVisible }"
+    (click)="toggleSidebar()"
+  >
+    <i class="fas fa-chevron-left"></i>
+  </button>
+
+  <div class="page-grid">
+    <aside [ngClass]="{ visible: sidebarVisible }">
+      <div class="sticky">
+        <ul>
+          <li>
+            <a
+              [routerLink]="['/profile', simpleUserData.username]"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              ><i class="fas fa-eye"></i> Pregled</a
+            >
+          </li>
+          <li>
+            <a [routerLink]=""><i class="fas fa-clipboard-list"></i> Termini</a>
+          </li>
+          <li *ngIf="isOwner">
+            <a
+              [routerLink]="['/profile', simpleUserData.username, 'edit']"
+              routerLinkActive="active"
+              ><i class="fas fa-pen"></i> Promena</a
+            >
+          </li>
+          <li *ngIf="isOwner">
+            <a [routerLink]=""> <i class="fas fa-bell"></i> Notifikacije</a>
+          </li>
+          <li *ngIf="isOwner">
+            <a [routerLink]=""
+              ><i class="fas fa-shield-alt"></i> Šifre i sigurnost</a
+            >
+          </li>
+          <li *ngIf="isOwner">
+            <a [routerLink]=""><i class="fas fa-cog"></i> Podešavanja</a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

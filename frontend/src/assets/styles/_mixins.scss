@@ -31,6 +31,7 @@
   align-items: center;
   color: $color-dark;
   &:focus {
+    outline: none;
     color: $color-dark;
     border-color: transparent;
     @include shadow-normal;
@@ -44,9 +45,35 @@
   border: none;
   padding: 8px 20px;
   transition: all 0.3s;
+
   &:hover {
     @include shadow-normal();
     background-color: darken($color: $bg-color, $amount: 10);
+  }
+  &:disabled {
+    cursor: default;
+    box-shadow: none;
+    background-color: $color-secondary;
+    // background-color: desaturate($bg-color, 100%);
+  }
+}
+@mixin button-gray {
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: $color-light;
+  color: $color-secondary;
+  padding: 8px 20px;
+  transition: all 0.3s;
+  border: 1px solid rgba($color-secondary, 0.5);
+  &:hover {
+    color: $color-dark;
+    border-color: transparent;
+    box-shadow: 3px 3px 10px rgba($color-dark, 0.2);
+  }
+  &.active {
+    background-color: $color-main-2;
+    border-color: transparent;
+    color: $color-dark;
   }
   &:disabled {
     cursor: default;
@@ -117,7 +144,7 @@
 }
 
 // SPECIAL
-@mixin autoCompleteBg($bg-color: rgba($color-main-2, 0.3)) {
+@mixin autoCompleteBg($bg-color: $color-main-2) {
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,

@@ -1,0 +1,100 @@
+@import "src/assets/styles/vars";
+@import "src/assets/styles/mixins";
+
+.container {
+  @include container;
+}
+
+.page-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-base;
+  min-height: 100vh;
+  position: relative;
+}
+
+#toggle-sidebar {
+  margin: 0 0 $spacing-base 0;
+  @include icon-btn;
+  i {
+    transition: transform 0.3s;
+    transform: rotateZ(180deg);
+  }
+  &.active {
+    i {
+      transform: rotateZ(0deg);
+    }
+  }
+}
+aside {
+  background-color: rgba($color: $color-light, $alpha: 0.9);
+  backdrop-filter: blur(3px);
+  padding: $spacing-base * 2;
+  border: 1px solid rgba($color-secondary, 0.5);
+  @include shadow-sm;
+  border-radius: $base-border-radius;
+  transform: translateX(-120%);
+  transition: transform 0.3s;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  &.visible {
+    transform: translateX(0%);
+  }
+  .sticky {
+    position: sticky;
+    z-index: 100;
+    top: $navbar-height + $spacing-base * 2;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    row-gap: $spacing-base;
+
+    a {
+      cursor: pointer;
+      user-select: none;
+      border: none;
+      background-color: transparent;
+      white-space: nowrap;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: 100%;
+      padding: $spacing-base * 0.5 $spacing-base;
+      color: $color-secondary;
+      border-radius: $base-border-radius;
+      transition: all 0.3s;
+      &:hover {
+        background-color: $color-main-2;
+        color: $color-dark;
+        @include shadow-normal;
+      }
+      &.active {
+        background-color: $color-main-2;
+        color: $color-dark;
+      }
+      i {
+        display: inline-block;
+        min-width: $spacing-base * 2;
+        margin-right: $spacing-base * 0.5;
+      }
+    }
+  }
+}
+
+@include md {
+  #toggle-sidebar {
+    display: none;
+  }
+  aside {
+    position: relative;
+    transform: translateX(0);
+  }
+  .page-grid {
+    grid-template-columns: auto 1fr;
+  }
+}

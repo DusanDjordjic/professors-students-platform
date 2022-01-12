@@ -14,17 +14,19 @@
         <i class="fas fa-search"></i>
       </div>
       <div class="auth-links" *ngIf="!loginStatus">
-        <a [routerLink]="['auth', 'login', 'student']">Login</a>
-        <a [routerLink]="['auth', 'signup', 'student']">Registruj se</a>
+        <a [routerLink]="['auth', 'login']">Login</a>
+        <a [routerLink]="['auth', 'signup']">Registruj se</a>
       </div>
       <div class="profile-details" *ngIf="loginStatus">
-        <img
-          src="assets\images\profile\default-profile.jpg"
-          alt="Profile pictire"
-        />
-        <span>Dušan Đorđić</span>
+        <a [routerLink]="['/profile', user.username]">
+          <img
+            src="assets\images\profile\default-profile.jpg"
+            alt="Profile pictire"
+          />
+        </a>
+        <span>{{ user.firstname }} {{ user.lastname }}</span>
       </div>
-      <a class="icon-btn notification-btn" routerLink="">
+      <a class="icon-btn notification-btn" routerLink="" *ngIf="loginStatus">
         <i class="fas fa-bell"></i>
       </a>
     </div>

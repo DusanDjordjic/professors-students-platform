@@ -1,0 +1,64 @@
+<div class="container">
+  <main>
+    <h1>
+      {{ isEdit ? "Promena kontakt informacija" : "Kontakt informacije" }}
+    </h1>
+    <form [formGroup]="contactDetailsForm" (ngSubmit)="onSubmit()">
+      <div class="fields-wrapper">
+        <div class="g-2">
+          <div class="form-group">
+            <label for="email">Email <span class="required">*</span></label>
+            <input
+              type="text"
+              id="email"
+              formControlName="email"
+              [ngClass]="{
+                invalid:
+                  getFormControl('email').invalid &&
+                  (getFormControl('email').touched ||
+                    getFormControl('email').dirty),
+                valid: getFormControl('email').valid
+              }"
+            />
+            <div
+              class="error-container"
+              *ngIf="
+                getFormControl('email').invalid &&
+                (getFormControl('email').touched ||
+                  getFormControl('email').dirty)
+              "
+            >
+              <small *ngIf="getFormControl('email').errors?.['required']">
+                Email je obavezan
+              </small>
+              <small *ngIf="getFormControl('email').errors?.['email']">
+                Email mora da bude u odgovarajućem formatu
+              </small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="phoneNumber">Broj telefona</label>
+            <input type="text" id="phoneNumber" formControlName="phoneNumber" />
+          </div>
+        </div>
+        <div>
+          <div class="form-group">
+            <label for="website">Web-sajt</label>
+            <input type="text" id="website" formControlName="website" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button
+            type="submit"
+            class="btn-full"
+            [disabled]="contactDetailsForm.invalid"
+          >
+            Dalje
+          </button>
+        </div>
+      </div>
+    </form>
+  </main>
+</div>

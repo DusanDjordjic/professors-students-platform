@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthLoginProfessorComponent } from './auth/auth-login-professor/auth-login-professor.component';
-import { AuthLoginStudentComponent } from './auth/auth-login-student/auth-login-student.component';
-import { AuthSignupProfessorComponent } from './auth/auth-signup-professor/auth-signup-professor.component';
-import { AuthSignupStudentComponent } from './auth/auth-signup-student/auth-signup-student.component';
+import { LoginComponent } from './auth/login/login.component';
+import { EditComponent } from './profile/edit/edit.component';
 import { CanActivateUser } from './profile/guards/canActivateUser.guard';
+import { OverviewComponent } from './profile/overview/overview.component';
 import { ProfileComponent } from './profile/profile/profile.component';
 import { HomeComponent } from './static-pages/home/home.component';
 
@@ -13,26 +12,37 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
   },
+
   {
-    path: 'auth/signup/student',
-    component: AuthSignupStudentComponent,
-  },
-  {
-    path: 'auth/signup/professor',
-    component: AuthSignupProfessorComponent,
-  },
-  {
-    path: 'auth/login/student',
-    component: AuthLoginStudentComponent,
-  },
-  {
-    path: 'auth/login/professor',
-    component: AuthLoginProfessorComponent,
-  },
-  {
-    path: 'moj-profil',
+    path: 'profile/:username',
     component: ProfileComponent,
     canActivate: [CanActivateUser],
+    children: [
+      {
+        path: '',
+        component: OverviewComponent,
+      },
+      {
+        path: 'edit',
+        component: EditComponent,
+      },
+      {
+        path: 'notifications',
+        component: EditComponent,
+      },
+      {
+        path: 'security',
+        component: EditComponent,
+      },
+      {
+        path: 'settings',
+        component: EditComponent,
+      },
+    ],
+  },
+  {
+    path: 'auth/login',
+    component: LoginComponent,
   },
 ];
 

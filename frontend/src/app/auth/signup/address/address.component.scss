@@ -1,0 +1,108 @@
+@import "src/assets/styles/vars";
+@import "src/assets/styles/mixins";
+.container {
+  @include container;
+}
+
+main {
+  width: 100%;
+  margin: $spacing-base auto;
+  border: 1px solid rgba($color: $color-secondary, $alpha: 0.5);
+  padding: $spacing-base * 4 $spacing-base * 2;
+  border-radius: 4px;
+  background-color: $color-light;
+  h1 {
+    margin: 0 0 $spacing-base * 2 0;
+    text-align: center;
+  }
+  .fields-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-base * 2;
+    .g-2 {
+      display: grid;
+      column-gap: $spacing-base;
+      row-gap: $spacing-base * 2;
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  .form-group {
+    label {
+      display: inline-block;
+      // Zvezdica
+      span.required {
+        color: $color-danger;
+      }
+    }
+    input {
+      @include placeholder-color;
+      @include autoCompleteBg;
+      @include input-gray();
+      display: block;
+      width: 100%;
+    }
+    button {
+      display: block;
+      &.btn-full {
+        width: 100%;
+      }
+    }
+    .invalid {
+      border-bottom: 2px solid $color-danger !important;
+    }
+  }
+
+  button {
+    @include button($color-main-2);
+  }
+
+  // Spiner u dugmetu
+  .loading-spinner-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    app-loading-spinner {
+      margin-left: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  // Greske
+  .error-container {
+    margin-top: 0.5rem;
+    color: $color-danger;
+    small {
+      display: block;
+      width: 100%;
+    }
+  }
+  #toLogin {
+    margin: 0.5rem 0;
+    display: block;
+    a {
+      color: $color-main-500;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+@include sm() {
+  main {
+    width: 80%;
+    .fields-wrapper {
+      .g-2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+}
+
+@include xl() {
+  main {
+    width: 70%;
+  }
+}

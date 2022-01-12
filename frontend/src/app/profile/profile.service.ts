@@ -1,17 +1,20 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserType } from 'src/shared/types/user.type';
+import { RequestShapeType } from 'src/shared/types/request-shape.type';
 
-const baseUrl = 'http://localhost:3000/api/user';
+const baseUrl = 'http://localhost:3000/api/users';
 
 @Injectable()
 export class ProfileService {
   constructor(private http: HttpClient) {}
-  getUserDetails(type: UserType) {
-    return this.http.get(baseUrl, {
-      params: {
-        type: type || '',
-      },
+  getOwnerDetails(shape: RequestShapeType) {
+    return this.http.get(`${baseUrl}/profile`, {
+      params: new HttpParams().set('shape', shape),
+    });
+  }
+  getUsersDetails(username: string, shape: RequestShapeType) {
+    return this.http.get(`${baseUrl}/${username}/profile`, {
+      params: new HttpParams().set('shape', shape),
     });
   }
 }
