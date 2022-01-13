@@ -1,3 +1,53 @@
-<div>
-  <h1>{{ user.username }}</h1>
-</div>
+<header>
+  <div class="header-grid">
+    <div class="profile-img-wrapper">
+      <img
+        src="assets/images/profile/default-profile.jpg"
+        [alt]="user.username"
+      />
+    </div>
+    <div class="profile-text-wrapper">
+      <h1>{{ user.firstname }} {{ user.lastname }}</h1>
+      <h3 id="username">@{{ user.username }}</h3>
+      <p>{{ user.about }}</p>
+      <div class="buttons-wrapper">
+        <button>Zakazi čas</button>
+        <button>Posalji poruku</button>
+      </div>
+    </div>
+  </div>
+</header>
+<section>
+  <div>
+    <div class="section-grid">
+      <div>
+        <h2>Kontakt informacije</h2>
+        <div class="fields-wrapper">
+          <div class="field">
+            <i class="fas fa-envelope"></i> {{ user.contactInfo.email }}
+          </div>
+          <div class="field" *ngIf="user.contactInfo.phoneNumber">
+            <i class="fas fa-phone-alt"></i> {{ user.contactInfo.phoneNumber }}
+          </div>
+          <div class="field" *ngIf="user.contactInfo.website">
+            <i class="fas fa-globe"></i>{{ user.contactInfo.website }}
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2>Adresa</h2>
+        <div class="fields-wrapper">
+          <div class="field">
+            <i class="fas fa-city"></i> {{ user.address.city }}
+          </div>
+          <div class="field" *ngIf="user.address.street">
+            <i class="fas fa-road"></i> {{ user.address.street }}
+          </div>
+          <div class="field" *ngIf="user.address.streetNumber">
+            <i class="fas fa-home"></i>{{ user.address.streetNumber }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

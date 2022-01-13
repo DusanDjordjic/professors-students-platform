@@ -24,7 +24,8 @@
             alt="Profile pictire"
           />
         </a>
-        <span>{{ user.firstname }} {{ user.lastname }}</span>
+        <!-- <span>{{ user.firstname }} {{ user.lastname }}</span> -->
+        <span>{{ user.username }}</span>
       </div>
       <a class="icon-btn notification-btn" routerLink="" *ngIf="loginStatus">
         <i class="fas fa-bell"></i>

@@ -38,6 +38,8 @@ aside {
   position: absolute;
   top: 0;
   bottom: 0;
+  z-index: 50;
+  min-width: 200px;
   &.visible {
     transform: translateX(0%);
   }
@@ -76,6 +78,9 @@ aside {
       &.active {
         background-color: $color-main-2;
         color: $color-dark;
+        &:hover {
+          background-color: darken($color-main-2, 10);
+        }
       }
       i {
         display: inline-block;

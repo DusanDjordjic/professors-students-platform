@@ -10,7 +10,7 @@
 // BUTTONS AND FIELDS
 @mixin field-gray {
   cursor: pointer;
-  padding: $spacing-base * 0.5;
+  padding: $spacing-base * 0.5 $spacing-base;
   border-radius: $base-border-radius;
   background-color: $color-light;
   color: $color-secondary;
@@ -45,7 +45,7 @@
   border: none;
   padding: 8px 20px;
   transition: all 0.3s;
-
+  font-size: $font-size-normal;
   &:hover {
     @include shadow-normal();
     background-color: darken($color: $bg-color, $amount: 10);

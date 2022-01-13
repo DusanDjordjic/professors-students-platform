@@ -67,6 +67,9 @@ aside {
             }
             &.active {
               background-color: $color-main-1 !important;
+              &:hover {
+                background-color: darken($color-main-1, 10) !important;
+              }
             }
           }
         }
@@ -80,6 +83,9 @@ aside {
             }
             &.active {
               background-color: $color-main-2 !important;
+              &:hover {
+                background-color: darken($color-main-2, 10) !important;
+              }
             }
           }
         }
@@ -93,6 +99,9 @@ aside {
             }
             &.active {
               background-color: $color-main-3 !important;
+              &:hover {
+                background-color: darken($color-main-3, 10) !important;
+              }
             }
           }
         }
